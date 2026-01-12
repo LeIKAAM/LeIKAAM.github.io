@@ -7,6 +7,7 @@
     
     <link rel="icon" href="logo.jpg" type="image/jpeg">
     <link rel="shortcut icon" href="logo.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="logo.jpg">
 
     <style>
         /* --- CONFIGURATION --- */
@@ -171,7 +172,7 @@
         .instruction-list a { color: var(--accent-blue); text-decoration: none; }
         .instruction-list a:hover { text-decoration: underline; }
 
-        /* --- STYLE THUMBNAILS VIDEOS (Ancien code) --- */
+        /* --- STYLE THUMBNAILS VIDEOS --- */
         .thumbnail-container { width: 100%; height: 100%; position: relative; overflow: hidden; border-radius: var(--radius-l) var(--radius-l) 0 0; }
         .thumbnail-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
         .thumbnail-container::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 40%); pointer-events: none; z-index: 1; }
@@ -193,7 +194,6 @@
 
         .hidden { display: none; }
         .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
-        
         .server-ip { font-weight: 700; color: var(--accent-blue); display: block; margin-top: 5px; user-select: all; }
     </style>
 </head>
@@ -454,25 +454,6 @@
 
                 <div class="card download-card full-width">
                     <div>
-                        <div class="video-eyebrow-date">H2M Mod</div>
-                        <div class="dl-title">HorizonMW (H2M)</div>
-                        <ol class="instruction-list">
-                            <li>Installe le <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/" target="_blank">Pack C++ AIO</a> (Important).</li>
-                            <li>Télécharge <strong>MWR (2017)</strong> via le torrent ci-dessous.</li>
-                            <li>Télécharge le <strong>HMW Launcher</strong> depuis le site officiel.</li>
-                            <li>Décompresse le launcher dans un dossier (PAS dans le jeu).</li>
-                            <li>Lance HMW Launcher.exe > "Select Install Directory" > Choisis ton dossier MWR.</li>
-                            <li>Clique sur "Verify game files" puis "Play".</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a>
-                            <a href="https://horizonmw.org/" target="_blank" class="dl-btn secondary">2. Site HorizonMW</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card download-card full-width">
-                    <div>
                         <div class="video-eyebrow-date">Plutonium / Steam</div>
                         <div class="dl-title">CoD : MW3</div>
                         <p class="dl-desc">Installation complète avec DLCs :</p>
@@ -491,6 +472,25 @@
                         <div class="dl-actions">
                             <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs (Mega)</a>
                             <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Créer compte Plutonium</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">H2M Mod</div>
+                        <div class="dl-title">HorizonMW (H2M)</div>
+                        <ol class="instruction-list">
+                            <li>Installe le <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/" target="_blank">Pack C++ AIO</a> (Important).</li>
+                            <li>Télécharge <strong>MWR (2017)</strong> via le torrent ci-dessous.</li>
+                            <li>Télécharge le <strong>HMW Launcher</strong> depuis le site officiel.</li>
+                            <li>Décompresse le launcher dans un dossier (PAS dans le jeu).</li>
+                            <li>Lance HMW Launcher.exe > "Select Install Directory" > Choisis ton dossier MWR.</li>
+                            <li>Clique sur "Verify game files" puis "Play".</li>
+                        </ol>
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a>
+                            <a href="https://horizonmw.org/" target="_blank" class="dl-btn secondary">2. Site HorizonMW</a>
                         </div>
                     </div>
                 </div>
