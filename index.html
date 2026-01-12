@@ -74,15 +74,31 @@
         /* --- CONTENEUR --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; }
 
-        /* --- NAVIGATION ONGLETS (STYLE IOS) --- */
+        /* --- NAVIGATION ONGLETS (SLIDING BUBBLE EFFECT) --- */
         .segmented-control {
             display: flex;
-            background: rgba(118, 118, 128, 0.12);
+            background: rgba(118, 118, 128, 0.12); /* Fond gris clair du conteneur */
             padding: 4px;
-            border-radius: 100px; /* Forme pilule */
+            border-radius: 100px;
             margin: 0 auto 50px auto;
-            max-width: 500px; /* Un peu plus large pour 3 boutons */
-            position: relative;
+            max-width: 400px; /* Réduit car seulement 2 onglets */
+            position: relative; /* Nécessaire pour le positionnement absolu de la bulle */
+            z-index: 1;
+        }
+
+        /* La bulle de verre qui glisse */
+        .segment-bubble {
+            position: absolute;
+            top: 4px;
+            left: 4px; /* Position initiale */
+            height: calc(100% - 8px); /* Hauteur moins le padding */
+            background: rgba(255, 255, 255, 0.85); /* Blanc style verre */
+            backdrop-filter: blur(10px);
+            border-radius: 100px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Ombre douce */
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Transition fluide style Apple */
+            z-index: -1; /* Derrière le texte */
+            pointer-events: none; /* Ignore les clics */
         }
 
         .segment-btn {
@@ -91,18 +107,20 @@
             padding: 8px 12px;
             font-size: 0.9rem;
             font-weight: 500;
-            color: var(--text-primary);
+            color: var(--text-secondary); /* Couleur par défaut un peu grise */
             border-radius: 100px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: transparent;
+            background: transparent; /* Important: fond transparent */
             border: none;
+            position: relative;
+            z-index: 2; /* Devant la bulle */
+            transition: color 0.3s ease;
         }
 
         .segment-btn.active {
-            background: white;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
             font-weight: 600;
+            color: #000; /* Texte plus foncé quand actif */
+            /* Plus de background ou box-shadow ici, c'est la bulle qui gère */
         }
 
         /* --- TITRES --- */
@@ -165,9 +183,6 @@
         .dl-btn.secondary { background-color: #333; }
         .dl-btn.mega { background-color: #D92E2E; } 
         .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; } 
-        /* Bouton spécifique Discord pour les cartes */
-        .dl-btn.discord-action { background-color: var(--discord-color); }
-        .dl-btn.discord-action:hover { background-color: #4752c4; }
 
         /* Zone de code (Clés CD) */
         .code-block {
@@ -232,10 +247,9 @@
     <div class="container">
         
         <div class="segmented-control">
-            <button class="segment-btn active" onclick="switchTab('videos')">Vidéos</button>
-            <button class="segment-btn" onclick="switchTab('downloads')">Téléchargements</button>
-            <button class="segment-btn" onclick="switchTab('discord')">Discord</button>
-        </div>
+            <div class="segment-bubble"></div> <button class="segment-btn active" onclick="switchTab('videos', event)">Vidéos</button>
+            <button class="segment-btn" onclick="switchTab('downloads', event)">Téléchargements</button>
+            </div>
 
         <div id="tab-videos">
             <h1>Dernières Vidéos</h1>
@@ -340,7 +354,7 @@
                     <div>
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : Black Ops 1</div>
-                        <p class="dl-desc" style="color:var(--accent-blue); font-weight:600;"></p>
+                        <p class="dl-desc" style="color:var(--accent-blue); font-weight:600;">Vidéo tuto : Bientôt</p>
                         <ol class="instruction-list">
                             <li>Télécharge le torrent du jeu.</li>
                             <li>Crée un compte sur Plutonium et installe qBittorrent.</li>
@@ -404,23 +418,7 @@
             </div>
         </div>
 
-        <div id="tab-discord" class="hidden">
-            <h1>Communautés Discord</h1>
-            <div class="bento-grid">
-                
-                <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Communauté</div>
-                        <div class="dl-title">Call of Duty</div>
-                        <p class="dl-desc">Rejoins le serveur Discord dédié à Call of Duty pour trouver des joueurs et discuter.</p>
-                    </div>
-                    <a href="https://discord.gg/na6DuNHFkX" target="_blank" class="dl-btn discord-action">Rejoindre le Serveur</a>
-                </div>
-
-            </div>
         </div>
-
-    </div>
 
     <footer><p>LeIKAAM.<br>Coming Soon.</p></footer>
 
@@ -435,7 +433,6 @@
             videos.forEach((video, index) => {
                 const card = document.createElement('a');
                 card.href = video.link; card.target = "_blank";
-                // On ajoute la classe video-card pour le styling spécifique
                 card.className = index === 0 ? 'card video-card featured' : 'card video-card';
                 card.innerHTML = `
                     <div class="thumbnail-container">
@@ -467,24 +464,37 @@
             } catch (error) { grid.innerHTML = `<p>Erreur de chargement.</p>`; }
         }
         
-        // --- LOGIQUE ONGLETS (3 TABS) ---
-        function switchTab(tabName) {
-            // Masquer tout
+        // --- LOGIQUE ONGLETS AVEC SLIDE ---
+        function switchTab(tabName, event) {
+            // 1. Gérer l'affichage des sections
             document.getElementById('tab-videos').classList.add('hidden');
             document.getElementById('tab-downloads').classList.add('hidden');
-            document.getElementById('tab-discord').classList.add('hidden');
+            // document.getElementById('tab-discord').classList.add('hidden'); // Supprimé
             
-            // Afficher le bon
             document.getElementById('tab-' + tabName).classList.remove('hidden');
 
-            // Gérer les boutons actifs
+            // 2. Gérer les boutons et la bulle
             const buttons = document.querySelectorAll('.segment-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            
-            if(tabName === 'videos') buttons[0].classList.add('active');
-            else if(tabName === 'downloads') buttons[1].classList.add('active');
-            else if(tabName === 'discord') buttons[2].classList.add('active');
+
+            const clickedBtn = event.currentTarget;
+            clickedBtn.classList.add('active');
+
+            // Déplacer la bulle
+            const bubble = document.querySelector('.segment-bubble');
+            bubble.style.width = `${clickedBtn.offsetWidth}px`;
+            bubble.style.left = `${clickedBtn.offsetLeft}px`;
         }
+
+        // Initialisation de la position de la bulle au chargement
+        window.addEventListener('DOMContentLoaded', () => {
+             const firstBtn = document.querySelector('.segment-btn.active');
+             const bubble = document.querySelector('.segment-bubble');
+             if(firstBtn && bubble) {
+                 bubble.style.width = `${firstBtn.offsetWidth}px`;
+                 bubble.style.left = `${firstBtn.offsetLeft}px`;
+             }
+        });
 
         fetchYouTubeVideos();
     </script>
