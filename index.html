@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Officiel de IKAAM</title>
+    <style>
+        /* --- CONFIGURATION --- */
+        :root {
+            --bg-main: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --shadow-soft: 0 15px 35px -5px rgba(0, 0, 0, 0.07);
+            --radius-l: 28px;
+            --radius-m: 12px;
+            --accent-blue: #0071e3;
+            --discord-color: #5865F2;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            margin: 0; padding: 0; overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* --- FOND ANIMÉ --- */
+        .ambient-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: #fbfbfd;
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5;
+            animation: float 25s infinite alternate ease-in-out;
+        }
+        .orb-1 { top: -15%; left: -15%; width: 55vw; height: 55vw; background: radial-gradient(circle, #dceaff 0%, transparent 70%); }
+        .orb-2 { bottom: -15%; right: -15%; width: 65vw; height: 65vw; background: radial-gradient(circle, #eef2ff 0%, transparent 70%); animation-delay: -7s; }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(40px, 60px); } }
+
+        /* --- HEADER --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; position: sticky; top: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+        .logo { font-weight: 600; font-size: 1.3rem; letter-spacing: -0.02em; }
+        
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+
+        .btn {
+            padding: 10px 20px; border-radius: 99px; text-decoration: none;
+            font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* Boutons Header */
+        .discord-btn {
+            background-color: rgba(255, 255, 255, 0.5); color: var(--text-primary);
+            border: 1px solid rgba(0,0,0,0.05); backdrop-filter: blur(5px);
+        }
+        .discord-btn:hover {
+            background-color: var(--discord-color); color: white; border-color: var(--discord-color);
+            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
+        }
+        .subscribe-btn { background-color: var(--text-primary); color: white; }
+        .subscribe-btn:hover { transform: translateY(-2px); background-color: black; box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+
+        /* --- CONTENEUR --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; }
+
+        /* --- NAVIGATION ONGLETS (STYLE IOS) --- */
+        .segmented-control {
+            display: flex;
+            background: rgba(118, 118, 128, 0.12);
+            padding: 4px;
+            border-radius: 100px; /* Forme pilule */
+            margin: 0 auto 50px auto;
+            max-width: 500px; /* Un peu plus large pour 3 boutons */
+            position: relative;
+        }
+
+        .segment-btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: none;
+        }
+
+        .segment-btn.active {
+            background: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            font-weight: 600;
+        }
+
+        /* --- TITRES --- */
+        h1 {
+            font-family: "SF Pro Display", sans-serif;
+            font-size: 3.5rem; font-weight: 600; letter-spacing: -0.04em;
+            margin-bottom: 40px; text-align: center; color: #1d1d1f;
+        }
+
+        /* --- BENTO GRID (Commun) --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; auto-rows: minmax(350px, auto); }
+        
+        /* Spécifique Vidéos */
+        .video-card.featured { grid-column: span 2; min-height: 520px; }
+
+        /* Spécifique Téléchargements */
+        .download-card {
+            min-height: auto !important; /* Pas besoin d'être aussi haut */
+            padding: 30px !important;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .download-card.full-width { grid-column: span 2; }
+
+        /* --- STYLE DES CARTES --- */
+        .card {
+            background-color: var(--glass-bg); border-radius: var(--radius-l); overflow: hidden;
+            position: relative; cursor: pointer;
+            border: 1px solid var(--glass-border); box-shadow: var(--shadow-soft);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.12);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- STYLE CONTENU TÉLÉCHARGEMENT --- */
+        .dl-title {
+            font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        .dl-desc {
+            font-size: 1rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;
+        }
+        .dl-btn {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: transform 0.2s;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .dl-btn:hover { transform: scale(1.02); background-color: #0062c4; }
+        .dl-btn.secondary { background-color: #333; }
+        .dl-btn.mega { background-color: #D92E2E; } 
+        .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; } 
+        /* Bouton spécifique Discord pour les cartes */
+        .dl-btn.discord-action { background-color: var(--discord-color); }
+        .dl-btn.discord-action:hover { background-color: #4752c4; }
+
+        /* Zone de code (Clés CD) */
+        .code-block {
+            background: rgba(0,0,0,0.04);
+            border-radius: 12px;
+            padding: 15px;
+            font-family: "SF Mono", "Monaco", "Courier New", monospace;
+            font-size: 0.85rem;
+            color: #333;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .key-row { display: block; margin-bottom: 6px; user-select: all; } /* Selection facile */
+
+        /* Liste d'instructions */
+        .instruction-list { padding-left: 20px; margin-bottom: 20px; color: var(--text-secondary); }
+        .instruction-list li { margin-bottom: 8px; }
+        .instruction-list a { color: var(--accent-blue); text-decoration: none; }
+        .instruction-list a:hover { text-decoration: underline; }
+
+        /* --- STYLE THUMBNAILS VIDEOS (Ancien code) --- */
+        .thumbnail-container { width: 100%; height: 100%; position: relative; overflow: hidden; border-radius: var(--radius-l) var(--radius-l) 0 0; }
+        .thumbnail-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; }
+        .thumbnail-container::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+        .card:hover .thumbnail-container img { transform: scale(1.06); }
+        .card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 34px; background: linear-gradient(to top, rgba(255,255,255,0.98) 25%, rgba(255,255,255,0.7) 55%, transparent); z-index: 2; }
+        .video-eyebrow-date { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 8px; }
+        .video-title { font-family: "SF Pro Display", sans-serif; font-size: 1.5rem; font-weight: 700; margin: 0; line-height: 1.15; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .video-card.featured .video-title { font-size: 2.2rem; }
+        .play-icon { position: absolute; top: 24px; right: 24px; width: 50px; height: 50px; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8) translateY(15px); transition: all 0.4s; color: black; font-size: 1.3rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: 5; }
+        .card:hover .play-icon { opacity: 1; transform: scale(1) translateY(0); }
+
+        /* Media Queries */
+        @media (max-width: 850px) { 
+            .video-card.featured { grid-column: span 1; min-height: 380px; }
+            .download-card.full-width { grid-column: span 1; }
+            h1 { font-size: 2.5rem; } 
+            header { padding: 15px 20px; }
+            .btn { padding: 8px 16px; font-size: 0.8rem; }
+        }
+
+        /* Utility pour cacher les onglets */
+        .hidden { display: none; }
+        
+        /* Flex group pour les boutons de téléchargement multiples */
+        .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <div class="ambient-light"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+    
+    <header>
+        <div class="logo">LeIKAAM</div>
+        <div class="header-actions">
+            <a href="https://discord.gg/pwGEPyB9Jz" target="_blank" class="btn discord-btn">Discord</a>
+            <a href="https://youtube.com/@LeIKAAM" target="_blank" class="btn subscribe-btn">S'abonner</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="segmented-control">
+            <button class="segment-btn active" onclick="switchTab('videos')">Vidéos</button>
+            <button class="segment-btn" onclick="switchTab('downloads')">Téléchargements</button>
+            <button class="segment-btn" onclick="switchTab('discord')">Discord</button>
+        </div>
+
+        <div id="tab-videos">
+            <h1>Dernières Vidéos</h1>
+            <div class="bento-grid" id="video-grid"></div>
+        </div>
+
+        <div id="tab-downloads" class="hidden">
+            <h1>Téléchargements</h1>
+            <div class="bento-grid">
+                
+                <div class="card download-card">
+                    <div>
+                        <div class="video-eyebrow-date">Classique</div>
+                        <div class="dl-title">Call of Duty 1X</div>
+                        <p class="dl-desc">La version revisitée du premier opus. Extrait simplement le fichier RAR et lance le jeu.</p>
+                    </div>
+                    <a href="https://www.mediafire.com/file/34lt06fw6ad1t64/COD1X.rar" target="_blank" class="dl-btn">Télécharger (Mediafire)</a>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Légendaire</div>
+                        <div class="dl-title">Call of Duty 2</div>
+                        <p class="dl-desc">Extrait le jeu et lance-le. Utilise l'une des clés ci-dessous pour jouer en ligne :</p>
+                        
+                        <div class="code-block">
+                            <span class="key-row">XEZL-GZWX-XQZG-GEGU-EEFC</span>
+                            <span class="key-row">W5HA-3557-666Q-JQGZ-232E</span>
+                            <span class="key-row">W5HA-ZHEL-666Q-L66X-CD23</span>
+                            <span class="key-row">W55E-QE6E-66Q6-EWE6-76DD</span>
+                            <span class="key-row">G6AE-57JJ-Q5G6-WJPP-E1D9</span>
+                            <span class="key-row">PPX6-6P6Q-7X3E-AZEA-20B0</span>
+                            <span class="key-row">P7QH-Q5U7-7U5W-EQ3Z-14AF</span>
+                            <span class="key-row">G3X7-6QZU-QZ3Z-A573-538F</span>
+                        </div>
+                    </div>
+                    <a href="https://www.mediafire.com/file/iydrzjoi7m0fahn/COD2.rar" target="_blank" class="dl-btn">Télécharger le Jeu</a>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Moderne</div>
+                        <div class="dl-title">Call of Duty 4X</div>
+                        <p class="dl-desc">Suis les instructions attentivement pour installer le Promod :</p>
+                        <ol class="instruction-list">
+                            <li>Télécharge le jeu complet et extrais-le.</li>
+                            <li>Télécharge le patch <strong>cod4x_client</strong>.</li>
+                            <li>Glisse les fichiers du patch dans le dossier du jeu.</li>
+                        </ol>
+                        
+                        <div class="dl-actions">
+                            <a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Télécharger Jeu</a>
+                            <a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch Client</a>
+                        </div>
+
+                        <p class="dl-desc" style="margin-top:20px;">Besoin de clés ? Regarde cette vidéo :</p>
+                        <a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube">▶ Voir la vidéo des clés sur YouTube</a>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Plutonium</div>
+                        <div class="dl-title">CoD : World at War</div>
+                        <p class="dl-desc">Installation via Plutonium :</p>
+                        <ol class="instruction-list">
+                            <li>Télécharge le torrent du jeu via le bouton ci-dessous.</li>
+                            <li>Crée un compte sur Plutonium.</li>
+                            <li>Installe qBittorent (pour télécharger le torrent).</li>
+                            <li>Lance Plutonium, sélectionne WaW.</li>
+                            <li>Clique sur <strong>Setup</strong> et pointe vers le dossier du jeu téléchargé.</li>
+                        </ol>
+                        
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Compte Plutonium</a>
+                            <a href="https://www.qbittorrent.org/download" target="_blank" class="dl-btn secondary">3. qBittorrent</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">IW4X / Alterware</div>
+                        <div class="dl-title">CoD : MW2 (IW4X)</div>
+                        <p class="dl-desc">Procédure d'installation :</p>
+                        <ol class="instruction-list">
+                            <li>Télécharge MW2 (Torrent) et extrais le jeu.</li>
+                            <li>Télécharge <strong>release.zip</strong> et extrais-le dans le dossier du jeu.</li>
+                            <li>Télécharge <strong>alterware-launcher.exe</strong> et glisse-le dans le dossier du jeu.</li>
+                        </ol>
+                        
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1223219330452553738/1223220365527093259/Call_of_Duty_-_Modern_Warfare_2.torrent?ex=6966213d&is=6964cfbd&hm=d8c330b69a24c0b2bda1e8b66d9bd7af34e4b670af4faea6b25d7fa161d29a25&" target="_blank" class="dl-btn">1. Torrent MW2</a>
+                            <a href="https://www.mediafire.com/file/24gpjb8kivhl2ps/release.zip" target="_blank" class="dl-btn secondary">2. release.zip</a>
+                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">3. Launcher</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Plutonium</div>
+                        <div class="dl-title">CoD : Black Ops 1</div>
+                        <p class="dl-desc" style="color:var(--accent-blue); font-weight:600;">Vidéo tuto : Bientôt</p>
+                        <ol class="instruction-list">
+                            <li>Télécharge le torrent du jeu.</li>
+                            <li>Crée un compte sur Plutonium et installe qBittorrent.</li>
+                            <li>Lance Plutonium, sélectionne Black Ops.</li>
+                            <li>Clique sur <strong>Setup</strong> et choisis le dossier du jeu téléchargé.</li>
+                        </ol>
+                        
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a>
+                            <a href="https://www.qbittorrent.org/download" target="_blank" class="dl-btn secondary">3. qBittorrent</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Plutonium</div>
+                        <div class="dl-title">CoD : Black Ops II</div>
+                        <p class="dl-desc">Installation via Plutonium :</p>
+                        <ol class="instruction-list">
+                            <li>Télécharge le fichier torrent via le lien ci-dessous.</li>
+                            <li>Crée un compte Plutonium et installe qBittorrent.</li>
+                            <li>Ouvre le torrent avec qBittorrent pour télécharger le jeu.</li>
+                            <li>Lance Plutonium, sélectionne Black Ops II.</li>
+                            <li>Clique sur <strong>Setup</strong> et indique le dossier du jeu.</li>
+                        </ol>
+
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Compte Plutonium</a>
+                            <a href="https://www.qbittorrent.org/download" target="_blank" class="dl-btn secondary">3. qBittorrent</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Plutonium / Steam</div>
+                        <div class="dl-title">CoD : MW3</div>
+                        <p class="dl-desc">Installation complète avec DLCs :</p>
+                        <ol class="instruction-list">
+                            <li>Installe Steam et connecte-toi.</li>
+                            <li>Dans Steam, coche <strong>Outils</strong> dans ta bibliothèque.</li>
+                            <li>Installe <strong>Call of Duty: Modern Warfare 3 Dedicated Server</strong>.</li>
+                            <li><a href="https://images-ext-1.discordapp.net/external/6unNopyphw-reX6YxMAQxyc59XqOH3sAx276mshVjZI/https/i.ibb.co/Z2ZHqM7/Sans-titre.png?format=webp&quality=lossless&width=1744&height=1088" target="_blank">Voir l'image d'aide</a> pour trouver l'outil.</li>
+                            <li>Télécharge les DLCs via le lien Mega.</li>
+                            <li>Sur Steam : Clic droit sur MW3 (Server) > Gérer > Parcourir fichiers locaux.</li>
+                            <li>Glisse le contenu des DLCs dans ce dossier.</li>
+                            <li>Crée un compte Plutonium.</li>
+                            <li>Lance Plutonium, sélectionne MW3, clique <strong>Setup</strong> et choisis le dossier.</li>
+                        </ol>
+                        
+                        <div class="dl-actions">
+                            <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs (Mega)</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Créer compte Plutonium</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-discord" class="hidden">
+            <h1>Communautés Discord</h1>
+            <div class="bento-grid">
+                
+                <div class="card download-card">
+                    <div>
+                        <div class="video-eyebrow-date">Communauté</div>
+                        <div class="dl-title">Call of Duty</div>
+                        <p class="dl-desc">Rejoins le serveur Discord dédié à Call of Duty pour trouver des joueurs et discuter.</p>
+                    </div>
+                    <a href="https://discord.gg/na6DuNHFkX" target="_blank" class="dl-btn discord-action">Rejoindre le Serveur</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer><p>LeIKAAM.<br>Coming Soon.</p></footer>
+
+    <script>
+        // --- LOGIQUE YOUTUBE ---
+        const API_KEY = 'AIzaSyBUUGtjhf9BBh0atNbk4rT97q7kz2Mm62k'; 
+        const CHANNEL_ID = 'UCBUHEV2NI3H4weKFG4Fz7AQ'; 
+        const grid = document.getElementById('video-grid');
+
+        function displayVideos(videos) {
+            grid.innerHTML = ''; 
+            videos.forEach((video, index) => {
+                const card = document.createElement('a');
+                card.href = video.link; card.target = "_blank";
+                // On ajoute la classe video-card pour le styling spécifique
+                card.className = index === 0 ? 'card video-card featured' : 'card video-card';
+                card.innerHTML = `
+                    <div class="thumbnail-container">
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <div class="card-content">
+                            <div class="video-eyebrow-date">${video.date}</div>
+                            <h3 class="video-title">${video.title}</h3>
+                        </div>
+                        <div class="play-icon">▶</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        async function fetchYouTubeVideos() {
+            try {
+                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=7`);
+                if (!res.ok) throw new Error("Erreur API");
+                const data = await res.json();
+                if (!data.items) { grid.innerHTML = '<p>Aucune vidéo.</p>'; return; }
+                const realVideos = data.items.map(item => ({
+                    id: item.id.videoId, title: item.snippet.title,
+                    thumbnail: (item.snippet.thumbnails.maxres ? item.snippet.thumbnails.maxres.url : item.snippet.thumbnails.high.url),
+                    date: new Date(item.snippet.publishedAt).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }),
+                    link: `https://www.youtube.com/watch?v=${item.id.videoId}`
+                }));
+                displayVideos(realVideos);
+            } catch (error) { grid.innerHTML = `<p>Erreur de chargement.</p>`; }
+        }
+        
+        // --- LOGIQUE ONGLETS (3 TABS) ---
+        function switchTab(tabName) {
+            // Masquer tout
+            document.getElementById('tab-videos').classList.add('hidden');
+            document.getElementById('tab-downloads').classList.add('hidden');
+            document.getElementById('tab-discord').classList.add('hidden');
+            
+            // Afficher le bon
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+
+            // Gérer les boutons actifs
+            const buttons = document.querySelectorAll('.segment-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if(tabName === 'videos') buttons[0].classList.add('active');
+            else if(tabName === 'downloads') buttons[1].classList.add('active');
+            else if(tabName === 'discord') buttons[2].classList.add('active');
+        }
+
+        fetchYouTubeVideos();
+    </script>
+</body>
+</html>
