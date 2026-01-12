@@ -77,51 +77,32 @@
         /* --- NAVIGATION ONGLETS (SLIDING BUBBLE EFFECT) --- */
         .segmented-control {
             display: flex;
-            background: rgba(118, 118, 128, 0.12); /* Fond gris clair du conteneur */
+            background: rgba(118, 118, 128, 0.12);
             padding: 4px;
             border-radius: 100px;
             margin: 0 auto 50px auto;
-            max-width: 400px; /* Réduit car seulement 2 onglets */
-            position: relative; /* Nécessaire pour le positionnement absolu de la bulle */
+            max-width: 400px;
+            position: relative;
             z-index: 1;
         }
 
-        /* La bulle de verre qui glisse */
         .segment-bubble {
             position: absolute;
-            top: 4px;
-            left: 4px; /* Position initiale */
-            height: calc(100% - 8px); /* Hauteur moins le padding */
-            background: rgba(255, 255, 255, 0.85); /* Blanc style verre */
-            backdrop-filter: blur(10px);
-            border-radius: 100px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Ombre douce */
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Transition fluide style Apple */
-            z-index: -1; /* Derrière le texte */
-            pointer-events: none; /* Ignore les clics */
+            top: 4px; left: 4px; height: calc(100% - 8px);
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+            border-radius: 100px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: -1; pointer-events: none;
         }
 
         .segment-btn {
-            flex: 1;
-            text-align: center;
-            padding: 8px 12px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary); /* Couleur par défaut un peu grise */
-            border-radius: 100px;
-            cursor: pointer;
-            background: transparent; /* Important: fond transparent */
-            border: none;
-            position: relative;
-            z-index: 2; /* Devant la bulle */
+            flex: 1; text-align: center; padding: 8px 12px; font-size: 0.9rem; font-weight: 500;
+            color: var(--text-secondary); border-radius: 100px; cursor: pointer;
+            background: transparent; border: none; position: relative; z-index: 2;
             transition: color 0.3s ease;
         }
 
-        .segment-btn.active {
-            font-weight: 600;
-            color: #000; /* Texte plus foncé quand actif */
-            /* Plus de background ou box-shadow ici, c'est la bulle qui gère */
-        }
+        .segment-btn.active { font-weight: 600; color: #000; }
 
         /* --- TITRES --- */
         h1 {
@@ -133,13 +114,10 @@
         /* --- BENTO GRID (Commun) --- */
         .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; auto-rows: minmax(350px, auto); }
         
-        /* Spécifique Vidéos */
         .video-card.featured { grid-column: span 2; min-height: 520px; }
 
-        /* Spécifique Téléchargements */
         .download-card {
-            min-height: auto !important; /* Pas besoin d'être aussi haut */
-            padding: 30px !important;
+            min-height: auto !important; padding: 30px !important;
             display: flex; flex-direction: column; justify-content: space-between;
         }
         .download-card.full-width { grid-column: span 2; }
@@ -160,46 +138,30 @@
 
         /* --- STYLE CONTENU TÉLÉCHARGEMENT --- */
         .dl-title {
-            font-size: 1.8rem; font-weight: 700; margin-bottom: 10px;
-            letter-spacing: -0.02em;
+            font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em;
         }
         .dl-desc {
             font-size: 1rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;
         }
         .dl-btn {
-            display: inline-block;
-            background-color: var(--accent-blue);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-            transition: transform 0.2s;
-            margin-top: 10px;
-            font-size: 0.9rem;
+            display: inline-block; background-color: var(--accent-blue); color: white;
+            padding: 12px 24px; border-radius: 12px; text-decoration: none;
+            font-weight: 600; text-align: center; transition: transform 0.2s;
+            margin-top: 10px; font-size: 0.9rem;
         }
         .dl-btn:hover { transform: scale(1.02); background-color: #0062c4; }
         .dl-btn.secondary { background-color: #333; }
         .dl-btn.mega { background-color: #D92E2E; } 
         .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; } 
 
-        /* Zone de code (Clés CD) */
         .code-block {
-            background: rgba(0,0,0,0.04);
-            border-radius: 12px;
-            padding: 15px;
+            background: rgba(0,0,0,0.04); border-radius: 12px; padding: 15px;
             font-family: "SF Mono", "Monaco", "Courier New", monospace;
-            font-size: 0.85rem;
-            color: #333;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
-            max-height: 200px;
-            overflow-y: auto;
+            font-size: 0.85rem; color: #333; margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.05); max-height: 200px; overflow-y: auto;
         }
-        .key-row { display: block; margin-bottom: 6px; user-select: all; } /* Selection facile */
+        .key-row { display: block; margin-bottom: 6px; user-select: all; }
 
-        /* Liste d'instructions */
         .instruction-list { padding-left: 20px; margin-bottom: 20px; color: var(--text-secondary); }
         .instruction-list li { margin-bottom: 8px; }
         .instruction-list a { color: var(--accent-blue); text-decoration: none; }
@@ -217,7 +179,6 @@
         .play-icon { position: absolute; top: 24px; right: 24px; width: 50px; height: 50px; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8) translateY(15px); transition: all 0.4s; color: black; font-size: 1.3rem; box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: 5; }
         .card:hover .play-icon { opacity: 1; transform: scale(1) translateY(0); }
 
-        /* Media Queries */
         @media (max-width: 850px) { 
             .video-card.featured { grid-column: span 1; min-height: 380px; }
             .download-card.full-width { grid-column: span 1; }
@@ -226,11 +187,10 @@
             .btn { padding: 8px 16px; font-size: 0.8rem; }
         }
 
-        /* Utility pour cacher les onglets */
         .hidden { display: none; }
-        
-        /* Flex group pour les boutons de téléchargement multiples */
         .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+        
+        .server-ip { font-weight: 700; color: var(--accent-blue); display: block; margin-top: 5px; user-select: all; }
     </style>
 </head>
 <body>
@@ -247,9 +207,10 @@
     <div class="container">
         
         <div class="segmented-control">
-            <div class="segment-bubble"></div> <button class="segment-btn active" onclick="switchTab('videos', event)">Vidéos</button>
+            <div class="segment-bubble"></div>
+            <button class="segment-btn active" onclick="switchTab('videos', event)">Vidéos</button>
             <button class="segment-btn" onclick="switchTab('downloads', event)">Téléchargements</button>
-            </div>
+        </div>
 
         <div id="tab-videos">
             <h1>Dernières Vidéos</h1>
@@ -304,7 +265,6 @@
                             <a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Télécharger Jeu</a>
                             <a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch Client</a>
                         </div>
-
                         <p class="dl-desc" style="margin-top:20px;">Besoin de clés ? Regarde cette vidéo :</p>
                         <a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube">▶ Voir la vidéo des clés sur YouTube</a>
                     </div>
@@ -354,7 +314,6 @@
                     <div>
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : Black Ops 1</div>
-                        <p class="dl-desc" style="color:var(--accent-blue); font-weight:600;">Vidéo tuto : Bientôt</p>
                         <ol class="instruction-list">
                             <li>Télécharge le torrent du jeu.</li>
                             <li>Crée un compte sur Plutonium et installe qBittorrent.</li>
@@ -372,15 +331,33 @@
 
                 <div class="card download-card full-width">
                     <div>
+                        <div class="video-eyebrow-date">Plutonium / Steam</div>
+                        <div class="dl-title">CoD : MW3</div>
+                        <ol class="instruction-list">
+                            <li>Installe Steam et coche <strong>Outils</strong> dans ta bibliothèque.</li>
+                            <li>Installe <strong>Call of Duty: Modern Warfare 3 Dedicated Server</strong> (<a href="https://images-ext-1.discordapp.net/external/6unNopyphw-reX6YxMAQxyc59XqOH3sAx276mshVjZI/https/i.ibb.co/Z2ZHqM7/Sans-titre.png?format=webp&quality=lossless&width=1744&height=1088" target="_blank">Aide</a>).</li>
+                            <li>Télécharge les DLCs (Mega).</li>
+                            <li>Sur Steam : Clic droit sur MW3 (Server) > Gérer > Parcourir fichiers locaux.</li>
+                            <li>Glisse le contenu des DLCs dans ce dossier.</li>
+                            <li>Lance Plutonium, sélectionne MW3, clique <strong>Setup</strong> et choisis le dossier.</li>
+                        </ol>
+                        
+                        <div class="dl-actions">
+                            <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs (Mega)</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Créer compte Plutonium</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : Black Ops II</div>
-                        <p class="dl-desc">Installation via Plutonium :</p>
                         <ol class="instruction-list">
                             <li>Télécharge le fichier torrent via le lien ci-dessous.</li>
                             <li>Crée un compte Plutonium et installe qBittorrent.</li>
-                            <li>Ouvre le torrent avec qBittorrent pour télécharger le jeu.</li>
-                            <li>Lance Plutonium, sélectionne Black Ops II.</li>
-                            <li>Clique sur <strong>Setup</strong> et indique le dossier du jeu.</li>
+                            <li>Ouvre le torrent avec qBittorrent.</li>
+                            <li>Lance Plutonium, sélectionne Black Ops II, clique <strong>Setup</strong> et indique le dossier.</li>
                         </ol>
 
                         <div class="dl-actions">
@@ -393,24 +370,115 @@
 
                 <div class="card download-card full-width">
                     <div>
-                        <div class="video-eyebrow-date">Plutonium / Steam</div>
-                        <div class="dl-title">CoD : MW3</div>
-                        <p class="dl-desc">Installation complète avec DLCs :</p>
+                        <div class="video-eyebrow-date">Alterware</div>
+                        <div class="dl-title">CoD : Ghosts</div>
                         <ol class="instruction-list">
-                            <li>Installe Steam et connecte-toi.</li>
-                            <li>Dans Steam, coche <strong>Outils</strong> dans ta bibliothèque.</li>
-                            <li>Installe <strong>Call of Duty: Modern Warfare 3 Dedicated Server</strong>.</li>
-                            <li><a href="https://images-ext-1.discordapp.net/external/6unNopyphw-reX6YxMAQxyc59XqOH3sAx276mshVjZI/https/i.ibb.co/Z2ZHqM7/Sans-titre.png?format=webp&quality=lossless&width=1744&height=1088" target="_blank">Voir l'image d'aide</a> pour trouver l'outil.</li>
-                            <li>Télécharge les DLCs via le lien Mega.</li>
-                            <li>Sur Steam : Clic droit sur MW3 (Server) > Gérer > Parcourir fichiers locaux.</li>
-                            <li>Glisse le contenu des DLCs dans ce dossier.</li>
-                            <li>Crée un compte Plutonium.</li>
-                            <li>Lance Plutonium, sélectionne MW3, clique <strong>Setup</strong> et choisis le dossier.</li>
+                            <li>Télécharge le torrent du jeu.</li>
+                            <li>Télécharge <strong>alterware-launcher.exe</strong>.</li>
+                            <li>Glisse le launcher dans le dossier du jeu Ghosts.</li>
+                            <li>Lance alterware-launcher.exe pour jouer.</li>
                         </ol>
-                        
                         <div class="dl-actions">
-                            <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs (Mega)</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Créer compte Plutonium</a>
+                            <a href="https://cdn.discordapp.com/attachments/1223252217952206879/1223255224962252870/Call_of_Duty_-_Ghosts.torrent?ex=696641b4&is=6964f034&hm=7f6779e4db84f1c7de049bc3b18afe5227676b877f832d8fdbfbc1c6b81da8b0&" target="_blank" class="dl-btn">1. Torrent Ghosts</a>
+                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Alterware Launcher</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Alterware</div>
+                        <div class="dl-title">CoD : Advanced Warfare</div>
+                        <ol class="instruction-list">
+                            <li>Télécharge Advanced Warfare via le torrent (qBittorrent requis).</li>
+                            <li>Télécharge <strong>alterware-launcher.exe</strong>.</li>
+                            <li>Glisse le launcher dans le dossier du jeu AW.</li>
+                            <li>Lance alterware-launcher.exe.</li>
+                        </ol>
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a>
+                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Alterware Launcher</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">H1-Mod</div>
+                        <div class="dl-title">CoD : MW Remastered</div>
+                        <p class="dl-desc">Installation H1-Mod :</p>
+                        <ol class="instruction-list">
+                            <li>Télécharge MWR via le torrent.</li>
+                            <li>Télécharge le <strong>H1-Mod</strong> depuis Github.</li>
+                            <li>Glisse le contenu de H1-Mod dans le dossier du jeu.</li>
+                            <li>Lance le jeu.</li>
+                        </ol>
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a>
+                            <a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a>
+                            <a href="https://youtu.be/FhRIE1DC7Uk" target="_blank" class="dl-btn youtube">▶ Tuto Vidéo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">T7 Patch / Workshop</div>
+                        <div class="dl-title">CoD : Black Ops III</div>
+                        <ol class="instruction-list">
+                            <li>Télécharge le jeu via torrent.</li>
+                            <li>Télécharge le client <strong>t7x.exe</strong>.</li>
+                            <li>Pour les maps customs : Télécharge le Workshop Map Installer.</li>
+                        </ol>
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1222959668914163734/1437098674533568603/Call_of_Duty_-_Black_Ops_III.torrent?ex=696661f0&is=69651070&hm=6fd334cc877af39bb33c24a176e06eb56fa1423c940c7c6ca1429a1283560b73&" target="_blank" class="dl-btn">1. Torrent BO3</a>
+                            <a href="https://master.bo3.eu/t7x/t7x.exe" target="_blank" class="dl-btn secondary">2. Client T7x</a>
+                            <a href="https://github.com/faroukbmiled/BOIIIWD/releases/tag/v0.3.7.3" target="_blank" class="dl-btn secondary">3. Workshop Installer</a>
+                            <a href="https://youtu.be/GMcwgc1sUd4" target="_blank" class="dl-btn youtube">▶ Tuto Complet</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Projet BO4</div>
+                        <div class="dl-title">CoD : Black Ops 4</div>
+                        <ol class="instruction-list">
+                            <li>Installe le lanceur <strong>Battle.net</strong> et crée un compte.</li>
+                            <li>Télécharge et extrais le dossier RAR "bnet".</li>
+                            <li>Clic droit sur <strong>battle.net.BAT</strong> > Edit : Change uniquement la lettre du disque (ex: D:) si besoin.</li>
+                            <li>Lance le .BAT et laisse le téléchargement se terminer (ne ferme pas la fenêtre !).</li>
+                            <li>Une fois fini, glisse le dossier "files" et "projet-bo4.exe" dans ton dossier BO4.</li>
+                            <li>Lance <strong>projet-bo4.exe</strong> pour jouer.</li>
+                        </ol>
+                        <div style="background:#eee; padding:10px; border-radius:8px; margin-bottom:15px;">
+                            <strong>Serveurs :</strong><br>
+                            Serveur 1 : <span class="server-ip">70.55.126.217</span>
+                            Serveur 2 : <span class="server-ip">45.137.192.227</span>
+                        </div>
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1245952854414589983/1245954016555434045/bnet.rar?ex=69666fda&is=69651e5a&hm=2236c5312e4d23cf7b3be10e453da9495fe2961a580d6d1e66c1326ca173b7d9&" target="_blank" class="dl-btn">1. Fichier RAR Bnet</a>
+                            <a href="https://github.com/bodnjenie14/Project_-bo4_Launcher/releases/tag/release" target="_blank" class="dl-btn secondary">2. Launcher Project</a>
+                            <a href="http://gamecontent.ir/Call%20of%20Duty%20Black%20Ops%204/Game%20Files/" target="_blank" class="dl-btn secondary">3. Lien Alternatif (ISO)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">H2M Mod</div>
+                        <div class="dl-title">HorizonMW (H2M)</div>
+                        <ol class="instruction-list">
+                            <li>Installe le <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/" target="_blank">Pack C++ AIO</a> (Important).</li>
+                            <li>Télécharge <strong>MWR (2017)</strong> via le torrent ci-dessous.</li>
+                            <li>Télécharge le <strong>HMW Launcher</strong> depuis le site officiel.</li>
+                            <li>Décompresse le launcher dans un dossier (PAS dans le jeu).</li>
+                            <li>Lance HMW Launcher.exe > "Select Install Directory" > Choisis ton dossier MWR.</li>
+                            <li>Clique sur "Verify game files" puis "Play".</li>
+                        </ol>
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a>
+                            <a href="https://horizonmw.org/" target="_blank" class="dl-btn secondary">2. Site HorizonMW</a>
                         </div>
                     </div>
                 </div>
@@ -418,12 +486,11 @@
             </div>
         </div>
 
-        </div>
+    </div>
 
     <footer><p>LeIKAAM.<br>Coming Soon.</p></footer>
 
     <script>
-        // --- LOGIQUE YOUTUBE ---
         const API_KEY = 'AIzaSyBUUGtjhf9BBh0atNbk4rT97q7kz2Mm62k'; 
         const CHANNEL_ID = 'UCBUHEV2NI3H4weKFG4Fz7AQ'; 
         const grid = document.getElementById('video-grid');
@@ -464,29 +531,21 @@
             } catch (error) { grid.innerHTML = `<p>Erreur de chargement.</p>`; }
         }
         
-        // --- LOGIQUE ONGLETS AVEC SLIDE ---
         function switchTab(tabName, event) {
-            // 1. Gérer l'affichage des sections
             document.getElementById('tab-videos').classList.add('hidden');
             document.getElementById('tab-downloads').classList.add('hidden');
-            // document.getElementById('tab-discord').classList.add('hidden'); // Supprimé
-            
             document.getElementById('tab-' + tabName).classList.remove('hidden');
 
-            // 2. Gérer les boutons et la bulle
             const buttons = document.querySelectorAll('.segment-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-
             const clickedBtn = event.currentTarget;
             clickedBtn.classList.add('active');
 
-            // Déplacer la bulle
             const bubble = document.querySelector('.segment-bubble');
             bubble.style.width = `${clickedBtn.offsetWidth}px`;
             bubble.style.left = `${clickedBtn.offsetLeft}px`;
         }
 
-        // Initialisation de la position de la bulle au chargement
         window.addEventListener('DOMContentLoaded', () => {
              const firstBtn = document.querySelector('.segment-btn.active');
              const bubble = document.querySelector('.segment-bubble');
