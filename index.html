@@ -56,16 +56,13 @@
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
         
-        /* STYLE DU LOGO IMAGE */
         .logo img {
-            height: 50px; /* Taille du logo ajustée */
+            height: 50px; 
             width: auto;
             display: block;
             transition: transform 0.3s ease;
         }
-        .logo img:hover {
-            transform: scale(1.05);
-        }
+        .logo img:hover { transform: scale(1.05); }
 
         .header-actions { display: flex; align-items: center; gap: 12px; }
 
@@ -135,7 +132,7 @@
             margin-bottom: 40px; text-align: center; color: #1d1d1f;
         }
 
-        /* --- BENTO GRID (2 COLONNES) --- */
+        /* --- BENTO GRID --- */
         .bento-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -148,9 +145,7 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Éléments qui prennent toute la largeur */
         .span-full { grid-column: span 2; }
-        
         .video-card.featured { grid-column: span 2; min-height: 520px; }
 
         .download-card {
@@ -329,10 +324,10 @@
         
         <div class="segmented-control">
             <div class="segment-bubble"></div>
-            <button class="segment-btn active" onclick="switchTab('videos', event)">Vidéos</button>
-            <button class="segment-btn" onclick="switchTab('cod', event)">Call of Duty</button>
-            <button class="segment-btn" onclick="switchTab('switch', event)">Switch</button>
-            <button class="segment-btn" onclick="switchTab('emulators', event)">Émulateurs</button>
+            <button id="nav-videos" class="segment-btn active" onclick="switchTab('videos')">Vidéos</button>
+            <button id="nav-cod" class="segment-btn" onclick="switchTab('cod')">Call of Duty</button>
+            <button id="nav-switch" class="segment-btn" onclick="switchTab('switch')">Switch</button>
+            <button id="nav-emulators" class="segment-btn" onclick="switchTab('emulators')">Émulateurs</button>
         </div>
 
         <div id="tab-videos">
@@ -850,21 +845,31 @@
             } catch (error) { grid.innerHTML = `<p style="text-align:center">Erreur de chargement des vidéos.</p>`; }
         }
         
-        function switchTab(tabName, event) {
+        // ROUTING SYSTEM (Gestion URL)
+        function switchTab(tabName) {
+            // Mettre à jour l'URL (ex: #cod)
+            history.pushState(null, null, '#' + tabName);
+            
+            // Masquer tous les onglets
             document.getElementById('tab-videos').classList.add('hidden');
             document.getElementById('tab-cod').classList.add('hidden');
             document.getElementById('tab-switch').classList.add('hidden');
             document.getElementById('tab-emulators').classList.add('hidden'); 
             
+            // Afficher le bon onglet
             const target = document.getElementById('tab-' + tabName);
             if(target) target.classList.remove('hidden');
 
+            // Gérer les boutons
             const buttons = document.querySelectorAll('.segment-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            const clickedBtn = event.currentTarget;
-            clickedBtn.classList.add('active');
-
-            updateBubble(clickedBtn);
+            
+            // Activer le bon bouton via son ID
+            const activeBtn = document.getElementById('nav-' + tabName);
+            if(activeBtn) {
+                activeBtn.classList.add('active');
+                updateBubble(activeBtn);
+            }
         }
 
         function updateBubble(element) {
@@ -875,9 +880,29 @@
             }
         }
 
+        // Au chargement de la page : Vérifier l'URL
         window.addEventListener('DOMContentLoaded', () => {
-             const firstBtn = document.querySelector('.segment-btn.active');
-             updateBubble(firstBtn);
+             // Récupérer le hash (ex: #cod) sans le #
+             const hash = window.location.hash.substring(1);
+             
+             if(hash && document.getElementById('tab-' + hash)) {
+                 // Si un hash valide existe, ouvrir cet onglet
+                 switchTab(hash);
+             } else {
+                 // Sinon, ouvrir l'onglet par défaut (vidéos)
+                 const firstBtn = document.getElementById('nav-videos');
+                 updateBubble(firstBtn);
+             }
+        });
+        
+        // Gérer le bouton "Précédent" du navigateur
+        window.addEventListener('popstate', () => {
+             const hash = window.location.hash.substring(1);
+             if(hash) {
+                 switchTab(hash);
+             } else {
+                 switchTab('videos');
+             }
         });
         
         window.addEventListener('resize', () => {
