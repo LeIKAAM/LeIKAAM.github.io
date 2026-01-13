@@ -56,7 +56,6 @@
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
         .logo { font-weight: 600; font-size: 1.3rem; letter-spacing: -0.02em; }
-        
         .header-actions { display: flex; align-items: center; gap: 12px; }
 
         .btn {
@@ -64,7 +63,6 @@
             font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;
             cursor: pointer;
         }
-        
         .discord-btn {
             background-color: rgba(255, 255, 255, 0.5); color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05); backdrop-filter: blur(5px);
@@ -79,33 +77,45 @@
         /* --- CONTENEUR --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; }
 
-        /* --- NAVIGATION ONGLETS --- */
+        /* --- NAVIGATION ONGLETS (CORRIGÉ) --- */
         .segmented-control {
-            display: flex;
+            display: inline-flex; /* S'adapte au contenu */
             background: rgba(118, 118, 128, 0.12);
             padding: 4px;
             border-radius: 100px;
-            margin: 0 auto 50px auto;
-            max-width: 650px;
+            margin: 0 auto 50px auto; /* Centré */
             position: relative;
             z-index: 1;
+            /* Gestion du scroll sur mobile */
+            max-width: 100%;
             overflow-x: auto;
+            white-space: nowrap;
+            /* Pour centrer le bloc entier sur la page */
+            left: 50%;
+            transform: translateX(-50%);
         }
+        
+        /* Masquer la barre de scroll moche */
+        .segmented-control::-webkit-scrollbar { display: none; }
+        .segmented-control { -ms-overflow-style: none; scrollbar-width: none; }
 
         .segment-bubble {
             position: absolute;
             top: 4px; left: 4px; height: calc(100% - 8px);
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
             border-radius: 100px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: -1; pointer-events: none;
         }
 
         .segment-btn {
-            flex: 1; text-align: center; padding: 8px 12px; font-size: 0.9rem; font-weight: 500;
-            color: var(--text-secondary); border-radius: 100px; cursor: pointer;
-            background: transparent; border: none; position: relative; z-index: 2;
-            transition: color 0.3s ease; white-space: nowrap;
+            border: none; background: none;
+            padding: 8px 20px; /* Plus d'espace */
+            font-size: 0.95rem; font-weight: 500;
+            color: var(--text-secondary); cursor: pointer;
+            border-radius: 100px;
+            transition: color 0.3s ease; 
+            z-index: 2;
         }
 
         .segment-btn.active { font-weight: 600; color: #000; }
@@ -113,7 +123,7 @@
         /* --- TITRES --- */
         h1 {
             font-family: "SF Pro Display", sans-serif;
-            font-size: 3.5rem; font-weight: 600; letter-spacing: -0.04em;
+            font-size: 3rem; font-weight: 600; letter-spacing: -0.04em;
             margin-bottom: 40px; text-align: center; color: #1d1d1f;
         }
 
@@ -286,7 +296,12 @@
             header { padding: 15px 20px; }
             .bento-grid { grid-template-columns: 1fr; }
             .modal-content { width: 95%; }
-            .segmented-control { max-width: 100%; }
+            /* Ajustement Menu Mobile */
+            .segmented-control { 
+                justify-content: flex-start; /* Aligner à gauche pour le scroll */
+                width: 90%; 
+                margin-bottom: 30px;
+            }
         }
 
         .hidden { display: none; }
@@ -725,7 +740,7 @@
                     <div>
                         <div class="video-eyebrow-date">PlayStation 3</div>
                         <div class="dl-title">RPCS3</div>
-                        <p class="dl-desc">L'émulateur PS3 le plus performant. Idéal pour jouer aux vieux CoD consoles ou exclusivités PS3.</p>
+                        <p class="dl-desc">L'émulateur PS3 le plus performant.</p>
                         <ul class="instruction-list">
                             <li>Nécessite le firmware PS3 officiel.</li>
                             <li>Demande un CPU assez puissant.</li>
@@ -741,7 +756,7 @@
                     <div>
                         <div class="video-eyebrow-date">Nintendo Switch</div>
                         <div class="dl-title">Ryujinx</div>
-                        <p class="dl-desc">Émulateur Switch très stable. Permet le jeu en ligne sur certains titres.</p>
+                        <p class="dl-desc">Émulateur Switch très stable.</p>
                     </div>
                     <a href="https://ryujinx.org/download" target="_blank" class="dl-btn switch-btn">Site Officiel</a>
                 </div>
@@ -750,7 +765,7 @@
                     <div>
                         <div class="video-eyebrow-date">Xbox 360</div>
                         <div class="dl-title">Xenia (Canary)</div>
-                        <p class="dl-desc">Parfait pour revivre l'époque Xbox 360 sur PC. Prenez la version "Canary" pour plus de compatibilité.</p>
+                        <p class="dl-desc">L'émulateur Xbox 360 pour PC.</p>
                     </div>
                     <a href="https://github.com/xenia-canary/xenia-canary/releases" target="_blank" class="dl-btn" style="background-color:#107C10;">Télécharger Xenia</a>
                 </div>
@@ -759,7 +774,7 @@
                     <div>
                         <div class="video-eyebrow-date">PlayStation 2</div>
                         <div class="dl-title">PCSX2 (Nightly)</div>
-                        <p class="dl-desc">La référence pour la PS2. Pensez à récupérer un BIOS PS2 légalement.</p>
+                        <p class="dl-desc">La référence pour la PS2.</p>
                     </div>
                     <a href="https://pcsx2.net/downloads" target="_blank" class="dl-btn secondary">Télécharger PCSX2</a>
                 </div>
@@ -768,7 +783,7 @@
                     <div>
                         <div class="video-eyebrow-date">Tout-en-un</div>
                         <div class="dl-title">RetroArch</div>
-                        <p class="dl-desc">L'interface ultime pour émuler tout le reste (GBA, SNES, N64, PS1...).</p>
+                        <p class="dl-desc">Pour émuler tout le reste (GBA, SNES, N64...).</p>
                     </div>
                     <a href="https://www.retroarch.com/?page=platforms" target="_blank" class="dl-btn secondary">Télécharger RetroArch</a>
                 </div>
@@ -851,6 +866,7 @@
             } catch (error) { grid.innerHTML = `<p style="text-align:center">Erreur de chargement des vidéos.</p>`; }
         }
         
+        // --- LOGIQUE ONGLETS (CORRIGÉE) ---
         function switchTab(tabName, event) {
             // Cacher tous les onglets
             document.getElementById('tab-videos').classList.add('hidden');
@@ -859,7 +875,8 @@
             document.getElementById('tab-emulators').classList.add('hidden'); 
             
             // Afficher le bon
-            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            const target = document.getElementById('tab-' + tabName);
+            if(target) target.classList.remove('hidden');
 
             // Gérer le bouton actif
             const buttons = document.querySelectorAll('.segment-btn');
@@ -867,19 +884,27 @@
             const clickedBtn = event.currentTarget;
             clickedBtn.classList.add('active');
 
-            // Bouger la bulle blanche
-            const bubble = document.querySelector('.segment-bubble');
-            bubble.style.width = `${clickedBtn.offsetWidth}px`;
-            bubble.style.left = `${clickedBtn.offsetLeft}px`;
+            // Animation bulle
+            updateBubble(clickedBtn);
         }
 
+        function updateBubble(element) {
+            const bubble = document.querySelector('.segment-bubble');
+            if(element && bubble) {
+                bubble.style.width = `${element.offsetWidth}px`;
+                bubble.style.left = `${element.offsetLeft}px`;
+            }
+        }
+
+        // Au chargement et au redimensionnement
         window.addEventListener('DOMContentLoaded', () => {
              const firstBtn = document.querySelector('.segment-btn.active');
-             const bubble = document.querySelector('.segment-bubble');
-             if(firstBtn && bubble) {
-                 bubble.style.width = `${firstBtn.offsetWidth}px`;
-                 bubble.style.left = `${firstBtn.offsetLeft}px`;
-             }
+             updateBubble(firstBtn);
+        });
+        
+        window.addEventListener('resize', () => {
+             const activeBtn = document.querySelector('.segment-btn.active');
+             updateBubble(activeBtn);
         });
 
         fetchYouTubeVideos();
