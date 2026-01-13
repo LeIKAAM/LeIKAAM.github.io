@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Officiel de IKAAM</title>
+    <title>IKAAM</title>
     
     <link rel="icon" href="logo-removebg-preview.png" type="image/png">
     <link rel="shortcut icon" href="logo-removebg-preview.png" type="image/png">
     <link rel="apple-touch-icon" href="logo-removebg-preview.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- CONFIGURATION --- */
@@ -22,6 +24,7 @@
             --radius-m: 12px;
             --accent-blue: #0071e3;
             --accent-red: #e60012;
+            --accent-green: #2ecc71; /* Pour le statut serveur */
             --discord-color: #5865F2;
             --orb-opacity: 0.5;
         }
@@ -43,198 +46,82 @@
             margin: 0; padding: 0; overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
+            display: flex; flex-direction: column;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- LOADER DE DEMARRAGE --- */
+        /* --- LOADER --- */
         #preloader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #000; /* Fond noir studio */
-            z-index: 9999999; /* Toujours au dessus de tout */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #000; z-index: 9999999;
             display: flex; justify-content: center; align-items: center;
             transition: opacity 0.8s ease, visibility 0.8s ease;
         }
-        
-        #preloader.loaded {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .loader-logo {
-            width: 120px;
-            height: auto;
-            animation: pulse-logo 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse-logo {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 15px rgba(255,255,255,0.5)); }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
+        #preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-logo { width: 120px; height: auto; animation: pulse-logo 1.5s infinite ease-in-out; }
+        @keyframes pulse-logo { 0% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 15px rgba(255,255,255,0.5)); } 100% { transform: scale(1); opacity: 0.8; } }
 
         /* --- FOND ANIMÉ --- */
-        .ambient-light {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; 
-            background: var(--bg-main); transition: background 0.4s ease;
-        }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(90px); opacity: var(--orb-opacity);
-            animation: float 25s infinite alternate ease-in-out;
-            transition: opacity 0.4s ease;
-        }
+        .ambient-light { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: var(--bg-main); transition: background 0.4s ease; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: var(--orb-opacity); animation: float 25s infinite alternate ease-in-out; transition: opacity 0.4s ease; }
         .orb-1 { top: -15%; left: -15%; width: 55vw; height: 55vw; background: radial-gradient(circle, #dceaff 0%, transparent 70%); }
         .orb-2 { bottom: -15%; right: -15%; width: 65vw; height: 65vw; background: radial-gradient(circle, #eef2ff 0%, transparent 70%); animation-delay: -7s; }
         @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(40px, 60px); } }
 
         /* --- HEADER --- */
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 40px; position: sticky; top: 0; z-index: 100;
-            background: var(--glass-bg);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            transition: background 0.4s, border 0.4s;
-        }
-        
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; position: sticky; top: 0; z-index: 100; background: var(--glass-bg); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--glass-border); transition: background 0.4s, border 0.4s; }
         .logo img { height: 50px; width: auto; display: block; transition: transform 0.3s ease; }
         .logo img:hover { transform: scale(1.05); }
-
         .header-actions { display: flex; align-items: center; gap: 12px; }
-
-        .btn {
-            padding: 10px 20px; border-radius: 99px; text-decoration: none;
-            font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease;
-            cursor: pointer; border: none;
-        }
-        
-        .theme-btn {
-            background-color: rgba(128, 128, 128, 0.15); color: var(--text-primary);
-            font-size: 1.2rem; padding: 8px 15px;
-        }
+        .btn { padding: 10px 20px; border-radius: 99px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .theme-btn { background-color: rgba(128, 128, 128, 0.15); color: var(--text-primary); font-size: 1.2rem; padding: 8px 15px; }
         .theme-btn:hover { background-color: rgba(128, 128, 128, 0.3); }
-
-        .discord-btn {
-            background-color: rgba(128, 128, 128, 0.1); color: var(--text-primary);
-            border: 1px solid var(--glass-border); backdrop-filter: blur(5px);
-        }
-        .discord-btn:hover {
-            background-color: var(--discord-color); color: white; border-color: var(--discord-color);
-            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
-        }
+        .discord-btn { background-color: rgba(128, 128, 128, 0.1); color: var(--text-primary); border: 1px solid var(--glass-border); backdrop-filter: blur(5px); }
+        .discord-btn:hover { background-color: var(--discord-color); color: white; border-color: var(--discord-color); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3); }
         .subscribe-btn { background-color: var(--text-primary); color: var(--bg-main); }
         .subscribe-btn:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
 
-        /* --- BREAKING NEWS BAR --- */
-        .news-ticker {
-            width: 100%;
-            background: var(--glass-bg);
-            border-bottom: 1px solid var(--glass-border);
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            z-index: 90;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            backdrop-filter: blur(10px);
-        }
-        
-        .news-content {
-            display: inline-block;
-            padding-left: 100%;
-            animation: scroll-text 45s linear infinite; 
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-        }
-        
+        /* --- NEWS TICKER --- */
+        .news-ticker { width: 100%; background: var(--glass-bg); border-bottom: 1px solid var(--glass-border); overflow: hidden; white-space: nowrap; position: relative; z-index: 90; height: 40px; display: flex; align-items: center; backdrop-filter: blur(10px); }
+        .news-content { display: inline-block; padding-left: 100%; animation: scroll-text 45s linear infinite; font-weight: 600; color: var(--text-primary); font-size: 0.95rem; }
         .news-content span { margin-right: 50px; }
         .news-badge { background: var(--accent-red); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; margin-right: 8px; }
-        
         .news-ticker:hover .news-content { animation-play-state: paused; cursor: default; }
-
-        @keyframes scroll-text {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
+        @keyframes scroll-text { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
         /* --- CHATBOX --- */
         .chat-container { position: relative; display: inline-block; padding-bottom: 20px; margin-bottom: -20px; }
         .chat-btn { background-color: #2ecc71; color: white; border: 1px solid rgba(0,0,0,0.05); }
         .chat-btn:hover { background-color: #27ae60; transform: translateY(-2px); }
-        .chat-popup {
-            display: none; position: absolute; right: -50px; top: 45px;
-            width: 350px; height: 500px; background-color: white;
-            border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-            z-index: 2000; overflow: hidden; border: 1px solid rgba(0,0,0,0.1);
-            animation: fadeIn 0.3s ease;
-        }
+        .chat-popup { display: none; position: absolute; right: -50px; top: 45px; width: 350px; height: 500px; background-color: white; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); z-index: 2000; overflow: hidden; border: 1px solid rgba(0,0,0,0.1); animation: fadeIn 0.3s ease; }
         .chat-container:hover .chat-popup { display: block; }
         .chat-popup iframe { width: 100%; height: 100%; border: none; }
 
         /* --- CONTENEUR --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; }
-
-        /* --- RECHERCHE --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; flex: 1; }
         .search-container { max-width: 400px; margin: 0 auto 30px auto; position: relative; z-index: 10; }
-        #searchInput {
-            width: 100%; padding: 12px 20px; border-radius: 50px;
-            border: 1px solid var(--glass-border); background: var(--glass-bg);
-            backdrop-filter: blur(10px); font-size: 1rem; color: var(--text-primary);
-            outline: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            box-sizing: border-box;
-        }
+        #searchInput { width: 100%; padding: 12px 20px; border-radius: 50px; border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: blur(10px); font-size: 1rem; color: var(--text-primary); outline: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
         #searchInput:focus { transform: scale(1.02); border-color: var(--accent-blue); }
 
         /* --- NAVIGATION --- */
-        .segmented-control {
-            display: inline-flex; background: rgba(118, 118, 128, 0.12);
-            padding: 4px; border-radius: 100px; margin: 0 auto 50px auto; 
-            position: relative; z-index: 1; max-width: 100%;
-            overflow-x: auto; white-space: nowrap; left: 50%; transform: translateX(-50%);
-        }
+        .segmented-control { display: inline-flex; background: rgba(118, 118, 128, 0.12); padding: 4px; border-radius: 100px; margin: 0 auto 50px auto; position: relative; z-index: 1; max-width: 100%; overflow-x: auto; white-space: nowrap; left: 50%; transform: translateX(-50%); }
         .segmented-control::-webkit-scrollbar { display: none; }
-        .segment-bubble {
-            position: absolute; top: 4px; left: 4px; height: calc(100% - 8px);
-            background: var(--bg-main); border-radius: 100px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1; pointer-events: none;
-        }
-        .segment-btn {
-            border: none; background: none; padding: 8px 20px; 
-            font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); 
-            cursor: pointer; border-radius: 100px; transition: color 0.3s ease; z-index: 2;
-        }
+        .segment-bubble { position: absolute; top: 4px; left: 4px; height: calc(100% - 8px); background: var(--bg-main); border-radius: 100px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1; pointer-events: none; }
+        .segment-btn { border: none; background: none; padding: 8px 20px; font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-radius: 100px; transition: color 0.3s ease; z-index: 2; }
         .segment-btn.active { font-weight: 600; color: var(--text-primary); }
 
-        /* --- GRID --- */
+        /* --- GRID & CARD --- */
         h1 { font-family: "SF Pro Display", sans-serif; font-size: 3rem; font-weight: 600; letter-spacing: -0.04em; margin-bottom: 40px; text-align: center; color: var(--text-primary); }
         .bento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
         .span-full { grid-column: span 2; }
         .video-card.featured { grid-column: span 2; min-height: 520px; }
         .download-card { min-height: auto !important; padding: 30px !important; display: flex; flex-direction: column; justify-content: space-between; }
-
-        /* --- CARD (3D TILT) --- */
-        .card {
-            background-color: var(--glass-bg); border-radius: var(--radius-l); overflow: hidden;
-            position: relative; cursor: pointer; border: 1px solid var(--glass-border); 
-            box-shadow: var(--shadow-soft); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, background-color 0.4s;
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            opacity: 0; animation: fadeUp 0.8s forwards; aspect-ratio: auto;
-            /* TILT */
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
-        }
-        .card:hover {
-            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25);
-            z-index: 10; background-color: var(--bg-main);
-        }
+        .card { background-color: var(--glass-bg); border-radius: var(--radius-l); overflow: hidden; position: relative; cursor: pointer; border: 1px solid var(--glass-border); box-shadow: var(--shadow-soft); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, background-color 0.4s; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); opacity: 0; animation: fadeUp 0.8s forwards; aspect-ratio: auto; transform-style: preserve-3d; transform: perspective(1000px); }
+        .card:hover { box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25); z-index: 10; background-color: var(--bg-main); }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- ELEMENTS AVEC PROFONDEUR --- */
-        .dl-title, .dl-desc, .dl-btn, .video-eyebrow-date, .video-title, .play-icon { transform: translateZ(20px); }
+        .dl-title, .dl-desc, .dl-btn, .video-eyebrow-date, .video-title, .play-icon, .tag-container { transform: translateZ(20px); }
         
         .dl-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary); }
         .dl-desc { font-size: 1rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; }
@@ -245,20 +132,21 @@
         .dl-btn.switch-btn { background-color: var(--accent-red); }
         .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; }
         
+        /* TAGS (NOUVEAU) */
+        .tag-container { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .tag { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; background: rgba(128,128,128,0.1); color: var(--text-secondary); border: 1px solid var(--glass-border); display: flex; align-items: center; gap: 5px; }
+        .tag i { font-size: 0.8rem; }
+
+        /* SERVER STATUS (NOUVEAU) */
+        .server-status { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-green); font-weight: 700; font-size: 0.9rem; margin-bottom: 5px; transform: translateZ(20px); }
+        .status-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); animation: pulse-green 2s infinite; }
+        @keyframes pulse-green { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
         .code-block { background: rgba(128,128,128,0.1); border-radius: 12px; padding: 15px; font-family: monospace; margin-bottom: 20px; max-height: 200px; overflow-y: auto; color: var(--text-primary); border: 1px solid var(--glass-border); transform: translateZ(20px); }
-        
-        /* KEYS CLICK TO COPY */
-        .key-row { 
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 8px 12px; margin-bottom: 6px;
-            background: rgba(0,0,0,0.05); border-radius: 6px;
-            cursor: pointer; transition: all 0.2s; border: 1px solid transparent;
-            user-select: none;
-        }
+        .key-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin-bottom: 6px; background: rgba(0,0,0,0.05); border-radius: 6px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; user-select: none; }
         .key-row:hover { background: rgba(0, 113, 227, 0.1); border-color: var(--accent-blue); transform: translateX(5px); }
         .key-row:active { transform: scale(0.98); }
         .copy-icon { font-size: 0.8rem; opacity: 0.5; }
-
         .instruction-list { padding-left: 20px; margin-bottom: 20px; color: var(--text-secondary); transform: translateZ(20px); }
         .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; transform: translateZ(20px); }
         .server-ip { font-weight: 700; color: var(--accent-blue); display: block; margin-top: 5px; user-select: all; }
@@ -274,51 +162,31 @@
         .video-eyebrow-date { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .video-title { font-family: "SF Pro Display", sans-serif; font-size: 1.4rem; font-weight: 700; margin: 0; color: #FFFFFF; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .video-card.featured .video-title { font-size: 2.4rem; }
-        
-        .play-icon { 
-            position: absolute; top: 20px; right: 20px; width: 45px; height: 45px; 
-            background: rgba(255,255,255,0.2); backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; 
-            opacity: 0; transform: scale(0.8) translateZ(30px);
-            transition: all 0.4s; color: white; font-size: 1.2rem; z-index: 5;
-        }
+        .play-icon { position: absolute; top: 20px; right: 20px; width: 45px; height: 45px; background: rgba(255,255,255,0.2); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8) translateZ(30px); transition: all 0.4s; color: white; font-size: 1.2rem; z-index: 5; }
         .card:hover .play-icon { opacity: 1; transform: scale(1) translateZ(30px); }
 
         /* --- MODALE --- */
-        .modal {
-            display: none; position: fixed; z-index: 99999; left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(5px);
-            justify-content: center; align-items: center; animation: fadeIn 0.3s ease;
-        }
-        .modal-content {
-            position: relative; background-color: #000;
-            width: 80%; max-width: 900px; aspect-ratio: 16/9;
-            border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            overflow: hidden;
-        }
+        .modal { display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(5px); justify-content: center; align-items: center; animation: fadeIn 0.3s ease; }
+        .modal-content { position: relative; background-color: #000; width: 80%; max-width: 900px; aspect-ratio: 16/9; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; }
         .modal-content iframe { width: 100%; height: 100%; display:block; border:none; }
-        .close-btn {
-            position: absolute; top: -40px; right: 0; color: white; 
-            font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.3s;
-        }
+        .close-btn { position: absolute; top: -40px; right: 0; color: white; font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
         .close-btn:hover { color: #e60012; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- LECTEUR MUSIQUE --- */
+        /* --- FOOTER PRO (NOUVEAU) --- */
+        footer { margin-top: auto; background: var(--glass-bg); border-top: 1px solid var(--glass-border); padding: 50px 20px 20px; backdrop-filter: blur(10px); }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h4 { font-size: 1.1rem; margin-bottom: 20px; color: var(--text-primary); font-weight: 700; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col a { font-size: 0.95rem; color: var(--text-secondary); text-decoration: none; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
+        .footer-col a:hover { color: var(--accent-blue); }
+        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 0.85rem; }
+
+        /* --- MUSIC & TOAST --- */
         .music-player { position: fixed; bottom: 20px; left: 20px; z-index: 100; }
         #playBtn { background: var(--glass-bg); color: var(--text-primary); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         #playBtn:hover { transform: scale(1.05); filter: brightness(110%); }
-
-        /* --- TOAST --- */
-        #toast {
-            visibility: hidden; min-width: 250px; margin-left: -125px;
-            background-color: #333; color: #fff; text-align: center; border-radius: 50px;
-            padding: 16px; position: fixed; z-index: 100000; left: 50%; bottom: 30px;
-            font-size: 17px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
-        }
+        #toast { visibility: hidden; min-width: 250px; margin-left: -125px; background-color: #333; color: #fff; text-align: center; border-radius: 50px; padding: 16px; position: fixed; z-index: 100000; left: 50%; bottom: 30px; font-size: 17px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
@@ -335,13 +203,10 @@
 
         .hidden { display: none !important; }
         .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
-        .server-ip { font-weight: 700; color: var(--accent-blue); display: block; margin-top: 5px; user-select: all; }
     </style>
 </head>
 <body>
-    <div id="preloader">
-        <img src="logo-removebg-preview.png" alt="Loading..." class="loader-logo">
-    </div>
+    <div id="preloader"><img src="logo-removebg-preview.png" alt="Loading..." class="loader-logo"></div>
 
     <div class="ambient-light"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
     
@@ -396,45 +261,62 @@
             <h1>Call of Duty</h1>
             <div class="bento-grid">
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Classique</div><div class="dl-title">Call of Duty 1X</div><p class="dl-desc">La version revisitée du premier opus. Extrait simplement le fichier RAR et lance le jeu.</p></div>
+                    <div>
+                        <div class="tag-container"><span class="tag"><i class="fa-brands fa-windows"></i> PC</span><span class="tag">RETRO</span></div>
+                        <div class="dl-title">Call of Duty 1X</div><p class="dl-desc">La version revisitée du premier opus. Extrait simplement le fichier RAR et lance le jeu.</p>
+                    </div>
                     <a href="https://www.mediafire.com/file/34lt06fw6ad1t64/COD1X.rar" target="_blank" class="dl-btn">Télécharger (Mediafire)</a>
                 </div>
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Légendaire</div><div class="dl-title">Call of Duty 2</div><p class="dl-desc">Extrait le jeu et lance-le. Utilise l'une des clés ci-dessous pour jouer en ligne :</p><div class="code-block"><span class="key-row" onclick="copyKey(this)">XEZL-GZWX-XQZG-GEGU-EEFC <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">W5HA-3557-666Q-JQGZ-232E <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">W5HA-ZHEL-666Q-L66X-CD23 <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">W55E-QE6E-66Q6-EWE6-76DD <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">G6AE-57JJ-Q5G6-WJPP-E1D9 <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">PPX6-6P6Q-7X3E-AZEA-20B0 <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">P7QH-Q5U7-7U5W-EQ3Z-14AF <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">G3X7-6QZU-QZ3Z-A573-538F <span class="copy-icon">📋</span></span></div></div>
+                    <div>
+                        <div class="tag-container"><span class="tag"><i class="fa-brands fa-windows"></i> PC</span><span class="tag">ONLINE</span></div>
+                        <div class="dl-title">Call of Duty 2</div><p class="dl-desc">Extrait le jeu et lance-le. Utilise l'une des clés ci-dessous pour jouer en ligne :</p><div class="code-block"><span class="key-row" onclick="copyKey(this)">XEZL-GZWX-XQZG-GEGU-EEFC <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">W5HA-3557-666Q-JQGZ-232E <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">W5HA-ZHEL-666Q-L66X-CD23 <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">W55E-QE6E-66Q6-EWE6-76DD <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">G6AE-57JJ-Q5G6-WJPP-E1D9 <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">PPX6-6P6Q-7X3E-AZEA-20B0 <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">P7QH-Q5U7-7U5W-EQ3Z-14AF <span class="copy-icon">📋</span></span><span class="key-row" onclick="copyKey(this)">G3X7-6QZU-QZ3Z-A573-538F <span class="copy-icon">📋</span></span></div></div>
                     <a href="https://www.mediafire.com/file/iydrzjoi7m0fahn/COD2.rar" target="_blank" class="dl-btn">Télécharger le Jeu</a>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Moderne</div><div class="dl-title">Call of Duty 4X</div><p class="dl-desc">Installation Promod :</p><ol class="instruction-list"><li>Télécharge le jeu complet.</li><li>Télécharge le patch <strong>cod4x_client</strong>.</li><li>Glisse les fichiers du patch dans le dossier du jeu.</li></ol><div class="dl-actions"><a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Jeu</a><a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch</a></div><a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube" style="margin-top:10px;">▶ Tuto Clés</a></div>
+                    <div>
+                        <div class="tag-container"><span class="tag"><i class="fa-brands fa-windows"></i> PC</span><span class="tag">MODS</span></div>
+                        <div class="dl-title">Call of Duty 4X</div><p class="dl-desc">Installation Promod :</p><ol class="instruction-list"><li>Télécharge le jeu complet.</li><li>Télécharge le patch <strong>cod4x_client</strong>.</li><li>Glisse les fichiers du patch dans le dossier du jeu.</li></ol><div class="dl-actions"><a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Jeu</a><a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch</a></div><a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube" style="margin-top:10px;">▶ Tuto Clés</a></div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : World at War</div><ol class="instruction-list"><li>Télécharge le torrent du jeu.</li><li>Crée un compte sur Plutonium.</li><li>Installe qBittorent.</li><li>Lance Plutonium, Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
+                    <div>
+                        <div class="tag-container"><span class="tag">PLUTONIUM</span><span class="tag">ZOMBIE</span></div>
+                        <div class="dl-title">CoD : World at War</div><ol class="instruction-list"><li>Télécharge le torrent du jeu.</li><li>Crée un compte sur Plutonium.</li><li>Installe qBittorent.</li><li>Lance Plutonium, Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">IW4X / Alterware</div><div class="dl-title">CoD : MW2 (IW4X)</div><ol class="instruction-list"><li>Télécharge MW2 (Torrent).</li><li>Extraire <strong>release.zip</strong>.</li><li>Lance <strong>launcher.exe</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223219330452553738/1223220365527093259/Call_of_Duty_-_Modern_Warfare_2.torrent?ex=6966213d&is=6964cfbd&hm=d8c330b69a24c0b2bda1e8b66d9bd7af34e4b670af4faea6b25d7fa161d29a25&" target="_blank" class="dl-btn">1. Torrent MW2</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
+                    <div><div class="tag-container"><span class="tag">IW4X</span><span class="tag">MODS</span></div><div class="dl-title">CoD : MW2 (IW4X)</div><ol class="instruction-list"><li>Télécharge MW2 (Torrent).</li><li>Extraire <strong>release.zip</strong>.</li><li>Lance <strong>launcher.exe</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223219330452553738/1223220365527093259/Call_of_Duty_-_Modern_Warfare_2.torrent?ex=6966213d&is=6964cfbd&hm=d8c330b69a24c0b2bda1e8b66d9bd7af34e4b670af4faea6b25d7fa161d29a25&" target="_blank" class="dl-btn">1. Torrent MW2</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : Black Ops 1</div><ol class="instruction-list"><li>Télécharge le torrent du jeu.</li><li>Crée un compte sur Plutonium.</li><li>Lance Plutonium, Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
+                    <div><div class="tag-container"><span class="tag">PLUTONIUM</span></div><div class="dl-title">CoD : Black Ops 1</div><ol class="instruction-list"><li>Télécharge le torrent du jeu.</li><li>Crée un compte sur Plutonium.</li><li>Lance Plutonium, Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Plutonium / Steam</div><div class="dl-title">CoD : MW3</div><ol class="instruction-list"><li>Installe Steam > Outils > MW3 Dedicated Server.</li><li>Télécharge les DLCs (Mega).</li><li>Glisse les DLCs dans le dossier MW3.</li></ol><div class="dl-actions"><a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Plutonium</a></div></div>
+                    <div><div class="tag-container"><span class="tag">STEAM</span><span class="tag">PLUTONIUM</span></div><div class="dl-title">CoD : MW3</div><ol class="instruction-list"><li>Installe Steam > Outils > MW3 Dedicated Server.</li><li>Télécharge les DLCs (Mega).</li><li>Glisse les DLCs dans le dossier MW3.</li></ol><div class="dl-actions"><a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Plutonium</a></div></div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : Black Ops II</div><ol class="instruction-list"><li>Télécharge le torrent BO2.</li><li>Crée un compte Plutonium.</li><li>Lance Plutonium, Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
+                    <div><div class="tag-container"><span class="tag">PLUTONIUM</span><span class="tag">ZOMBIE</span></div><div class="dl-title">CoD : Black Ops II</div><ol class="instruction-list"><li>Télécharge le torrent BO2.</li><li>Crée un compte Plutonium.</li><li>Lance Plutonium, Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Alterware</div><div class="dl-title">CoD : Advanced Warfare</div><ol class="instruction-list"><li>Télécharge Advanced Warfare (Torrent).</li><li>Télécharge <strong>launcher.exe</strong>.</li><li>Lance le launcher.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
+                    <div><div class="tag-container"><span class="tag">S1X</span><span class="tag">EXO</span></div><div class="dl-title">CoD : Advanced Warfare</div><ol class="instruction-list"><li>Télécharge Advanced Warfare (Torrent).</li><li>Télécharge <strong>launcher.exe</strong>.</li><li>Lance le launcher.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
                 </div>
                  <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">H1-Mod</div><div class="dl-title">CoD : MW Remastered</div><ol class="instruction-list"><li>Télécharge MWR via le torrent.</li><li>Installe le <strong>H1-Mod</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a></div></div>
+                    <div><div class="tag-container"><span class="tag">H1-MOD</span></div><div class="dl-title">CoD : MW Remastered</div><ol class="instruction-list"><li>Télécharge MWR via le torrent.</li><li>Installe le <strong>H1-Mod</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a></div></div>
                 </div>
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">T7 Patch / Workshop</div><div class="dl-title">CoD : Black Ops III</div><ol class="instruction-list"><li>Télécharge le jeu via torrent et le client <strong>t7x.exe</strong>.</li><li>Pour les maps customs : Télécharge le Workshop Map Installer.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1222959668914163734/1437098674533568603/Call_of_Duty_-_Black_Ops_III.torrent?ex=696661f0&is=69651070&hm=6fd334cc877af39bb33c24a176e06eb56fa1423c940c7c6ca1429a1283560b73&" target="_blank" class="dl-btn">1. Torrent BO3</a><a href="https://master.bo3.eu/t7x/t7x.exe" target="_blank" class="dl-btn secondary">2. Client T7x</a><a href="https://github.com/faroukbmiled/BOIIIWD/releases/tag/v0.3.7.3" target="_blank" class="dl-btn secondary">3. Workshop Installer</a><a href="https://youtu.be/GMcwgc1sUd4" target="_blank" class="dl-btn youtube">▶ Tuto Complet</a></div></div>
+                    <div><div class="tag-container"><span class="tag">T7 PATCH</span><span class="tag">WORKSHOP</span></div><div class="dl-title">CoD : Black Ops III</div><ol class="instruction-list"><li>Télécharge le jeu via torrent et le client <strong>t7x.exe</strong>.</li><li>Pour les maps customs : Télécharge le Workshop Map Installer.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1222959668914163734/1437098674533568603/Call_of_Duty_-_Black_Ops_III.torrent?ex=696661f0&is=69651070&hm=6fd334cc877af39bb33c24a176e06eb56fa1423c940c7c6ca1429a1283560b73&" target="_blank" class="dl-btn">1. Torrent BO3</a><a href="https://master.bo3.eu/t7x/t7x.exe" target="_blank" class="dl-btn secondary">2. Client T7x</a><a href="https://github.com/faroukbmiled/BOIIIWD/releases/tag/v0.3.7.3" target="_blank" class="dl-btn secondary">3. Workshop Installer</a><a href="https://youtu.be/GMcwgc1sUd4" target="_blank" class="dl-btn youtube">▶ Tuto Complet</a></div></div>
                 </div>
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Projet BO4</div><div class="dl-title">CoD : Black Ops 4</div><ol class="instruction-list"><li>Installe <strong>Battle.net</strong> et crée un compte. Télécharge "bnet.rar".</li><li>Clic droit sur <strong>battle.net.BAT</strong> > Edit : Change la lettre du disque si besoin.</li><li>Lance le .BAT et attends la fin.</li><li>Glisse "files" et "projet-bo4.exe" dans le dossier BO4.</li></ol><div style="background:#eee; padding:10px; border-radius:8px; margin-bottom:15px; color:#333;"><strong>Serveurs :</strong><br>Serveur 1 : <span class="server-ip">70.55.126.217</span> Serveur 2 : <span class="server-ip">45.137.192.227</span></div><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1245952854414589983/1245954016555434045/bnet.rar?ex=69666fda&is=69651e5a&hm=2236c5312e4d23cf7b3be10e453da9495fe2961a580d6d1e66c1326ca173b7d9&" target="_blank" class="dl-btn">1. Fichier RAR Bnet</a><a href="https://github.com/bodnjenie14/Project_-bo4_Launcher/releases/tag/release" target="_blank" class="dl-btn secondary">2. Launcher Project</a><a href="http://gamecontent.ir/Call%20of%20Duty%20Black%20Ops%204/Game%20Files/" target="_blank" class="dl-btn secondary">3. Lien Alternatif (ISO)</a></div></div>
+                    <div>
+                        <div class="tag-container"><span class="tag">PROJET BO4</span><span class="tag">ONLINE</span></div>
+                        <div class="dl-title">CoD : Black Ops 4</div>
+                        <div class="server-status"><span class="status-dot"></span> Serveur En Ligne</div>
+                        
+                        <ol class="instruction-list"><li>Installe <strong>Battle.net</strong> et crée un compte. Télécharge "bnet.rar".</li><li>Clic droit sur <strong>battle.net.BAT</strong> > Edit : Change la lettre du disque si besoin.</li><li>Lance le .BAT et attends la fin.</li><li>Glisse "files" et "projet-bo4.exe" dans le dossier BO4.</li></ol>
+                        <div style="background:rgba(128,128,128,0.1); padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid var(--glass-border);"><strong>Serveurs :</strong><br>Serveur 1 : <span class="server-ip">70.55.126.217</span> Serveur 2 : <span class="server-ip">45.137.192.227</span></div>
+                        <div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1245952854414589983/1245954016555434045/bnet.rar?ex=69666fda&is=69651e5a&hm=2236c5312e4d23cf7b3be10e453da9495fe2961a580d6d1e66c1326ca173b7d9&" target="_blank" class="dl-btn">1. Fichier RAR Bnet</a><a href="https://github.com/bodnjenie14/Project_-bo4_Launcher/releases/tag/release" target="_blank" class="dl-btn secondary">2. Launcher Project</a><a href="http://gamecontent.ir/Call%20of%20Duty%20Black%20Ops%204/Game%20Files/" target="_blank" class="dl-btn secondary">3. Lien Alternatif (ISO)</a></div>
+                    </div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">H2M Mod</div><div class="dl-title">HorizonMW (H2M)</div><ol class="instruction-list"><li>Installe le Pack C++ AIO.</li><li>Télécharge MWR (2017).</li><li>Télécharge le <strong>HMW Launcher</strong>.</li><li>Lance HMW Launcher > Select Install Directory.</li><li>"Verify game files" puis "Play".</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://horizonmw.org/" target="_blank" class="dl-btn secondary">2. Site HorizonMW</a></div></div>
+                    <div><div class="tag-container"><span class="tag">H2M</span><span class="tag">MODS</span></div><div class="dl-title">HorizonMW (H2M)</div><ol class="instruction-list"><li>Installe le Pack C++ AIO.</li><li>Télécharge MWR (2017).</li><li>Télécharge le <strong>HMW Launcher</strong>.</li><li>Lance HMW Launcher > Select Install Directory.</li><li>"Verify game files" puis "Play".</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://horizonmw.org/" target="_blank" class="dl-btn secondary">2. Site HorizonMW</a></div></div>
                 </div>
             </div>
         </div>
@@ -443,7 +325,7 @@
             <h1>Nintendo Switch</h1>
             <div class="bento-grid">
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Pack AIO</div><div class="dl-title">Pack pour Hack la Switch</div><ul class="instruction-list"><li>Supprimer tout de la carte SD <strong>SAUF</strong> les dossiers : "Nintendo", "emuMMC", "sxos" et "emutendo".</li><li>Télécharger le pack via le bouton ci-dessous.</li><li>Mettre tout le contenu du ZIP à la racine de la carte SD.</li><li>Utiliser Daybreak pour mettre à jour la Switch.</li></ul></div>
+                    <div><div class="tag-container"><span class="tag"><i class="fa-solid fa-gamepad"></i> SWITCH</span><span class="tag">AIO</span></div><div class="dl-title">Pack pour Hack la Switch</div><ul class="instruction-list"><li>Supprimer tout de la carte SD <strong>SAUF</strong> les dossiers : "Nintendo", "emuMMC", "sxos" et "emutendo".</li><li>Télécharger le pack via le bouton ci-dessous.</li><li>Mettre tout le contenu du ZIP à la racine de la carte SD.</li><li>Utiliser Daybreak pour mettre à jour la Switch.</li></ul></div>
                     <a href="https://cdn.discordapp.com/attachments/960788243308232704/1441453401954058302/Pack_Switch.zip?ex=69671057&is=6965bed7&hm=db0b81f4ff94d5482bfec302f238870a0b89c36612c64460ac95a7258b999c10&" target="_blank" class="dl-btn switch-btn">Télécharger le Pack Switch</a>
                 </div>
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
@@ -476,26 +358,26 @@
             <h1>Émulateurs</h1>
             <div class="bento-grid">
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Nintendo Switch</div><div class="dl-title">Citron</div><p class="dl-desc">Le nouvel émulateur Switch performant (successeur de Yuzu/Ryujinx).</p></div>
+                    <div><div class="tag-container"><span class="tag"><i class="fa-solid fa-gamepad"></i> SWITCH</span><span class="tag">NEW</span></div><div class="dl-title">Citron</div><p class="dl-desc">Le nouvel émulateur Switch performant (successeur de Yuzu/Ryujinx).</p></div>
                     <div class="dl-actions">
                         <a href="https://citron-emu.org/" target="_blank" class="dl-btn" style="background-color: #F4D03F; color: black;">Télécharger Citron</a>
                         <a href="https://mega.nz/file/CQYDXLzb#cknvToHSFueDiXxkd3yTVrW3dznazCqEP3kCwWzbmzY" target="_blank" class="dl-btn" style="background-color: #F4D03F; color: black;">Firmware / Keys 21.0</a>
                     </div>
                 </div>
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">PlayStation 3</div><div class="dl-title">RPCS3</div><p class="dl-desc">L'émulateur PS3 le plus performant.</p><ul class="instruction-list"><li>Nécessite le firmware PS3 officiel.</li><li>Demande un CPU assez puissant.</li></ul></div>
+                    <div><div class="tag-container"><span class="tag">PS3</span><span class="tag">SONY</span></div><div class="dl-title">RPCS3</div><p class="dl-desc">L'émulateur PS3 le plus performant.</p><ul class="instruction-list"><li>Nécessite le firmware PS3 officiel.</li><li>Demande un CPU assez puissant.</li></ul></div>
                     <div class="dl-actions"><a href="https://rpcs3.net/download" target="_blank" class="dl-btn">Télécharger RPCS3</a><a href="https://www.playstation.com/en-us/support/hardware/ps3/system-software/" target="_blank" class="dl-btn secondary">Firmware PS3</a></div>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Xbox 360</div><div class="dl-title">Xenia (Canary)</div><p class="dl-desc">L'émulateur Xbox 360 pour PC.</p></div>
+                    <div><div class="tag-container"><span class="tag">XBOX 360</span></div><div class="dl-title">Xenia (Canary)</div><p class="dl-desc">L'émulateur Xbox 360 pour PC.</p></div>
                     <a href="https://github.com/xenia-canary/xenia-canary/releases" target="_blank" class="dl-btn" style="background-color:#107C10;">Télécharger Xenia</a>
                 </div>
                 <div class="card download-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">PlayStation 2</div><div class="dl-title">PCSX2 (Nightly)</div><p class="dl-desc">La référence pour la PS2.</p></div>
+                    <div><div class="tag-container"><span class="tag">PS2</span></div><div class="dl-title">PCSX2 (Nightly)</div><p class="dl-desc">La référence pour la PS2.</p></div>
                     <a href="https://pcsx2.net/downloads" target="_blank" class="dl-btn secondary">Télécharger PCSX2</a>
                 </div>
                 <div class="card download-card span-full" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.5">
-                    <div><div class="video-eyebrow-date">Tout-en-un</div><div class="dl-title">RetroArch</div><p class="dl-desc">Pour émuler tout le reste (GBA, SNES, N64...).</p></div>
+                    <div><div class="tag-container"><span class="tag">ALL IN ONE</span><span class="tag">RETRO</span></div><div class="dl-title">RetroArch</div><p class="dl-desc">Pour émuler tout le reste (GBA, SNES, N64...).</p></div>
                     <a href="https://www.retroarch.com/?page=platforms" target="_blank" class="dl-btn secondary">Télécharger RetroArch</a>
                 </div>
             </div>
@@ -503,7 +385,35 @@
 
     </div>
 
-    <footer><p style="color: #86868b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0;">Copyright © 2026 IKAAM Inc.</p></footer>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4><img src="logo-removebg-preview.png" alt="Logo" style="height:30px; vertical-align:middle; margin-right:10px;">IKAAM</h4>
+                <p>La référence du gaming, des tutos et de l'émulation. Rejoins une communauté passionnée.</p>
+                <p>Créé avec passion pour les gamers.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#" onclick="switchTab('videos')">🎬 Dernières Vidéos</a></li>
+                    <li><a href="#" onclick="switchTab('cod')">🔫 Call of Duty</a></li>
+                    <li><a href="#" onclick="switchTab('switch')">🎮 Nintendo Switch</a></li>
+                    <li><a href="#" onclick="switchTab('emulators')">🕹️ Émulateurs</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Communauté</h4>
+                <ul>
+                    <li><a href="https://discord.gg/pwGEPyB9Jz" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a></li>
+                    <li><a href="https://youtube.com/@LeIKAAM" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a></li>
+                    <li><a href="#" class="btn chat-btn" style="display:inline-block; margin-top:5px; text-align:center; padding:5px 10px; font-size:0.8rem;">Ouvrir le Chat</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2026 IKAAM Inc. Tous droits réservés.</p>
+        </div>
+    </footer>
 
     <div id="videoModal" class="modal">
         <div class="modal-content">
@@ -525,10 +435,7 @@
         // --- CHARGEMENT DU SITE (PRELOADER) ---
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
-            // Le loader disparait après 1.5 secondes ou quand tout est chargé
-            setTimeout(() => {
-                preloader.classList.add('loaded');
-            }, 1500); 
+            setTimeout(() => { preloader.classList.add('loaded'); }, 1500); 
         });
 
         const CHANNEL_ID = 'UCBUHEV2NI3H4weKFG4Fz7AQ'; 
@@ -650,7 +557,6 @@
                         <div class="play-icon">▶</div>
                     </div>
                 `;
-                // Initialisation du Tilt pour les cartes dynamiques
                 grid.appendChild(card);
                 VanillaTilt.init(card, { max: 10, speed: 400, glare: true, "max-glare": 0.5 });
             });
