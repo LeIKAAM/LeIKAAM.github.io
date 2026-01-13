@@ -187,7 +187,17 @@
         .tuto-section p { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 15px; }
         .tuto-section strong { color: var(--text-primary); }
         .warning-text { color: #e60012; font-weight: 600; }
-        .tuto-img { width: 100%; border-radius: var(--radius-m); margin: 20px 0; border: 1px solid rgba(0,0,0,0.1); }
+        
+        /* MODIFICATION DES IMAGES TUTO (PLUS PETITES ET CENTRÉES) */
+        .tuto-img {
+            max-width: 60%; /* Réduit la largeur max à 60% du conteneur */
+            width: auto; /* Conserve le ratio */
+            display: block; /* Permet le centrage */
+            margin: 25px auto; /* Centre l'image verticalement et horizontalement */
+            border-radius: var(--radius-m);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Légère ombre pour le style */
+        }
 
         /* --- STYLE THUMBNAILS VIDEOS --- */
         .thumbnail-container { width: 100%; height: 100%; position: relative; overflow: hidden; border-radius: var(--radius-l) var(--radius-l) 0 0; }
@@ -207,6 +217,7 @@
             h1 { font-size: 2.5rem; } 
             header { padding: 15px 20px; }
             .btn { padding: 8px 16px; font-size: 0.8rem; }
+            .tuto-img { max-width: 90%; } /* Sur mobile, on les garde assez grandes */
         }
 
         .hidden { display: none; }
@@ -334,7 +345,7 @@
                         <ol class="instruction-list">
                             <li>Télécharge le torrent du jeu.</li>
                             <li>Crée un compte sur Plutonium et installe qBittorrent.</li>
-                            <li>Lance Plutonium, sélectionne Black Ops, clique <strong>Setup</strong> et choisis le dossier.</li>
+                            <li>Lance Plutonium, sélectionne Black Ops, clique <strong>Setup</strong> et choisis le dossier du jeu téléchargé.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a>
@@ -536,6 +547,7 @@
                             3. Injectez le payload <strong>TegraExplorer.bin</strong>.<br>
                             4. Sur la Switch : Allez dans "Partition the SD" -> "Fat32 + EmuMMC". Validez.<br>
                             5. Une fois fini, redémarrez en RCM.</p>
+                            <img src="https://cdn.discordapp.com/attachments/961921377064067132/961937959081365524/unknown.png" alt="TegraRcm" class="tuto-img">
                         </div>
 
                         <div class="tuto-section">
