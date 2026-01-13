@@ -99,7 +99,7 @@
         .subscribe-btn { background-color: var(--text-primary); color: var(--bg-main); }
         .subscribe-btn:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
 
-        /* --- BREAKING NEWS BAR (RALENTIE) --- */
+        /* --- BREAKING NEWS BAR --- */
         .news-ticker {
             width: 100%;
             background: var(--glass-bg);
@@ -117,7 +117,6 @@
         .news-content {
             display: inline-block;
             padding-left: 100%;
-            /* Vitesse passée de 25s à 45s pour ralentir */
             animation: scroll-text 45s linear infinite; 
             font-weight: 600;
             color: var(--text-primary);
@@ -203,7 +202,7 @@
         }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- ELEMENTS --- */
+        /* --- ELEMENTS (CLICK TO COPY) --- */
         .dl-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary); }
         .dl-desc { font-size: 1rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; }
         .dl-btn { display: inline-block; background-color: var(--accent-blue); color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 600; text-align: center; transition: transform 0.2s; margin-top: 10px; font-size: 0.9rem; }
@@ -212,8 +211,23 @@
         .dl-btn.mega { background-color: #D92E2E; } 
         .dl-btn.switch-btn { background-color: var(--accent-red); }
         .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; }
+        
         .code-block { background: rgba(128,128,128,0.1); border-radius: 12px; padding: 15px; font-family: monospace; margin-bottom: 20px; max-height: 200px; overflow-y: auto; color: var(--text-primary); border: 1px solid var(--glass-border); }
-        .key-row { display: block; margin-bottom: 6px; user-select: all; }
+        
+        /* STYLE CLÉ CD COPIABLE */
+        .key-row { 
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 12px; margin-bottom: 6px;
+            background: rgba(0,0,0,0.05); border-radius: 6px;
+            cursor: pointer; transition: all 0.2s; border: 1px solid transparent;
+            user-select: none; /* Empêche la sélection texte classique */
+        }
+        .key-row:hover {
+            background: rgba(0, 113, 227, 0.1); border-color: var(--accent-blue); transform: translateX(5px);
+        }
+        .key-row:active { transform: scale(0.98); }
+        .copy-icon { font-size: 0.8rem; opacity: 0.5; }
+
         .instruction-list { padding-left: 20px; margin-bottom: 20px; color: var(--text-secondary); }
         .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
         .server-ip { font-weight: 700; color: var(--accent-blue); display: block; margin-top: 5px; user-select: all; }
@@ -259,6 +273,33 @@
         #playBtn { background: var(--glass-bg); color: var(--text-primary); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         #playBtn:hover { transform: scale(1.05); filter: brightness(110%); }
 
+        /* --- TOAST NOTIFICATION (COPIÉ) --- */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100000;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
         @media (max-width: 850px) { 
             header { padding: 15px 20px; flex-wrap: wrap; }
             .header-actions { gap: 8px; width: 100%; justify-content: center; margin-top: 10px; }
@@ -277,6 +318,8 @@
 <body>
     <div class="ambient-light"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
     
+    <div id="toast">✅ Clé copiée dans le presse-papier !</div>
+
     <header>
         <div class="logo">
             <img src="logo-removebg-preview.png" alt="Logo LeIKAAM">
@@ -332,7 +375,18 @@
                     <a href="https://www.mediafire.com/file/34lt06fw6ad1t64/COD1X.rar" target="_blank" class="dl-btn">Télécharger (Mediafire)</a>
                 </div>
                 <div class="card download-card span-full">
-                    <div><div class="video-eyebrow-date">Légendaire</div><div class="dl-title">Call of Duty 2</div><p class="dl-desc">Extrait le jeu et lance-le. Utilise l'une des clés ci-dessous pour jouer en ligne :</p><div class="code-block"><span class="key-row">XEZL-GZWX-XQZG-GEGU-EEFC</span><span class="key-row">W5HA-3557-666Q-JQGZ-232E</span><span class="key-row">W5HA-ZHEL-666Q-L66X-CD23</span><span class="key-row">W55E-QE6E-66Q6-EWE6-76DD</span><span class="key-row">G6AE-57JJ-Q5G6-WJPP-E1D9</span><span class="key-row">PPX6-6P6Q-7X3E-AZEA-20B0</span><span class="key-row">P7QH-Q5U7-7U5W-EQ3Z-14AF</span><span class="key-row">G3X7-6QZU-QZ3Z-A573-538F</span></div></div>
+                    <div><div class="video-eyebrow-date">Légendaire</div><div class="dl-title">Call of Duty 2</div><p class="dl-desc">Extrait le jeu et lance-le. Clique sur une clé pour copier :</p>
+                        <div class="code-block">
+                            <span class="key-row" onclick="copyKey(this)">XEZL-GZWX-XQZG-GEGU-EEFC <span class="copy-icon">📋</span></span>
+                            <span class="key-row" onclick="copyKey(this)">W5HA-3557-666Q-JQGZ-232E <span class="copy-icon">📋</span></span>
+                            <span class="key-row" onclick="copyKey(this)">W5HA-ZHEL-666Q-L66X-CD23 <span class="copy-icon">📋</span></span>
+                            <span class="key-row" onclick="copyKey(this)">W55E-QE6E-66Q6-EWE6-76DD <span class="copy-icon">📋</span></span>
+                            <span class="key-row" onclick="copyKey(this)">G6AE-57JJ-Q5G6-WJPP-E1D9 <span class="copy-icon">📋</span></span>
+                            <span class="key-row" onclick="copyKey(this)">PPX6-6P6Q-7X3E-AZEA-20B0 <span class="copy-icon">📋</span></span>
+                            <span class="key-row" onclick="copyKey(this)">P7QH-Q5U7-7U5W-EQ3Z-14AF <span class="copy-icon">📋</span></span>
+                            <span class="key-row" onclick="copyKey(this)">G3X7-6QZU-QZ3Z-A573-538F <span class="copy-icon">📋</span></span>
+                        </div>
+                    </div>
                     <a href="https://www.mediafire.com/file/iydrzjoi7m0fahn/COD2.rar" target="_blank" class="dl-btn">Télécharger le Jeu</a>
                 </div>
                 <div class="card download-card">
@@ -354,7 +408,7 @@
                     <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : Black Ops II</div><ol class="instruction-list"><li>Télécharge le torrent BO2.</li><li>Crée un compte Plutonium.</li><li>Lance Plutonium, sélectionne Black Ops II, clique Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
                 <div class="card download-card">
-                    <div><div class="video-eyebrow-date">Alterware</div><div class="dl-title">CoD : Advanced Warfare</div><ol class="instruction-list"><li>Télécharge Advanced Warfare via le torrent.</li><li>Télécharge <strong>alterware-launcher.exe</strong> et glisse-le dans le dossier AW.</li><li>Lance le launcher.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
+                    <div><div class="video-eyebrow-date">Alterware</div><div class="dl-title">CoD : Advanced Warfare</div><ol class="instruction-list"><li>Télécharge Advanced Warfare via le torrent.</li><li>Télécharge <strong>launcher.exe</strong> et glisse-le dans le dossier AW.</li><li>Lance le launcher.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
                 </div>
                  <div class="card download-card">
                     <div><div class="video-eyebrow-date">H1-Mod</div><div class="dl-title">CoD : MW Remastered</div><ol class="instruction-list"><li>Télécharge MWR via le torrent.</li><li>Installe le <strong>H1-Mod</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a></div></div>
@@ -464,17 +518,32 @@
             const newTheme = currentTheme === "dark" ? "light" : "dark";
             document.documentElement.setAttribute("data-theme", newTheme);
             localStorage.setItem("theme", newTheme);
-            
-            // Mise à jour de l'icone du bouton
             const btn = document.querySelector('.theme-btn');
             btn.innerText = newTheme === "dark" ? "☀️" : "🌙";
         }
 
-        // Charger le thème au démarrage
         const savedTheme = localStorage.getItem("theme");
         if(savedTheme) {
             document.documentElement.setAttribute("data-theme", savedTheme);
             document.querySelector('.theme-btn').innerText = savedTheme === "dark" ? "☀️" : "🌙";
+        }
+
+        // --- CLICK TO COPY ---
+        function copyKey(element) {
+            // On récupère le texte sans l'icône
+            const key = element.childNodes[0].textContent.trim();
+            navigator.clipboard.writeText(key).then(() => {
+                showToast(`✅ Clé copiée : ${key}`);
+            }).catch(err => {
+                showToast("❌ Erreur de copie");
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
         // --- MUSIQUE ---
