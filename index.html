@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IKAAM</title>
+    <title>Site Officiel de IKAAM</title>
     
     <link rel="icon" href="logo-removebg-preview.png" type="image/png">
     <link rel="shortcut icon" href="logo-removebg-preview.png" type="image/png">
@@ -99,7 +99,7 @@
         .subscribe-btn { background-color: var(--text-primary); color: var(--bg-main); }
         .subscribe-btn:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
 
-        /* --- BREAKING NEWS BAR --- */
+        /* --- BREAKING NEWS BAR (RALENTIE) --- */
         .news-ticker {
             width: 100%;
             background: var(--glass-bg);
@@ -117,7 +117,8 @@
         .news-content {
             display: inline-block;
             padding-left: 100%;
-            animation: scroll-text 25s linear infinite;
+            /* Vitesse passée de 25s à 45s pour ralentir */
+            animation: scroll-text 45s linear infinite; 
             font-weight: 600;
             color: var(--text-primary);
             font-size: 0.95rem;
@@ -269,6 +270,8 @@
         }
 
         .hidden { display: none !important; }
+        .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+        .server-ip { font-weight: 700; color: var(--accent-blue); display: block; margin-top: 5px; user-select: all; }
     </style>
 </head>
 <body>
@@ -295,10 +298,10 @@
 
     <div class="news-ticker">
         <div class="news-content">
-            <span><span class="news-badge">INFO</span>Nouveau patch Call of Duty 4X disponible !</span>
-            <span><span class="news-badge">UPDATE</span>Citron Emulator v2.0 : Meilleurs FPS sur Switch</span>
-            <span><span class="news-badge">TUTO</span>Le guide complet pour hacker sa Switch OLED est en ligne</span>
-            <span><span class="news-badge">DISCORD</span>Rejoins la communauté pour de l'aide en direct !</span>
+            <span><span class="news-badge">INFO</span>V2 du site drop !</span>
+            <span><span class="news-badge">NEW</span>Citron disponible dans les émulateurs.</span>
+            <span><span class="news-badge">JEUX</span>Tous les Call of Duty PC sont dispo.</span>
+            <span><span class="news-badge">SOON</span>La prochaine vidéo est en cours de montage</span>
         </div>
     </div>
 
@@ -351,7 +354,7 @@
                     <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : Black Ops II</div><ol class="instruction-list"><li>Télécharge le torrent BO2.</li><li>Crée un compte Plutonium.</li><li>Lance Plutonium, sélectionne Black Ops II, clique Setup.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
                 <div class="card download-card">
-                    <div><div class="video-eyebrow-date">Alterware</div><div class="dl-title">CoD : Advanced Warfare</div><ol class="instruction-list"><li>Télécharge Advanced Warfare via le torrent.</li><li>Télécharge <strong>launcher.exe</strong> et glisse-le dans le dossier AW.</li><li>Lance le launcher.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
+                    <div><div class="video-eyebrow-date">Alterware</div><div class="dl-title">CoD : Advanced Warfare</div><ol class="instruction-list"><li>Télécharge Advanced Warfare via le torrent.</li><li>Télécharge <strong>alterware-launcher.exe</strong> et glisse-le dans le dossier AW.</li><li>Lance le launcher.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
                 </div>
                  <div class="card download-card">
                     <div><div class="video-eyebrow-date">H1-Mod</div><div class="dl-title">CoD : MW Remastered</div><ol class="instruction-list"><li>Télécharge MWR via le torrent.</li><li>Installe le <strong>H1-Mod</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a></div></div>
