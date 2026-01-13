@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IKAAM</title>
+    <title>Site Officiel de IKAAM</title>
     
     <link rel="icon" href="logo-removebg-preview.png" type="image/png">
     <link rel="shortcut icon" href="logo-removebg-preview.png" type="image/png">
@@ -56,12 +56,7 @@
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
         
-        .logo img {
-            height: 50px; 
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
+        .logo img { height: 50px; width: auto; display: block; transition: transform 0.3s ease; }
         .logo img:hover { transform: scale(1.05); }
 
         .header-actions { display: flex; align-items: center; gap: 12px; }
@@ -83,318 +78,129 @@
         .subscribe-btn:hover { transform: translateY(-2px); background-color: black; box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
 
         /* --- CHATBOX --- */
-        .chat-container {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 20px;
-            margin-bottom: -20px;
-        }
-
-        .chat-btn {
-            background-color: #2ecc71; 
-            color: white;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .chat-btn:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
-        }
-
+        .chat-container { position: relative; display: inline-block; padding-bottom: 20px; margin-bottom: -20px; }
+        .chat-btn { background-color: #2ecc71; color: white; border: 1px solid rgba(0,0,0,0.05); }
+        .chat-btn:hover { background-color: #27ae60; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4); }
         .chat-popup {
-            display: none;
-            position: absolute;
-            right: -50px;
-            top: 45px;
-            width: 320px;
-            height: 450px;
-            background-color: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            z-index: 2000;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.1);
+            display: none; position: absolute; right: -50px; top: 45px;
+            width: 320px; height: 450px; background-color: white;
+            border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            z-index: 2000; overflow: hidden; border: 1px solid rgba(0,0,0,0.1);
             animation: fadeIn 0.3s ease;
         }
-
         .chat-container:hover .chat-popup { display: block; }
-
         .chat-popup iframe { width: 100%; height: 100%; border: none; }
-
-        .chat-footer {
-            position: absolute; bottom: 0; width: 100%; text-align: center;
-            font-size: 10px; background: #fff; padding: 2px 0; color: #aaa;
-        }
+        .chat-footer { position: absolute; bottom: 0; width: 100%; text-align: center; font-size: 10px; background: #fff; padding: 2px 0; color: #aaa; }
 
         /* --- CONTENEUR --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; }
 
         /* --- RECHERCHE --- */
-        .search-container {
-            max-width: 400px;
-            margin: 0 auto 30px auto;
-            position: relative;
-            z-index: 10;
-        }
-
+        .search-container { max-width: 400px; margin: 0 auto 30px auto; position: relative; z-index: 10; }
         #searchInput {
-            width: 100%;
-            padding: 12px 20px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.5);
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            font-size: 1rem;
-            color: var(--text-primary);
-            outline: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%; padding: 12px 20px; border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.5); background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px); font-size: 1rem; color: var(--text-primary);
+            outline: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             box-sizing: border-box;
         }
-
-        #searchInput:focus {
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            transform: scale(1.02);
-        }
+        #searchInput:focus { background: rgba(255, 255, 255, 0.9); box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: scale(1.02); }
 
         /* --- NAVIGATION ONGLETS --- */
         .segmented-control {
-            display: inline-flex; 
-            background: rgba(118, 118, 128, 0.12);
-            padding: 4px;
-            border-radius: 100px;
-            margin: 0 auto 50px auto; 
-            position: relative;
-            z-index: 1;
-            max-width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            left: 50%;
-            transform: translateX(-50%);
+            display: inline-flex; background: rgba(118, 118, 128, 0.12);
+            padding: 4px; border-radius: 100px; margin: 0 auto 50px auto; 
+            position: relative; z-index: 1; max-width: 100%;
+            overflow-x: auto; white-space: nowrap; left: 50%; transform: translateX(-50%);
         }
-        
         .segmented-control::-webkit-scrollbar { display: none; }
-        .segmented-control { -ms-overflow-style: none; scrollbar-width: none; }
-
         .segment-bubble {
-            position: absolute;
-            top: 4px; left: 4px; height: calc(100% - 8px);
+            position: absolute; top: 4px; left: 4px; height: calc(100% - 8px);
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
             border-radius: 100px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            z-index: -1; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1; pointer-events: none;
         }
-
         .segment-btn {
-            border: none; background: none;
-            padding: 8px 20px; 
-            font-size: 0.95rem; font-weight: 500;
-            color: var(--text-secondary); cursor: pointer;
-            border-radius: 100px;
-            transition: color 0.3s ease; 
-            z-index: 2;
+            border: none; background: none; padding: 8px 20px; 
+            font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); 
+            cursor: pointer; border-radius: 100px; transition: color 0.3s ease; z-index: 2;
         }
-
         .segment-btn.active { font-weight: 600; color: #000; }
 
-        /* --- TITRES --- */
-        h1 {
-            font-family: "SF Pro Display", sans-serif;
-            font-size: 3rem; font-weight: 600; letter-spacing: -0.04em;
-            margin-bottom: 40px; text-align: center; color: #1d1d1f;
-        }
-
-        /* --- BENTO GRID (2 COLONNES) --- */
-        .bento-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 30px; 
-            width: 100%;
-        }
-        
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Éléments qui prennent toute la largeur */
+        /* --- BENTO GRID --- */
+        h1 { font-family: "SF Pro Display", sans-serif; font-size: 3rem; font-weight: 600; letter-spacing: -0.04em; margin-bottom: 40px; text-align: center; color: #1d1d1f; }
+        .bento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
         .span-full { grid-column: span 2; }
-        
         .video-card.featured { grid-column: span 2; min-height: 520px; }
+        .download-card { min-height: auto !important; padding: 30px !important; display: flex; flex-direction: column; justify-content: space-between; }
 
-        .download-card {
-            min-height: auto !important; padding: 30px !important;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-
-        /* --- STYLE DES CARTES --- */
+        /* --- CARTES --- */
         .card {
             background-color: var(--glass-bg); border-radius: var(--radius-l); overflow: hidden;
-            position: relative; cursor: pointer;
-            border: 1px solid var(--glass-border); box-shadow: var(--shadow-soft);
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            opacity: 0; 
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            aspect-ratio: auto;
+            position: relative; cursor: pointer; border: 1px solid var(--glass-border); 
+            box-shadow: var(--shadow-soft); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+            backdrop-filter: blur(15px); opacity: 0; animation: fadeUp 0.8s forwards; aspect-ratio: auto;
         }
-        
-        .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
-            background-color: rgba(255, 255, 255, 0.95);
-            z-index: 10;
-        }
+        .card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15); z-index: 10; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- STYLE CONTENU TÉLÉCHARGEMENT --- */
-        .dl-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; }
+        /* --- ELEMENTS CARTES --- */
+        .dl-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
         .dl-desc { font-size: 1rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; }
-        .dl-btn {
-            display: inline-block; background-color: var(--accent-blue); color: white;
-            padding: 12px 24px; border-radius: 12px; text-decoration: none;
-            font-weight: 600; text-align: center; transition: transform 0.2s;
-            margin-top: 10px; font-size: 0.9rem;
-        }
-        .dl-btn:hover { transform: scale(1.02); background-color: #0062c4; }
+        .dl-btn { display: inline-block; background-color: var(--accent-blue); color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 600; text-align: center; transition: transform 0.2s; margin-top: 10px; font-size: 0.9rem; }
+        .dl-btn:hover { transform: scale(1.02); filter: brightness(110%); }
         .dl-btn.secondary { background-color: #333; }
         .dl-btn.mega { background-color: #D92E2E; } 
-        .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; } 
         .dl-btn.switch-btn { background-color: var(--accent-red); }
-        .dl-btn.switch-btn:hover { background-color: #b0000e; }
-
-        .code-block {
-            background: rgba(0,0,0,0.04); border-radius: 12px; padding: 15px;
-            font-family: "SF Mono", "Monaco", "Courier New", monospace;
-            font-size: 0.85rem; color: #333; margin-bottom: 20px;
-            border: 1px solid rgba(0,0,0,0.05); max-height: 200px; overflow-y: auto;
-        }
+        .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; }
+        .code-block { background: rgba(0,0,0,0.04); border-radius: 12px; padding: 15px; font-family: monospace; margin-bottom: 20px; max-height: 200px; overflow-y: auto; }
         .key-row { display: block; margin-bottom: 6px; user-select: all; }
-
         .instruction-list { padding-left: 20px; margin-bottom: 20px; color: var(--text-secondary); }
-        .instruction-list li { margin-bottom: 8px; }
-        .instruction-list a { color: var(--accent-blue); text-decoration: none; }
-        .instruction-list a:hover { text-decoration: underline; }
+        .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
 
-        .faq-item { margin-bottom: 25px; }
-        .faq-item h4 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text-primary); font-weight: 700; }
-        .faq-item p { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
-        .update-date { font-size: 0.8rem; color: #999; margin-top: 20px; text-align: right; font-style: italic; }
-        
-        .tuto-section { margin-bottom: 30px; }
-        .tuto-section h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 15px; color: var(--text-primary); }
-        .tuto-section p { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 15px; }
-        .tuto-section strong { color: var(--text-primary); }
-        .warning-text { color: #e60012; font-weight: 600; }
-        .tuto-img {
-            max-width: 60%; width: auto; display: block; margin: 25px auto;
-            border-radius: var(--radius-m); border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        /* --- STYLE THUMBNAILS VIDEOS --- */
-        .thumbnail-container { 
-            width: 100%; height: 100%; position: relative; overflow: hidden; 
-            border-radius: var(--radius-l) var(--radius-l) 0 0; 
-        }
-        .thumbnail-container img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .thumbnail-container::after { 
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.9) 100%); 
-            pointer-events: none; z-index: 1; 
-        }
+        /* --- VIDEOS --- */
+        .thumbnail-container { width: 100%; height: 100%; position: relative; overflow: hidden; border-radius: var(--radius-l) var(--radius-l) 0 0; }
+        .thumbnail-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .thumbnail-container::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.9) 100%); pointer-events: none; z-index: 1; }
         .card:hover .thumbnail-container img { transform: scale(1.05); }
-        .card-content { 
-            position: absolute; bottom: 0; left: 0; right: 0; padding: 25px; 
-            z-index: 2; 
-        }
-        .video-eyebrow-date { 
-            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; 
-            letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        .video-title { 
-            font-family: "SF Pro Display", sans-serif; font-size: 1.4rem; 
-            font-weight: 700; margin: 0; line-height: 1.1; 
-            letter-spacing: -0.015em; color: #FFFFFF; text-decoration: none; 
-            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .video-card.featured .video-title { font-size: 2.4rem; letter-spacing: -0.025em; }
-        .play-icon { 
-            position: absolute; top: 20px; right: 20px; width: 45px; height: 45px; 
-            background: rgba(255,255,255,0.2); backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            opacity: 0; transform: scale(0.8) translateY(10px); 
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
-            color: white; font-size: 1.2rem; z-index: 5; 
-        }
+        .card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 25px; z-index: 2; }
+        .video-eyebrow-date { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .video-title { font-family: "SF Pro Display", sans-serif; font-size: 1.4rem; font-weight: 700; margin: 0; color: #FFFFFF; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .video-card.featured .video-title { font-size: 2.4rem; }
+        .play-icon { position: absolute; top: 20px; right: 20px; width: 45px; height: 45px; background: rgba(255,255,255,0.2); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8) translateY(10px); transition: all 0.4s; color: white; font-size: 1.2rem; }
         .card:hover .play-icon { opacity: 1; transform: scale(1) translateY(0); }
 
-        /* --- MODALE --- */
+        /* --- MODALE VIDÉO (CORRIGÉE) --- */
         .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            display: none; position: fixed; z-index: 99999; left: 0; top: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(5px);
             justify-content: center; align-items: center; animation: fadeIn 0.3s ease;
         }
         .modal-content {
             position: relative; background-color: #000;
             width: 80%; max-width: 900px; aspect-ratio: 16/9;
             border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            display: flex; overflow: hidden;
+            overflow: hidden;
         }
-        .modal-content iframe { width: 100%; height: 100%; }
+        .modal-content iframe { width: 100%; height: 100%; display: block; border:none; }
         .close-btn {
             position: absolute; top: -40px; right: 0; color: white; 
-            font-size: 30px; font-weight: bold; cursor: pointer; transition: color 0.3s;
+            font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.3s;
         }
-        .close-btn:hover { color: #ccc; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .close-btn:hover { color: #e60012; }
 
-        /* --- LECTEUR MUSIQUE --- */
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 100;
-        }
-        #playBtn {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0,0,0,0.1);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #333;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        /* --- MUSIQUE --- */
+        .music-player { position: fixed; bottom: 20px; left: 20px; z-index: 100; }
+        #playBtn { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; color: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
         #playBtn:hover { transform: scale(1.05); background: white; }
 
         @media (max-width: 850px) { 
-            .bento-grid { grid-template-columns: 1fr; } 
-            .span-full { grid-column: span 1; }
-            .modal-content { width: 95%; }
-            .segmented-control { 
-                justify-content: flex-start; width: 90%; margin-bottom: 30px;
-            }
+            .bento-grid { grid-template-columns: 1fr; } .span-full { grid-column: span 1; }
+            .modal-content { width: 95%; } .segmented-control { justify-content: flex-start; width: 90%; margin-bottom: 30px; }
             .chat-popup { width: 280px; height: 350px; right: -20px; }
         }
-
         .hidden { display: none !important; }
-        .dl-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
-        .server-ip { font-weight: 700; color: var(--accent-blue); display: block; margin-top: 5px; user-select: all; }
     </style>
 </head>
 <body>
@@ -412,7 +218,6 @@
                     <div class="chat-footer">Chat généré par <a href="https://cbox.ws" target="_blank">Cbox</a></div>
                 </div>
             </div>
-
             <a href="https://discord.gg/pwGEPyB9Jz" target="_blank" class="btn discord-btn">Discord</a>
             <a href="https://youtube.com/@LeIKAAM" target="_blank" class="btn subscribe-btn">S'abonner</a>
         </div>
@@ -440,444 +245,109 @@
         <div id="tab-cod" class="hidden">
             <h1>Call of Duty</h1>
             <div class="bento-grid">
-                
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Classique</div>
-                        <div class="dl-title">Call of Duty 1X</div>
-                        <p class="dl-desc">La version revisitée du premier opus. Extrait simplement le fichier RAR et lance le jeu.</p>
-                    </div>
+                    <div><div class="video-eyebrow-date">Classique</div><div class="dl-title">Call of Duty 1X</div><p class="dl-desc">La version revisitée du premier opus. Extrait simplement le fichier RAR et lance le jeu.</p></div>
                     <a href="https://www.mediafire.com/file/34lt06fw6ad1t64/COD1X.rar" target="_blank" class="dl-btn">Télécharger (Mediafire)</a>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Légendaire</div>
-                        <div class="dl-title">Call of Duty 2</div>
-                        <p class="dl-desc">Extrait le jeu et lance-le. Utilise l'une des clés ci-dessous pour jouer en ligne :</p>
-                        <div class="code-block">
-                            <span class="key-row">XEZL-GZWX-XQZG-GEGU-EEFC</span>
-                            <span class="key-row">W5HA-3557-666Q-JQGZ-232E</span>
-                            <span class="key-row">W5HA-ZHEL-666Q-L66X-CD23</span>
-                            <span class="key-row">W55E-QE6E-66Q6-EWE6-76DD</span>
-                            <span class="key-row">G6AE-57JJ-Q5G6-WJPP-E1D9</span>
-                            <span class="key-row">PPX6-6P6Q-7X3E-AZEA-20B0</span>
-                            <span class="key-row">P7QH-Q5U7-7U5W-EQ3Z-14AF</span>
-                            <span class="key-row">G3X7-6QZU-QZ3Z-A573-538F</span>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Légendaire</div><div class="dl-title">Call of Duty 2</div><p class="dl-desc">Extrait le jeu et lance-le. Clés CD :</p><div class="code-block"><span class="key-row">XEZL-GZWX-XQZG-GEGU-EEFC</span><span class="key-row">W5HA-3557-666Q-JQGZ-232E</span></div></div>
                     <a href="https://www.mediafire.com/file/iydrzjoi7m0fahn/COD2.rar" target="_blank" class="dl-btn">Télécharger le Jeu</a>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Moderne</div>
-                        <div class="dl-title">Call of Duty 4X</div>
-                        <p class="dl-desc">Installation Promod :</p>
-                        <ol class="instruction-list">
-                            <li>Télécharge le jeu complet.</li>
-                            <li>Télécharge le patch <strong>cod4x_client</strong>.</li>
-                            <li>Glisse les fichiers du patch dans le dossier du jeu.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Jeu</a>
-                            <a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch</a>
-                        </div>
-                        <a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube" style="margin-top:10px;">▶ Tuto Clés</a>
-                    </div>
+                    <div><div class="video-eyebrow-date">Moderne</div><div class="dl-title">Call of Duty 4X</div><p class="dl-desc">Installation Promod :</p><ol class="instruction-list"><li>Télécharge le jeu complet.</li><li>Télécharge le patch <strong>cod4x_client</strong>.</li></ol><div class="dl-actions"><a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Jeu</a><a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch</a></div><a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube" style="margin-top:10px;">▶ Tuto Clés</a></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Plutonium</div>
-                        <div class="dl-title">CoD : World at War</div>
-                        <ol class="instruction-list">
-                            <li>Télécharge le torrent du jeu.</li>
-                            <li>Crée un compte Plutonium.</li>
-                            <li>Installe qBittorent (pour télécharger le torrent).</li>
-                            <li>Lance Plutonium, sélectionne WaW.</li>
-                            <li>Clique sur Setup et pointe vers le dossier du jeu.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : World at War</div><ol class="instruction-list"><li>Télécharge le torrent.</li><li>Compte Plutonium requis.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">IW4X / Alterware</div>
-                        <div class="dl-title">CoD : MW2 (IW4X)</div>
-                        <ol class="instruction-list">
-                            <li>Télécharge MW2 (Torrent) et extrais le jeu.</li>
-                            <li>Télécharge <strong>release.zip</strong> et extrais-le dans le dossier du jeu.</li>
-                            <li>Télécharge <strong>alterware-launcher.exe</strong> et glisse-le dans le dossier du jeu.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1223219330452553738/1223220365527093259/Call_of_Duty_-_Modern_Warfare_2.torrent?ex=6966213d&is=6964cfbd&hm=d8c330b69a24c0b2bda1e8b66d9bd7af34e4b670af4faea6b25d7fa161d29a25&" target="_blank" class="dl-btn">1. Torrent MW2</a>
-                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">IW4X / Alterware</div><div class="dl-title">CoD : MW2 (IW4X)</div><ol class="instruction-list"><li>Télécharge le Torrent.</li><li>Extraire <strong>release.zip</strong>.</li><li>Lancer <strong>launcher.exe</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223219330452553738/1223220365527093259/Call_of_Duty_-_Modern_Warfare_2.torrent?ex=6966213d&is=6964cfbd&hm=d8c330b69a24c0b2bda1e8b66d9bd7af34e4b670af4faea6b25d7fa161d29a25&" target="_blank" class="dl-btn">1. Torrent MW2</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Plutonium</div>
-                        <div class="dl-title">CoD : Black Ops 1</div>
-                        <ol class="instruction-list">
-                            <li>Télécharge le torrent du jeu.</li>
-                            <li>Crée un compte sur Plutonium.</li>
-                            <li>Lance Plutonium, sélectionne Black Ops, clique Setup.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : Black Ops 1</div><ol class="instruction-list"><li>Télécharge le torrent.</li><li>Utilise Plutonium pour lancer.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Plutonium / Steam</div>
-                        <div class="dl-title">CoD : MW3</div>
-                        <ol class="instruction-list">
-                            <li>Installe Steam et coche Outils. Installe MW3 Dedicated Server.</li>
-                            <li>Télécharge les DLCs (Mega).</li>
-                            <li>Glisse les DLCs dans le dossier MW3 Server.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Plutonium</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Plutonium / Steam</div><div class="dl-title">CoD : MW3</div><ol class="instruction-list"><li>MW3 Dedicated Server (Steam).</li><li>Ajoute les DLCs (Mega).</li></ol><div class="dl-actions"><a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Plutonium</a></div></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Plutonium</div>
-                        <div class="dl-title">CoD : Black Ops II</div>
-                        <ol class="instruction-list">
-                            <li>Télécharge le torrent BO2.</li>
-                            <li>Crée un compte Plutonium.</li>
-                            <li>Lance Plutonium, sélectionne Black Ops II, clique Setup.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Plutonium</div><div class="dl-title">CoD : Black Ops II</div><ol class="instruction-list"><li>Télécharge le torrent BO2.</li><li>Utilise Plutonium pour jouer.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a><a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a></div></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Alterware</div>
-                        <div class="dl-title">CoD : Advanced Warfare</div>
-                        <ol class="instruction-list">
-                            <li>Télécharge Advanced Warfare via le torrent.</li>
-                            <li>Télécharge <strong>alterware-launcher.exe</strong> et glisse-le dans le dossier AW.</li>
-                            <li>Lance le launcher.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a>
-                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Alterware</div><div class="dl-title">CoD : Advanced Warfare</div><ol class="instruction-list"><li>Télécharge AW (Torrent).</li><li>Lance avec <strong>launcher.exe</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a><a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a></div></div>
                 </div>
-
                  <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">H1-Mod</div>
-                        <div class="dl-title">CoD : MW Remastered</div>
-                        <ol class="instruction-list">
-                            <li>Télécharge MWR via le torrent.</li>
-                            <li>Télécharge le <strong>H1-Mod</strong> depuis Github et glisse le contenu dans le jeu.</li>
-                            <li>Lance le jeu.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a>
-                            <a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">H1-Mod</div><div class="dl-title">CoD : MW Remastered</div><ol class="instruction-list"><li>Télécharge MWR (Torrent).</li><li>Installe le <strong>H1-Mod</strong>.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a></div></div>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">T7 Patch / Workshop</div>
-                        <div class="dl-title">CoD : Black Ops III</div>
-                        <ol class="instruction-list">
-                            <li>Télécharge le jeu via torrent et le client <strong>t7x.exe</strong>.</li>
-                            <li>Pour les maps customs : Télécharge le Workshop Map Installer.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1222959668914163734/1437098674533568603/Call_of_Duty_-_Black_Ops_III.torrent?ex=696661f0&is=69651070&hm=6fd334cc877af39bb33c24a176e06eb56fa1423c940c7c6ca1429a1283560b73&" target="_blank" class="dl-btn">1. Torrent BO3</a>
-                            <a href="https://master.bo3.eu/t7x/t7x.exe" target="_blank" class="dl-btn secondary">2. Client T7x</a>
-                            <a href="https://github.com/faroukbmiled/BOIIIWD/releases/tag/v0.3.7.3" target="_blank" class="dl-btn secondary">3. Workshop Installer</a>
-                            <a href="https://youtu.be/GMcwgc1sUd4" target="_blank" class="dl-btn youtube">▶ Tuto Complet</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">T7 Patch / Workshop</div><div class="dl-title">CoD : Black Ops III</div><ol class="instruction-list"><li>Télécharge le jeu via torrent et le client <strong>t7x.exe</strong>.</li><li>Pour les maps customs : Télécharge le Workshop Map Installer.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1222959668914163734/1437098674533568603/Call_of_Duty_-_Black_Ops_III.torrent?ex=696661f0&is=69651070&hm=6fd334cc877af39bb33c24a176e06eb56fa1423c940c7c6ca1429a1283560b73&" target="_blank" class="dl-btn">1. Torrent BO3</a><a href="https://master.bo3.eu/t7x/t7x.exe" target="_blank" class="dl-btn secondary">2. Client T7x</a><a href="https://github.com/faroukbmiled/BOIIIWD/releases/tag/v0.3.7.3" target="_blank" class="dl-btn secondary">3. Workshop Installer</a><a href="https://youtu.be/GMcwgc1sUd4" target="_blank" class="dl-btn youtube">▶ Tuto Complet</a></div></div>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Projet BO4</div>
-                        <div class="dl-title">CoD : Black Ops 4</div>
-                        <ol class="instruction-list">
-                            <li>Installe <strong>Battle.net</strong> et crée un compte. Télécharge "bnet.rar".</li>
-                            <li>Clic droit sur <strong>battle.net.BAT</strong> > Edit : Change la lettre du disque si besoin.</li>
-                            <li>Lance le .BAT et attends la fin.</li>
-                            <li>Glisse "files" et "projet-bo4.exe" dans le dossier BO4.</li>
-                        </ol>
-                        <div style="background:#eee; padding:10px; border-radius:8px; margin-bottom:15px;">
-                            <strong>Serveurs :</strong><br>
-                            Serveur 1 : <span class="server-ip">70.55.126.217</span>
-                            Serveur 2 : <span class="server-ip">45.137.192.227</span>
-                        </div>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1245952854414589983/1245954016555434045/bnet.rar?ex=69666fda&is=69651e5a&hm=2236c5312e4d23cf7b3be10e453da9495fe2961a580d6d1e66c1326ca173b7d9&" target="_blank" class="dl-btn">1. Fichier RAR Bnet</a>
-                            <a href="https://github.com/bodnjenie14/Project_-bo4_Launcher/releases/tag/release" target="_blank" class="dl-btn secondary">2. Launcher Project</a>
-                            <a href="http://gamecontent.ir/Call%20of%20Duty%20Black%20Ops%204/Game%20Files/" target="_blank" class="dl-btn secondary">3. Lien Alternatif (ISO)</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Projet BO4</div><div class="dl-title">CoD : Black Ops 4</div><ol class="instruction-list"><li>Installe <strong>Battle.net</strong> et crée un compte. Télécharge "bnet.rar".</li><li>Clic droit sur <strong>battle.net.BAT</strong> > Edit : Change la lettre du disque si besoin.</li><li>Lance le .BAT et attends la fin.</li><li>Glisse "files" et "projet-bo4.exe" dans le dossier BO4.</li></ol><div style="background:#eee; padding:10px; border-radius:8px; margin-bottom:15px;"><strong>Serveurs :</strong><br>Serveur 1 : <span class="server-ip">70.55.126.217</span> Serveur 2 : <span class="server-ip">45.137.192.227</span></div><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1245952854414589983/1245954016555434045/bnet.rar?ex=69666fda&is=69651e5a&hm=2236c5312e4d23cf7b3be10e453da9495fe2961a580d6d1e66c1326ca173b7d9&" target="_blank" class="dl-btn">1. Fichier RAR Bnet</a><a href="https://github.com/bodnjenie14/Project_-bo4_Launcher/releases/tag/release" target="_blank" class="dl-btn secondary">2. Launcher Project</a><a href="http://gamecontent.ir/Call%20of%20Duty%20Black%20Ops%204/Game%20Files/" target="_blank" class="dl-btn secondary">3. Lien Alternatif (ISO)</a></div></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">H2M Mod</div>
-                        <div class="dl-title">HorizonMW (H2M)</div>
-                        <ol class="instruction-list">
-                            <li>Installe le Pack C++ AIO.</li>
-                            <li>Télécharge MWR (2017).</li>
-                            <li>Télécharge le <strong>HMW Launcher</strong>, décompresse-le HORS du dossier jeu.</li>
-                            <li>Lance HMW Launcher > "Select Install Directory" > Choisis ton dossier MWR.</li>
-                            <li>"Verify game files" puis "Play".</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a>
-                            <a href="https://horizonmw.org/" target="_blank" class="dl-btn secondary">2. Site HorizonMW</a>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">H2M Mod</div><div class="dl-title">HorizonMW (H2M)</div><ol class="instruction-list"><li>Installe le Pack C++ AIO.</li><li>Télécharge MWR (2017).</li><li>Lance HMW Launcher.</li></ol><div class="dl-actions"><a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a><a href="https://horizonmw.org/" target="_blank" class="dl-btn secondary">2. Site HorizonMW</a></div></div>
                 </div>
-
             </div>
         </div>
 
         <div id="tab-switch" class="hidden">
             <h1>Nintendo Switch</h1>
             <div class="bento-grid">
-                
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Pack AIO</div>
-                        <div class="dl-title">Pack pour Hack la Switch</div>
-                        <ul class="instruction-list">
-                            <li>Supprimer tout de la carte SD <strong>SAUF</strong> les dossiers : "Nintendo", "emuMMC", "sxos" et "emutendo".</li>
-                            <li>Télécharger le pack via le bouton ci-dessous.</li>
-                            <li>Mettre tout le contenu du ZIP à la racine de la carte SD.</li>
-                            <li>Utiliser Daybreak pour mettre à jour la Switch.</li>
-                        </ul>
-                    </div>
+                    <div><div class="video-eyebrow-date">Pack AIO</div><div class="dl-title">Pack pour Hack la Switch</div><ul class="instruction-list"><li>Supprimer tout de la carte SD <strong>SAUF</strong> les dossiers : "Nintendo", "emuMMC", "sxos" et "emutendo".</li><li>Télécharger le pack via le bouton ci-dessous.</li><li>Mettre tout le contenu du ZIP à la racine de la carte SD.</li><li>Utiliser Daybreak pour mettre à jour la Switch.</li></ul></div>
                     <a href="https://cdn.discordapp.com/attachments/960788243308232704/1441453401954058302/Pack_Switch.zip?ex=69671057&is=6965bed7&hm=db0b81f4ff94d5482bfec302f238870a0b89c36612c64460ac95a7258b999c10&" target="_blank" class="dl-btn switch-btn">Télécharger le Pack Switch</a>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Tutoriel Complet</div>
-                        <div class="dl-title">Tuto pour hack la Switch</div>
-                        
-                        <div class="tuto-section">
-                            <h3>1. Matériel Requis</h3>
-                            <p><strong>Carte SD :</strong> 64Go minimum recommandé. <br>
-                            <a href="https://cutt.ly/txpEmA5" target="_blank">64Go</a> | <a href="https://cutt.ly/expE6HX" target="_blank">128Go</a> | <a href="https://cutt.ly/sxpEXUf" target="_blank">256Go</a></p>
-                            <p><strong>Accessoires :</strong><br>
-                            - Câble USB-C pour relier au PC : <a href="https://cutt.ly/hF3jvGc" target="_blank">Lien</a><br>
-                            - RCM Jig (indispensable) : <a href="https://cutt.ly/BxpPvO3" target="_blank">Lien</a></p>
-                        </div>
-                        <div class="tuto-section">
-                            <h3>2. Vérifier si votre Switch est compatible</h3>
-                            <p>Seules les Switch de "première génération" (V1 non patchées) sont hackables facilement. Vérifiez votre numéro de série (sous la console).</p>
-                            <a href="https://damota.me/ssnc/checker" target="_blank" class="dl-btn secondary" style="margin-bottom:15px;">Checker mon Numéro de Série</a>
-                            <img src="https://cdn.discordapp.com/attachments/415232404303642655/965955899627831346/Capture_decran_2022-04-19_144324.png?ex=6966e6c9&is=69659549&hm=3b08f348d54f2f6e148c26311c505245001cc581ca89fa4882e870f99a5d4da2&" alt="Serial Check" class="tuto-img">
-                        </div>
-                        <div class="tuto-section">
-                            <h3>3. Entrer en mode RCM</h3>
-                            <p>1. Éteignez complètement la Switch.<br>
-                            2. Insérez le RCM Jig dans le rail du Joy-Con droit.<br>
-                            3. Maintenez <strong>Volume +</strong> et appuyez sur <strong>Power</strong>.<br>
-                            4. L'écran doit rester noir. S'il s'allume, recommencez.</p>
-                            <img src="https://jeffvi.github.io/Switch-guide-FR/user_guide/img/entering_rcm_jig.jpg" alt="RCM Jig" class="tuto-img">
-                        </div>
-                        <div class="tuto-section">
-                            <h3>4. Préparer la Carte SD</h3>
-                            <p class="warning-text">ATTENTION : Sauvegardez votre dossier "Nintendo" sur PC avant de commencer !</p>
-                            <p>1. Téléchargez le <strong>Pack Switch</strong> (voir onglet au-dessus).<br>
-                            2. Copiez tout le contenu à la racine de la carte SD.<br>
-                            3. Insérez la carte SD dans la Switch.</p>
-                        </div>
-                        <div class="tuto-section">
-                            <h3>5. Injection & Partition (TegraRcmGUI)</h3>
-                            <p>1. Sur PC, lancez <strong>TegraRcmGUI</strong> et installez les drivers (onglet Settings).<br>
-                            2. Branchez la Switch en RCM au PC.<br>
-                            3. Injectez le payload <strong>TegraExplorer.bin</strong>.<br>
-                            4. Sur la Switch : Allez dans "Partition the SD" -> "Fat32 + EmuMMC". Validez.<br>
-                            5. Une fois fini, redémarrez en RCM.</p>
-                        </div>
-                        <div class="tuto-section">
-                            <h3>6. Créer l'EmuMMC & Lancer</h3>
-                            <p>1. Injectez le payload <strong>Hekate</strong>.<br>
-                            2. Menu Hekate -> <strong>emuMMC</strong> -> <strong>Create emuMMC</strong> -> <strong>SD Partition</strong> -> <strong>Part 1</strong>.<br>
-                            3. Une fois fini : Close -> Change emuMMC -> SD RAW 1.<br>
-                            4. Retour au menu -> <strong>Launch</strong> -> <strong>Atmosphere FSS0 EmuMMC</strong>.</p>
-                            <p class="warning-text">IMPORTANT : Ne connectez jamais l'emuMMC à Internet (Nintendo) pour éviter le bannissement !</p>
-                        </div>
-                    </div>
+                    <div><div class="video-eyebrow-date">Tutoriel Complet</div><div class="dl-title">Tuto pour hack la Switch</div><div class="tuto-section"><h3>1. Matériel Requis</h3><p><strong>Carte SD :</strong> 64Go minimum recommandé. <br><a href="https://cutt.ly/txpEmA5" target="_blank">64Go</a> | <a href="https://cutt.ly/expE6HX" target="_blank">128Go</a> | <a href="https://cutt.ly/sxpEXUf" target="_blank">256Go</a></p><p><strong>Accessoires :</strong><br>- Câble USB-C pour relier au PC : <a href="https://cutt.ly/hF3jvGc" target="_blank">Lien</a><br>- RCM Jig (indispensable) : <a href="https://cutt.ly/BxpPvO3" target="_blank">Lien</a></p></div><div class="tuto-section"><h3>2. Vérifier si votre Switch est compatible</h3><p>Seules les Switch de "première génération" (V1 non patchées) sont hackables facilement. Vérifiez votre numéro de série (sous la console).</p><a href="https://damota.me/ssnc/checker" target="_blank" class="dl-btn secondary" style="margin-bottom:15px;">Checker mon Numéro de Série</a><img src="https://cdn.discordapp.com/attachments/415232404303642655/965955899627831346/Capture_decran_2022-04-19_144324.png?ex=6966e6c9&is=69659549&hm=3b08f348d54f2f6e148c26311c505245001cc581ca89fa4882e870f99a5d4da2&" alt="Serial Check" class="tuto-img"></div><div class="tuto-section"><h3>3. Entrer en mode RCM</h3><p>1. Éteignez complètement la Switch.<br>2. Insérez le RCM Jig dans le rail du Joy-Con droit.<br>3. Maintenez <strong>Volume +</strong> et appuyez sur <strong>Power</strong>.<br>4. L'écran doit rester noir. S'il s'allume, recommencez.</p><img src="https://jeffvi.github.io/Switch-guide-FR/user_guide/img/entering_rcm_jig.jpg" alt="RCM Jig" class="tuto-img"></div><div class="tuto-section"><h3>4. Préparer la Carte SD</h3><p class="warning-text">ATTENTION : Sauvegardez votre dossier "Nintendo" sur PC avant de commencer !</p><p>1. Téléchargez le <strong>Pack Switch</strong> (voir onglet au-dessus).<br>2. Copiez tout le contenu à la racine de la carte SD.<br>3. Insérez la carte SD dans la Switch.</p></div><div class="tuto-section"><h3>5. Injection & Partition (TegraRcmGUI)</h3><p>1. Sur PC, lancez <strong>TegraRcmGUI</strong> et installez les drivers (onglet Settings).<br>2. Branchez la Switch en RCM au PC.<br>3. Injectez le payload <strong>TegraExplorer.bin</strong>.<br>4. Sur la Switch : Allez dans "Partition the SD" -> "Fat32 + EmuMMC". Validez.<br>5. Une fois fini, redémarrez en RCM.</p></div><div class="tuto-section"><h3>6. Créer l'EmuMMC & Lancer</h3><p>1. Injectez le payload <strong>Hekate</strong>.<br>2. Menu Hekate -> <strong>emuMMC</strong> -> <strong>Create emuMMC</strong> -> <strong>SD Partition</strong> -> <strong>Part 1</strong>.<br>3. Une fois fini : Close -> Change emuMMC -> SD RAW 1.<br>4. Retour au menu -> <strong>Launch</strong> -> <strong>Atmosphere FSS0 EmuMMC</strong>.</p><p class="warning-text">IMPORTANT : Ne connectez jamais l'emuMMC à Internet (Nintendo) pour éviter le bannissement !</p></div></div>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Logiciels</div>
-                        <div class="dl-title">Utilitaires pour le hack</div>
-                        <p class="dl-desc">Liens officiels vers les outils indispensables :</p>
-                        <div class="dl-actions">
-                            <a href="https://github.com/Atmosphere-NX/Atmosphere/releases" target="_blank" class="dl-btn secondary">Atmosphère (CFW)</a>
-                            <a href="https://github.com/CTCaer/hekate/releases" target="_blank" class="dl-btn secondary">Hekate</a>
-                            <a href="https://github.com/Morce3232/DBIPatcher/releases/download/v845/845.en.nro" target="_blank" class="dl-btn secondary">DBI Installer</a>
-                        </div>
-                        <p style="margin-top:20px; font-size:0.9rem; color:#86868b;">Merci à <strong>Joueur68</strong> pour avoir fourni les liens.</p>
-                    </div>
+                    <div><div class="video-eyebrow-date">Logiciels</div><div class="dl-title">Utilitaires pour le hack</div><p class="dl-desc">Liens officiels vers les outils indispensables :</p><div class="dl-actions"><a href="https://github.com/Atmosphere-NX/Atmosphere/releases" target="_blank" class="dl-btn secondary">Atmosphère (CFW)</a><a href="https://github.com/CTCaer/hekate/releases" target="_blank" class="dl-btn secondary">Hekate</a><a href="https://github.com/Morce3232/DBIPatcher/releases/download/v845/845.en.nro" target="_blank" class="dl-btn secondary">DBI Installer</a></div><p style="margin-top:20px; font-size:0.9rem; color:#86868b;">Merci à <strong>Joueur68</strong> pour avoir fourni les liens.</p></div>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Roms & Outils</div>
-                        <div class="dl-title">Sites de Jeux & Quark</div>
-                        <p class="dl-desc">Liste de sites conseillés pour trouver vos jeux (SuperXCI, NSP, NSZ).<br>Astuce : Utilisez un VPN pour contourner l'attente sur 1fichier.</p>
-                        <div class="dl-actions">
-                            <a href="https://eggnsemulator.com/nintendo-switch-roms/" target="_blank" class="dl-btn">Eggns Emulator</a>
-                            <a href="https://switchrom.net/" target="_blank" class="dl-btn">SwitchRom</a>
-                            <a href="https://www.emulegends.net/console/switch/" target="_blank" class="dl-btn">EmuLegends</a>
-                            <a href="https://github.com/XorTroll/Goldleaf/releases" target="_blank" class="dl-btn secondary">Goldleaf / Quark</a>
-                        </div>
-                        <p style="margin-top:20px; font-size:0.9rem; color:#86868b;">Merci à <strong>joueur68</strong> pour son aide précieuse.</p>
-                    </div>
+                    <div><div class="video-eyebrow-date">Roms & Outils</div><div class="dl-title">Sites de Jeux & Quark</div><p class="dl-desc">Liste de sites conseillés pour trouver vos jeux (SuperXCI, NSP, NSZ).<br>Astuce : Utilisez un VPN pour contourner l'attente sur 1fichier.</p><div class="dl-actions"><a href="https://eggnsemulator.com/nintendo-switch-roms/" target="_blank" class="dl-btn">Eggns Emulator</a><a href="https://switchrom.net/" target="_blank" class="dl-btn">SwitchRom</a><a href="https://www.emulegends.net/console/switch/" target="_blank" class="dl-btn">EmuLegends</a><a href="https://github.com/XorTroll/Goldleaf/releases" target="_blank" class="dl-btn secondary">Goldleaf / Quark</a></div><p style="margin-top:20px; font-size:0.9rem; color:#86868b;">Merci à <strong>joueur68</strong> pour son aide précieuse.</p></div>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Informations</div>
-                        <div class="dl-title">FAQ Switch (par Allan)</div>
-                        
-                        <div class="faq-item">
-                            <h4>Qu’est-ce que ce tuto ?</h4>
-                            <p>Ce Tuto a pour finalité de prendre une Switch non modifiée à l'état "Usine" au CFW Atmosphère. Fusée-gelée est actuellement la meilleure méthode qui nous donne presque un contrôle total du système via le mode RCM.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Qu’est-ce que homebrew ?</h4>
-                            <p>Homebrew est un terme pour les logiciels non-officiels (éditeurs de sauvegardes, émulateurs, etc.). Ils peuvent être exécutés gratuitement via un CFW sur une Switch de "première génération" (non patchée).</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Qu’est-ce qu'un Custom Firmware (CFW) ?</h4>
-                            <p>C'est un logiciel qui modifie le système (comme Atmosphère). Il tourne en arrière-plan et permet d'étendre les fonctionnalités, de modder des jeux via LayeredFS, et d'exécuter du code non signé.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Que puis-je faire avec un CFW ?</h4>
-                            <p>- Customiser le Menu Home (Thèmes).<br>- Utiliser des “ROM hacks”.<br>- Gérer ses sauvegardes (Checkpoint/JKSV).<br>- Jouer à des jeux rétros (RetroArch).<br>- Mettre à jour en sécurité.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Pourquoi une EmuNAND ?</h4>
-                            <p>L'emuNAND permet d'utiliser des homebrews et codes de triche sans affecter votre sysNAND (système original). Ainsi, votre sysNAND peut rester propre pour jouer en ligne sans risque de bannissement.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Qu’est-ce que le RCM ?</h4>
-                            <p>Le mode de récupération (Recovery Mode). Sur les Switchs non patchées, on peut envoyer un payload en RCM pour lancer Atmosphère.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Pourquoi ma Switch ne boot pas sur Hekate ?</h4>
-                            <p>Soit elle est Patchée (modèle trop récent), soit le Jig RCM est mal inséré.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Qu'est ce que l'emuNAND, l'emuMMC, sysNAND ?</h4>
-                            <p><strong>sysNAND :</strong> Mémoire interne réelle de la console.<br><strong>emuNAND :</strong> Copie complète de la NAND qui tourne sur la carte SD (séparée du système réel).<br><strong>emuMMC :</strong> Nom technique de l'emuNAND utilisée par la Switch.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Message d'erreur Windows pour la carte SD ?</h4>
-                            <p>Si Windows demande de formater la carte SD, <strong>NE LE FAITES PAS !</strong> C’est votre partition emuMMC que Windows ne reconnaît pas. Ignorez simplement le message.</p>
-                        </div>
-
+                    <div><div class="video-eyebrow-date">Informations</div><div class="dl-title">FAQ Switch (par Allan)</div>
+                        <div class="faq-item"><h4>Qu’est-ce que ce tuto ?</h4><p>Ce Tuto a pour finalité de prendre une Switch non modifiée à l'état "Usine" au CFW Atmosphère. Fusée-gelée est actuellement la meilleure méthode qui nous donne presque un contrôle total du système via le mode RCM.</p></div>
+                        <div class="faq-item"><h4>Qu’est-ce que homebrew ?</h4><p>Homebrew est un terme pour les logiciels non-officiels (éditeurs de sauvegardes, émulateurs, etc.). Ils peuvent être exécutés gratuitement via un CFW sur une Switch de "première génération" (non patchée).</p></div>
+                        <div class="faq-item"><h4>Qu’est-ce qu'un Custom Firmware (CFW) ?</h4><p>C'est un logiciel qui modifie le système (comme Atmosphère). Il tourne en arrière-plan et permet d'étendre les fonctionnalités, de modder des jeux via LayeredFS, et d'exécuter du code non signé.</p></div>
+                        <div class="faq-item"><h4>Que puis-je faire avec un CFW ?</h4><p>- Customiser le Menu Home (Thèmes).<br>- Utiliser des “ROM hacks”.<br>- Gérer ses sauvegardes (Checkpoint/JKSV).<br>- Jouer à des jeux rétros (RetroArch).<br>- Mettre à jour en sécurité.</p></div>
+                        <div class="faq-item"><h4>Pourquoi une EmuNAND ?</h4><p>L'emuNAND permet d'utiliser des homebrews et codes de triche sans affecter votre sysNAND (système original). Ainsi, votre sysNAND peut rester propre pour jouer en ligne sans risque de bannissement.</p></div>
+                        <div class="faq-item"><h4>Qu’est-ce que le RCM ?</h4><p>Le mode de récupération (Recovery Mode). Sur les Switchs non patchées, on peut envoyer un payload en RCM pour lancer Atmosphère.</p></div>
+                        <div class="faq-item"><h4>Pourquoi ma Switch ne boot pas sur Hekate ?</h4><p>Soit elle est Patchée (modèle trop récent), soit le Jig RCM est mal inséré.</p></div>
+                        <div class="faq-item"><h4>Qu'est ce que l'emuNAND, l'emuMMC, sysNAND ?</h4><p><strong>sysNAND :</strong> Mémoire interne réelle de la console.<br><strong>emuNAND :</strong> Copie complète de la NAND qui tourne sur la carte SD (séparée du système réel).<br><strong>emuMMC :</strong> Nom technique de l'emuNAND utilisée par la Switch.</p></div>
+                        <div class="faq-item"><h4>Message d'erreur Windows pour la carte SD ?</h4><p>Si Windows demande de formater la carte SD, <strong>NE LE FAITES PAS !</strong> C’est votre partition emuMMC que Windows ne reconnaît pas. Ignorez simplement le message.</p></div>
                         <div class="update-date">Mise à jour le 19/04/2022</div>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <div id="tab-emulators" class="hidden">
             <h1>Émulateurs</h1>
             <div class="bento-grid">
-                
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Nintendo Switch</div>
-                        <div class="dl-title">Citron</div>
-                        <p class="dl-desc">Le nouvel émulateur Switch performant (successeur de Yuzu/Ryujinx).</p>
-                    </div>
+                    <div><div class="video-eyebrow-date">Nintendo Switch</div><div class="dl-title">Citron</div><p class="dl-desc">Le nouvel émulateur Switch performant (successeur de Yuzu/Ryujinx).</p></div>
                     <div class="dl-actions">
                         <a href="https://citron-emu.org/" target="_blank" class="dl-btn" style="background-color: #F4D03F; color: black;">Télécharger Citron</a>
                         <a href="https://mega.nz/file/CQYDXLzb#cknvToHSFueDiXxkd3yTVrW3dznazCqEP3kCwWzbmzY" target="_blank" class="dl-btn" style="background-color: #F4D03F; color: black;">Firmware / Keys 21.0</a>
                     </div>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">PlayStation 3</div>
-                        <div class="dl-title">RPCS3</div>
-                        <p class="dl-desc">L'émulateur PS3 le plus performant.</p>
-                        <ul class="instruction-list">
-                            <li>Nécessite le firmware PS3 officiel.</li>
-                            <li>Demande un CPU assez puissant.</li>
-                        </ul>
-                    </div>
-                    <div class="dl-actions">
-                        <a href="https://rpcs3.net/download" target="_blank" class="dl-btn">Télécharger RPCS3</a>
-                        <a href="https://www.playstation.com/en-us/support/hardware/ps3/system-software/" target="_blank" class="dl-btn secondary">Firmware PS3</a>
-                    </div>
+                    <div><div class="video-eyebrow-date">PlayStation 3</div><div class="dl-title">RPCS3</div><p class="dl-desc">L'émulateur PS3 le plus performant.</p><ul class="instruction-list"><li>Nécessite le firmware PS3 officiel.</li><li>Demande un CPU assez puissant.</li></ul></div>
+                    <div class="dl-actions"><a href="https://rpcs3.net/download" target="_blank" class="dl-btn">Télécharger RPCS3</a><a href="https://www.playstation.com/en-us/support/hardware/ps3/system-software/" target="_blank" class="dl-btn secondary">Firmware PS3</a></div>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">Xbox 360</div>
-                        <div class="dl-title">Xenia (Canary)</div>
-                        <p class="dl-desc">L'émulateur Xbox 360 pour PC.</p>
-                    </div>
+                    <div><div class="video-eyebrow-date">Xbox 360</div><div class="dl-title">Xenia (Canary)</div><p class="dl-desc">L'émulateur Xbox 360 pour PC.</p></div>
                     <a href="https://github.com/xenia-canary/xenia-canary/releases" target="_blank" class="dl-btn" style="background-color:#107C10;">Télécharger Xenia</a>
                 </div>
-
                 <div class="card download-card">
-                    <div>
-                        <div class="video-eyebrow-date">PlayStation 2</div>
-                        <div class="dl-title">PCSX2 (Nightly)</div>
-                        <p class="dl-desc">La référence pour la PS2.</p>
-                    </div>
+                    <div><div class="video-eyebrow-date">PlayStation 2</div><div class="dl-title">PCSX2 (Nightly)</div><p class="dl-desc">La référence pour la PS2.</p></div>
                     <a href="https://pcsx2.net/downloads" target="_blank" class="dl-btn secondary">Télécharger PCSX2</a>
                 </div>
-
                 <div class="card download-card span-full">
-                    <div>
-                        <div class="video-eyebrow-date">Tout-en-un</div>
-                        <div class="dl-title">RetroArch</div>
-                        <p class="dl-desc">Pour émuler tout le reste (GBA, SNES, N64...).</p>
-                    </div>
+                    <div><div class="video-eyebrow-date">Tout-en-un</div><div class="dl-title">RetroArch</div><p class="dl-desc">Pour émuler tout le reste (GBA, SNES, N64...).</p></div>
                     <a href="https://www.retroarch.com/?page=platforms" target="_blank" class="dl-btn secondary">Télécharger RetroArch</a>
                 </div>
-
             </div>
         </div>
 
@@ -894,7 +364,7 @@
 
     <div class="music-player">
         <button id="playBtn" onclick="toggleMusic()">🎵 Play Music</button>
-        <audio id="bgMusic" loop>
+        <audio id="bgMusic" loop crossorigin="anonymous">
             <source src="https://stream.zeno.fm/0r0xa854rp8uv" type="audio/mpeg">
         </audio>
     </div>
@@ -917,7 +387,7 @@
                 music.pause();
                 btn.innerText = "🎵 Play Music";
             } else {
-                music.play();
+                music.play().catch(e => console.log("Erreur lecture: ", e));
                 btn.innerText = "⏸ Pause Music";
             }
             isPlaying = !isPlaying;
@@ -939,21 +409,19 @@
             });
         }
 
+        // --- MODALE ---
         function openModal(videoId) {
             modal.style.display = "flex";
             videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
         }
-
         function closeModal() {
             modal.style.display = "none";
             videoFrame.src = ""; 
         }
-
         closeBtn.onclick = closeModal;
-        window.onclick = function(event) {
-            if (event.target == modal) closeModal();
-        }
+        window.onclick = function(event) { if (event.target == modal) closeModal(); }
 
+        // --- VIDEOS (RSS) ---
         function displayVideos(videos) {
             grid.innerHTML = ''; 
             videos.forEach((video, index) => {
@@ -979,6 +447,7 @@
 
         async function fetchYouTubeVideos() {
             try {
+                // Utilisation du flux RSS via rss2json pour éviter les erreurs de clé API
                 const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`);
                 if (!res.ok) throw new Error("Erreur");
                 const data = await res.json();
@@ -988,8 +457,7 @@
                 const realVideos = data.items.map(item => {
                     const videoId = item.link.split('v=')[1];
                     return {
-                        id: videoId,
-                        title: item.title,
+                        id: videoId, title: item.title,
                         thumbnail: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
                         date: new Date(item.pubDate).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
                     };
@@ -998,10 +466,9 @@
             } catch (error) { grid.innerHTML = `<p style="text-align:center">Erreur de chargement des vidéos.</p>`; }
         }
         
-        // ROUTING SYSTEM (Gestion URL)
+        // --- ONGLETS & ROUTING ---
         function switchTab(tabName) {
             history.pushState(null, null, '#' + tabName);
-            
             document.getElementById('tab-videos').classList.add('hidden');
             document.getElementById('tab-cod').classList.add('hidden');
             document.getElementById('tab-switch').classList.add('hidden');
@@ -1012,12 +479,8 @@
 
             const buttons = document.querySelectorAll('.segment-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            
             const activeBtn = document.getElementById('nav-' + tabName);
-            if(activeBtn) {
-                activeBtn.classList.add('active');
-                updateBubble(activeBtn);
-            }
+            if(activeBtn) { activeBtn.classList.add('active'); updateBubble(activeBtn); }
         }
 
         function updateBubble(element) {
@@ -1030,22 +493,13 @@
 
         window.addEventListener('DOMContentLoaded', () => {
              const hash = window.location.hash.substring(1);
-             
-             if(hash && document.getElementById('tab-' + hash)) {
-                 switchTab(hash);
-             } else {
-                 const firstBtn = document.getElementById('nav-videos');
-                 updateBubble(firstBtn);
-             }
+             if(hash && document.getElementById('tab-' + hash)) { switchTab(hash); } 
+             else { const firstBtn = document.getElementById('nav-videos'); updateBubble(firstBtn); }
         });
         
         window.addEventListener('popstate', () => {
              const hash = window.location.hash.substring(1);
-             if(hash) {
-                 switchTab(hash);
-             } else {
-                 switchTab('videos');
-             }
+             if(hash) { switchTab(hash); } else { switchTab('videos'); }
         });
         
         window.addEventListener('resize', () => {
