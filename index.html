@@ -77,25 +77,22 @@
         /* --- CONTENEUR --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; }
 
-        /* --- NAVIGATION ONGLETS (CORRIGÉ) --- */
+        /* --- NAVIGATION ONGLETS --- */
         .segmented-control {
-            display: inline-flex; /* S'adapte au contenu */
+            display: inline-flex; 
             background: rgba(118, 118, 128, 0.12);
             padding: 4px;
             border-radius: 100px;
-            margin: 0 auto 50px auto; /* Centré */
+            margin: 0 auto 50px auto; 
             position: relative;
             z-index: 1;
-            /* Gestion du scroll sur mobile */
             max-width: 100%;
             overflow-x: auto;
             white-space: nowrap;
-            /* Pour centrer le bloc entier sur la page */
             left: 50%;
             transform: translateX(-50%);
         }
         
-        /* Masquer la barre de scroll moche */
         .segmented-control::-webkit-scrollbar { display: none; }
         .segmented-control { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -110,7 +107,7 @@
 
         .segment-btn {
             border: none; background: none;
-            padding: 8px 20px; /* Plus d'espace */
+            padding: 8px 20px; 
             font-size: 0.95rem; font-weight: 500;
             color: var(--text-secondary); cursor: pointer;
             border-radius: 100px;
@@ -130,7 +127,7 @@
         /* --- BENTO GRID --- */
         .bento-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
             gap: 30px; 
             width: 100%;
         }
@@ -146,7 +143,7 @@
             min-height: auto !important; padding: 30px !important;
             display: flex; flex-direction: column; justify-content: space-between;
         }
-        .download-card.full-width { grid-column: span 2; }
+        .download-card.full-width { grid-column: 1 / -1; } /* Force toute la largeur */
 
         /* --- STYLE DES CARTES --- */
         .card {
@@ -157,9 +154,8 @@
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             opacity: 0; 
             animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            aspect-ratio: 16/10;
+            aspect-ratio: auto;
         }
-        .video-card.featured { aspect-ratio: auto; }
         
         .card:hover {
             transform: translateY(-8px) scale(1.01);
@@ -298,7 +294,7 @@
             .modal-content { width: 95%; }
             /* Ajustement Menu Mobile */
             .segmented-control { 
-                justify-content: flex-start; /* Aligner à gauche pour le scroll */
+                justify-content: flex-start; 
                 width: 90%; 
                 margin-bottom: 30px;
             }
@@ -339,7 +335,7 @@
             <h1>Call of Duty</h1>
             <div class="bento-grid">
                 
-                <div class="card download-card">
+                <div class="card download-card full-width">
                     <div>
                         <div class="video-eyebrow-date">Classique</div>
                         <div class="dl-title">Call of Duty 1X</div>
@@ -367,125 +363,131 @@
                     <a href="https://www.mediafire.com/file/iydrzjoi7m0fahn/COD2.rar" target="_blank" class="dl-btn">Télécharger le Jeu</a>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">Moderne</div>
                         <div class="dl-title">Call of Duty 4X</div>
                         <p class="dl-desc">Suis les instructions pour installer le Promod :</p>
                         <ol class="instruction-list">
-                            <li>Télécharge le jeu complet et extrais-le.</li>
+                            <li>Télécharge le jeu complet.</li>
                             <li>Télécharge le patch <strong>cod4x_client</strong>.</li>
-                            <li>Glisse les fichiers du patch dans le dossier du jeu.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Télécharger Jeu</a>
-                            <a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch Client</a>
+                            <a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch</a>
                         </div>
-                        <p class="dl-desc" style="margin-top:20px;">Besoin de clés ?</p>
-                        <a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube">▶ Voir la vidéo des clés sur YouTube</a>
+                        <a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube" style="margin-top:10px;">▶ Tuto Clés</a>
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : World at War</div>
                         <ol class="instruction-list">
-                            <li>Télécharge le torrent du jeu via le bouton ci-dessous.</li>
-                            <li>Crée un compte sur Plutonium.</li>
-                            <li>Installe qBittorent (pour télécharger le torrent).</li>
-                            <li>Lance Plutonium, sélectionne WaW.</li>
-                            <li>Clique sur <strong>Setup</strong> et pointe vers le dossier du jeu téléchargé.</li>
+                            <li>Télécharge le torrent.</li>
+                            <li>Crée un compte Plutonium.</li>
+                            <li>Installe qBittorent.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Compte Plutonium</a>
-                            <a href="https://www.qbittorrent.org/download" target="_blank" class="dl-btn secondary">3. qBittorrent</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">IW4X / Alterware</div>
                         <div class="dl-title">CoD : MW2 (IW4X)</div>
                         <ol class="instruction-list">
-                            <li>Télécharge MW2 (Torrent) et extrais le jeu.</li>
-                            <li>Télécharge <strong>release.zip</strong> et extrais-le dans le dossier du jeu.</li>
-                            <li>Télécharge <strong>alterware-launcher.exe</strong> et glisse-le dans le dossier du jeu.</li>
+                            <li>Télécharge MW2 (Torrent).</li>
+                            <li>Télécharge <strong>release.zip</strong>.</li>
+                            <li>Télécharge <strong>launcher.exe</strong>.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223219330452553738/1223220365527093259/Call_of_Duty_-_Modern_Warfare_2.torrent?ex=6966213d&is=6964cfbd&hm=d8c330b69a24c0b2bda1e8b66d9bd7af34e4b670af4faea6b25d7fa161d29a25&" target="_blank" class="dl-btn">1. Torrent MW2</a>
-                            <a href="https://www.mediafire.com/file/24gpjb8kivhl2ps/release.zip" target="_blank" class="dl-btn secondary">2. release.zip</a>
-                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">3. Launcher</a>
+                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : Black Ops 1</div>
-                        <p class="dl-desc" style="color:var(--accent-blue); font-weight:600;">Vidéo tuto : Bientôt</p>
                         <ol class="instruction-list">
-                            <li>Télécharge le torrent du jeu.</li>
-                            <li>Crée un compte sur Plutonium et installe qBittorrent.</li>
-                            <li>Lance Plutonium, sélectionne Black Ops, clique <strong>Setup</strong> et choisis le dossier du jeu téléchargé.</li>
+                            <li>Télécharge le torrent.</li>
+                            <li>Crée un compte Plutonium.</li>
+                            <li>Sélectionne Black Ops sur Plutonium.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a>
                             <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a>
-                            <a href="https://www.qbittorrent.org/download" target="_blank" class="dl-btn secondary">3. qBittorrent</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">Plutonium / Steam</div>
                         <div class="dl-title">CoD : MW3</div>
                         <ol class="instruction-list">
-                            <li>Installe Steam et coche <strong>Outils</strong>. Installe <strong>MW3 Dedicated Server</strong>.</li>
+                            <li>Installe MW3 Dedicated Server (Steam).</li>
                             <li>Télécharge les DLCs (Mega).</li>
-                            <li>Sur Steam : Clic droit sur MW3 Server > Fichiers locaux. Glisse les DLCs dedans.</li>
-                            <li>Lance Plutonium, sélectionne MW3, clique <strong>Setup</strong> et choisis le dossier.</li>
+                            <li>Glisse les DLCs dans les fichiers.</li>
                         </ol>
                         <div class="dl-actions">
-                            <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs (Mega)</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Créer compte Plutonium</a>
+                            <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Compte Plutonium</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : Black Ops II</div>
                         <ol class="instruction-list">
-                            <li>Télécharge le torrent via le lien ci-dessous.</li>
+                            <li>Télécharge le torrent BO2.</li>
                             <li>Crée un compte Plutonium.</li>
-                            <li>Lance Plutonium, sélectionne Black Ops II, clique <strong>Setup</strong> et indique le dossier.</li>
+                            <li>Lance Plutonium > Setup > Dossier BO2.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Compte Plutonium</a>
-                            <a href="https://www.qbittorrent.org/download" target="_blank" class="dl-btn secondary">3. qBittorrent</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">2. Plutonium</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">Alterware</div>
                         <div class="dl-title">CoD : Advanced Warfare</div>
                         <ol class="instruction-list">
-                            <li>Télécharge Advanced Warfare via le torrent (qBittorrent requis).</li>
-                            <li>Télécharge <strong>alterware-launcher.exe</strong> et glisse-le dans le dossier AW.</li>
-                            <li>Lance le launcher.</li>
+                            <li>Télécharge AW (Torrent).</li>
+                            <li>Télécharge <strong>launcher.exe</strong>.</li>
+                            <li>Lance le launcher dans le dossier.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a>
-                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Alterware Launcher</a>
+                            <a href="https://github.com/mxve/alterware-launcher/releases/latest" target="_blank" class="dl-btn secondary">2. Launcher</a>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="card download-card">
+                    <div>
+                        <div class="video-eyebrow-date">H1-Mod</div>
+                        <div class="dl-title">CoD : MW Remastered</div>
+                        <ol class="instruction-list">
+                            <li>Télécharge MWR (Torrent).</li>
+                            <li>Télécharge <strong>H1-Mod</strong> (Github).</li>
+                            <li>Glisse le H1-Mod dans le jeu.</li>
+                        </ol>
+                        <div class="dl-actions">
+                            <a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a>
+                            <a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a>
                         </div>
                     </div>
                 </div>
@@ -503,24 +505,6 @@
                             <a href="https://master.bo3.eu/t7x/t7x.exe" target="_blank" class="dl-btn secondary">2. Client T7x</a>
                             <a href="https://github.com/faroukbmiled/BOIIIWD/releases/tag/v0.3.7.3" target="_blank" class="dl-btn secondary">3. Workshop Installer</a>
                             <a href="https://youtu.be/GMcwgc1sUd4" target="_blank" class="dl-btn youtube">▶ Tuto Complet</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card download-card full-width">
-                    <div>
-                        <div class="video-eyebrow-date">H1-Mod</div>
-                        <div class="dl-title">CoD : MW Remastered</div>
-                        <p class="dl-desc">Installation H1-Mod :</p>
-                        <ol class="instruction-list">
-                            <li>Télécharge MWR via le torrent.</li>
-                            <li>Télécharge le <strong>H1-Mod</strong> depuis Github et glisse le contenu dans le jeu.</li>
-                            <li>Lance le jeu.</li>
-                        </ol>
-                        <div class="dl-actions">
-                            <a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a>
-                            <a href="https://github.com/auroramod/h1-mod/releases" target="_blank" class="dl-btn secondary">2. H1-Mod</a>
-                            <a href="https://youtu.be/FhRIE1DC7Uk" target="_blank" class="dl-btn youtube">▶ Tuto Vidéo</a>
                         </div>
                     </div>
                 </div>
@@ -548,16 +532,14 @@
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">H2M Mod</div>
                         <div class="dl-title">HorizonMW (H2M)</div>
                         <ol class="instruction-list">
-                            <li>Installe le <a href="https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/" target="_blank">Pack C++ AIO</a>.</li>
-                            <li>Télécharge <strong>MWR (2017)</strong> via torrent.</li>
-                            <li>Télécharge le <strong>HMW Launcher</strong>, décompresse-le HORS du dossier jeu.</li>
-                            <li>Lance HMW Launcher > "Select Install Directory" > Choisis ton dossier MWR.</li>
-                            <li>"Verify game files" puis "Play".</li>
+                            <li>Installe le Pack C++ AIO.</li>
+                            <li>Télécharge MWR (2017).</li>
+                            <li>Lance HMW Launcher.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1273788134391287868/1437101680167616653/Call_of_Duty_Modern_Warfare_Remastered.torrent?ex=696664bc&is=6965133c&hm=4c84a9a96dee12538304a873723cdd898902745592bdd1d00b1c113463cb7b9c&" target="_blank" class="dl-btn">1. Torrent MWR</a>
@@ -866,25 +848,21 @@
             } catch (error) { grid.innerHTML = `<p style="text-align:center">Erreur de chargement des vidéos.</p>`; }
         }
         
-        // --- LOGIQUE ONGLETS (CORRIGÉE) ---
+        // --- LOGIQUE ONGLETS ---
         function switchTab(tabName, event) {
-            // Cacher tous les onglets
             document.getElementById('tab-videos').classList.add('hidden');
             document.getElementById('tab-cod').classList.add('hidden');
             document.getElementById('tab-switch').classList.add('hidden');
             document.getElementById('tab-emulators').classList.add('hidden'); 
             
-            // Afficher le bon
             const target = document.getElementById('tab-' + tabName);
             if(target) target.classList.remove('hidden');
 
-            // Gérer le bouton actif
             const buttons = document.querySelectorAll('.segment-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             const clickedBtn = event.currentTarget;
             clickedBtn.classList.add('active');
 
-            // Animation bulle
             updateBubble(clickedBtn);
         }
 
@@ -896,7 +874,6 @@
             }
         }
 
-        // Au chargement et au redimensionnement
         window.addEventListener('DOMContentLoaded', () => {
              const firstBtn = document.querySelector('.segment-btn.active');
              updateBubble(firstBtn);
