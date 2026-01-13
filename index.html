@@ -259,6 +259,53 @@
         }
         .card:hover .play-icon { opacity: 1; transform: scale(1) translateY(0); }
 
+        /* --- NOUVEAU STYLE POUR LA MODALE (POPUP VIDÉO) --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; /* Au dessus de tout */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); 
+            backdrop-filter: blur(10px);
+            justify-content: center; 
+            align-items: center; 
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #000;
+            width: 80%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-btn:hover { color: #ccc; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         @media (max-width: 850px) { 
             .video-card.featured { grid-column: span 1; min-height: 380px; }
             .download-card.full-width { grid-column: span 1; }
@@ -266,6 +313,7 @@
             header { padding: 15px 20px; }
             .btn { padding: 8px 16px; font-size: 0.8rem; }
             .tuto-img { max-width: 90%; }
+            .modal-content { width: 95%; }
         }
 
         .hidden { display: none; }
@@ -603,6 +651,7 @@
                             2. Menu Hekate -> <strong>emuMMC</strong> -> <strong>Create emuMMC</strong> -> <strong>SD Partition</strong> -> <strong>Part 1</strong>.<br>
                             3. Une fois fini : Close -> Change emuMMC -> SD RAW 1.<br>
                             4. Retour au menu -> <strong>Launch</strong> -> <strong>Atmosphere FSS0 EmuMMC</strong>.</p>
+
                             <p class="warning-text">IMPORTANT : Ne connectez jamais l'emuMMC à Internet (Nintendo) pour éviter le bannissement !</p>
                         </div>
                     </div>
@@ -698,21 +747,56 @@
 
     <footer><p style="color: #86868b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0;">Copyright © 2026 IKAAM Inc. Tous droits réservés.</p></footer>
 
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <iframe id="videoFrame" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
     <script>
         const API_KEY = 'AIzaSyBUUGtjhf9BBh0atNbk4rT97q7kz2Mm62k'; 
         const CHANNEL_ID = 'UCBUHEV2NI3H4weKFG4Fz7AQ'; 
         const grid = document.getElementById('video-grid');
+        
+        // --- LOGIQUE MODALE ---
+        const modal = document.getElementById("videoModal");
+        const videoFrame = document.getElementById("videoFrame");
+        const closeBtn = document.getElementsByClassName("close-btn")[0];
 
+        function openModal(videoId) {
+            modal.style.display = "flex";
+            // On injecte l'ID et on lance l'autoplay
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            videoFrame.src = ""; // Arrête le son
+        }
+
+        closeBtn.onclick = closeModal;
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // --- AFFICHAGE DES VIDÉOS ---
         function displayVideos(videos) {
             grid.innerHTML = ''; 
             videos.forEach((video, index) => {
                 const card = document.createElement('a');
-                card.href = video.link; card.target = "_blank";
-                // Animation de délai "en cascade"
+                // ICI ON CHANGE : On n'utilise plus href classique
+                card.href = "#"; 
+                card.onclick = function(e) {
+                    e.preventDefault(); // Empêche de remonter en haut de page
+                    openModal(video.id); // Ouvre notre modale
+                };
+
                 card.style.animationDelay = `${index * 0.1}s`;
                 card.className = index === 0 ? 'card video-card featured' : 'card video-card';
                 
-                // Si c'est la vidéo featured, on peut ajuster la qualité de l'image
                 card.innerHTML = `
                     <div class="thumbnail-container">
                         <img src="${video.thumbnail}" alt="${video.title}">
@@ -734,9 +818,11 @@
                 const data = await res.json();
                 if (!data.items) { grid.innerHTML = '<p>Aucune vidéo.</p>'; return; }
                 const realVideos = data.items.map(item => ({
-                    id: item.id.videoId, title: item.snippet.title,
+                    id: item.id.videoId, 
+                    title: item.snippet.title,
                     thumbnail: (item.snippet.thumbnails.maxres ? item.snippet.thumbnails.maxres.url : item.snippet.thumbnails.high.url),
                     date: new Date(item.snippet.publishedAt).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }),
+                    // Le lien classique n'est plus utilisé par le clic, mais on garde la structure
                     link: `https://www.youtube.com/watch?v=${item.id.videoId}`
                 }));
                 displayVideos(realVideos);
