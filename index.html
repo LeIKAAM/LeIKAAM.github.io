@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Officiel de IKAAM</title>
     
-    <link rel="icon" href="logo.jpg" type="image/jpeg">
-    <link rel="shortcut icon" href="logo.jpg" type="image/jpeg">
-    <link rel="apple-touch-icon" href="logo.jpg">
+    <link rel="icon" href="logo-removebg-preview.png" type="image/png">
+    <link rel="shortcut icon" href="logo-removebg-preview.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo-removebg-preview.png">
 
     <style>
         /* --- CONFIGURATION --- */
@@ -49,13 +49,24 @@
         /* --- HEADER --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 40px; position: sticky; top: 0; z-index: 100;
+            padding: 15px 40px; position: sticky; top: 0; z-index: 100;
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-        .logo { font-weight: 600; font-size: 1.3rem; letter-spacing: -0.02em; }
+        
+        /* STYLE DU LOGO IMAGE */
+        .logo img {
+            height: 50px; /* Taille du logo ajustée */
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
         .header-actions { display: flex; align-items: center; gap: 12px; }
 
         .btn {
@@ -305,7 +316,9 @@
     <div class="ambient-light"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
     
     <header>
-        <div class="logo">LeIKAAM</div>
+        <div class="logo">
+            <img src="logo-removebg-preview.png" alt="Logo LeIKAAM">
+        </div>
         <div class="header-actions">
             <a href="https://discord.gg/pwGEPyB9Jz" target="_blank" class="btn discord-btn">Discord</a>
             <a href="https://youtube.com/@LeIKAAM" target="_blank" class="btn subscribe-btn">S'abonner</a>
