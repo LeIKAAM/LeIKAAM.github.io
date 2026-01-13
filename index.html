@@ -87,7 +87,7 @@
             padding: 4px;
             border-radius: 100px;
             margin: 0 auto 50px auto;
-            max-width: 550px; /* Élargi pour 3 boutons avec texte long */
+            max-width: 550px;
             position: relative;
             z-index: 1;
         }
@@ -160,7 +160,7 @@
         .dl-btn.secondary { background-color: #333; }
         .dl-btn.mega { background-color: #D92E2E; } 
         .dl-btn.youtube { background-color: #FF0000; width: 100%; box-sizing: border-box; } 
-        .dl-btn.switch-btn { background-color: var(--accent-red); } /* Bouton rouge pour la Switch */
+        .dl-btn.switch-btn { background-color: var(--accent-red); }
         .dl-btn.switch-btn:hover { background-color: #b0000e; }
 
         .code-block {
@@ -175,6 +175,19 @@
         .instruction-list li { margin-bottom: 8px; }
         .instruction-list a { color: var(--accent-blue); text-decoration: none; }
         .instruction-list a:hover { text-decoration: underline; }
+
+        /* Style spécifique FAQ et Tuto */
+        .faq-item { margin-bottom: 25px; }
+        .faq-item h4 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text-primary); font-weight: 700; }
+        .faq-item p { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+        .update-date { font-size: 0.8rem; color: #999; margin-top: 20px; text-align: right; font-style: italic; }
+        
+        .tuto-section { margin-bottom: 30px; }
+        .tuto-section h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 15px; color: var(--text-primary); }
+        .tuto-section p { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 15px; }
+        .tuto-section strong { color: var(--text-primary); }
+        .warning-text { color: #e60012; font-weight: 600; }
+        .tuto-img { width: 100%; border-radius: var(--radius-m); margin: 20px 0; border: 1px solid rgba(0,0,0,0.1); }
 
         /* --- STYLE THUMBNAILS VIDEOS --- */
         .thumbnail-container { width: 100%; height: 100%; position: relative; overflow: hidden; border-radius: var(--radius-l) var(--radius-l) 0 0; }
@@ -282,9 +295,11 @@
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : World at War</div>
                         <ol class="instruction-list">
-                            <li>Télécharge le torrent du jeu.</li>
-                            <li>Crée un compte sur Plutonium et installe qBittorrent.</li>
-                            <li>Lance Plutonium, sélectionne WaW, clique <strong>Setup</strong> et pointe vers le dossier.</li>
+                            <li>Télécharge le torrent du jeu via le bouton ci-dessous.</li>
+                            <li>Crée un compte sur Plutonium.</li>
+                            <li>Installe qBittorent (pour télécharger le torrent).</li>
+                            <li>Lance Plutonium, sélectionne WaW.</li>
+                            <li>Clique sur <strong>Setup</strong> et pointe vers le dossier du jeu téléchargé.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a>
@@ -315,6 +330,7 @@
                     <div>
                         <div class="video-eyebrow-date">Plutonium</div>
                         <div class="dl-title">CoD : Black Ops 1</div>
+                        <p class="dl-desc" style="color:var(--accent-blue); font-weight:600;">Vidéo tuto : Bientôt</p>
                         <ol class="instruction-list">
                             <li>Télécharge le torrent du jeu.</li>
                             <li>Crée un compte sur Plutonium et installe qBittorrent.</li>
@@ -477,6 +493,65 @@
 
                 <div class="card download-card full-width">
                     <div>
+                        <div class="video-eyebrow-date">Tutoriel Complet</div>
+                        <div class="dl-title">Tuto pour hack la Switch</div>
+                        
+                        <div class="tuto-section">
+                            <h3>1. Matériel Requis</h3>
+                            <p><strong>Carte SD :</strong> 64Go minimum recommandé. <br>
+                            <a href="https://cutt.ly/txpEmA5" target="_blank">64Go</a> | <a href="https://cutt.ly/expE6HX" target="_blank">128Go</a> | <a href="https://cutt.ly/sxpEXUf" target="_blank">256Go</a></p>
+                            <p><strong>Accessoires :</strong><br>
+                            - Câble USB-C pour relier au PC : <a href="https://cutt.ly/hF3jvGc" target="_blank">Lien</a><br>
+                            - RCM Jig (indispensable) : <a href="https://cutt.ly/BxpPvO3" target="_blank">Lien</a></p>
+                        </div>
+
+                        <div class="tuto-section">
+                            <h3>2. Vérifier si votre Switch est compatible</h3>
+                            <p>Seules les Switch de "première génération" (V1 non patchées) sont hackables facilement. Vérifiez votre numéro de série (sous la console).</p>
+                            <a href="https://damota.me/ssnc/checker" target="_blank" class="dl-btn secondary" style="margin-bottom:15px;">Checker mon Numéro de Série</a>
+                            <img src="https://cdn.discordapp.com/attachments/415232404303642655/965955899627831346/Capture_decran_2022-04-19_144324.png?ex=6966e6c9&is=69659549&hm=3b08f348d54f2f6e148c26311c505245001cc581ca89fa4882e870f99a5d4da2&" alt="Serial Check" class="tuto-img">
+                        </div>
+
+                        <div class="tuto-section">
+                            <h3>3. Entrer en mode RCM</h3>
+                            <p>1. Éteignez complètement la Switch.<br>
+                            2. Insérez le RCM Jig dans le rail du Joy-Con droit.<br>
+                            3. Maintenez <strong>Volume +</strong> et appuyez sur <strong>Power</strong>.<br>
+                            4. L'écran doit rester noir. S'il s'allume, recommencez.</p>
+                            <img src="https://jeffvi.github.io/Switch-guide-FR/user_guide/img/entering_rcm_jig.jpg" alt="RCM Jig" class="tuto-img">
+                        </div>
+
+                        <div class="tuto-section">
+                            <h3>4. Préparer la Carte SD</h3>
+                            <p class="warning-text">ATTENTION : Sauvegardez votre dossier "Nintendo" sur PC avant de commencer !</p>
+                            <p>1. Téléchargez le <strong>Pack Switch</strong> (voir onglet au-dessus).<br>
+                            2. Copiez tout le contenu à la racine de la carte SD.<br>
+                            3. Insérez la carte SD dans la Switch.</p>
+                        </div>
+
+                        <div class="tuto-section">
+                            <h3>5. Injection & Partition (TegraRcmGUI)</h3>
+                            <p>1. Sur PC, lancez <strong>TegraRcmGUI</strong> et installez les drivers (onglet Settings).<br>
+                            2. Branchez la Switch en RCM au PC.<br>
+                            3. Injectez le payload <strong>TegraExplorer.bin</strong>.<br>
+                            4. Sur la Switch : Allez dans "Partition the SD" -> "Fat32 + EmuMMC". Validez.<br>
+                            5. Une fois fini, redémarrez en RCM.</p>
+                            <img src="https://cdn.discordapp.com/attachments/961921377064067132/961937959081365524/unknown.png" alt="TegraRcm" class="tuto-img">
+                        </div>
+
+                        <div class="tuto-section">
+                            <h3>6. Créer l'EmuMMC & Lancer</h3>
+                            <p>1. Injectez le payload <strong>Hekate</strong>.<br>
+                            2. Menu Hekate -> <strong>emuMMC</strong> -> <strong>Create emuMMC</strong> -> <strong>SD Partition</strong> -> <strong>Part 1</strong>.<br>
+                            3. Une fois fini : Close -> Change emuMMC -> SD RAW 1.<br>
+                            4. Retour au menu -> <strong>Launch</strong> -> <strong>Atmosphere FSS0 EmuMMC</strong>.</p>
+                            <p class="warning-text">IMPORTANT : Ne connectez jamais l'emuMMC à Internet (Nintendo) pour éviter le bannissement !</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
                         <div class="video-eyebrow-date">Logiciels</div>
                         <div class="dl-title">Utilitaires pour le hack</div>
                         <p class="dl-desc">Liens officiels vers les outils indispensables :</p>
@@ -486,6 +561,75 @@
                             <a href="https://github.com/Morce3232/DBIPatcher/releases/download/v845/845.en.nro" target="_blank" class="dl-btn secondary">DBI Installer</a>
                         </div>
                         <p style="margin-top:20px; font-size:0.9rem; color:#86868b;">Merci à <strong>Joueur68</strong> pour avoir fourni les liens.</p>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Roms & Outils</div>
+                        <div class="dl-title">Sites de Jeux & Quark</div>
+                        <p class="dl-desc">Liste de sites conseillés pour trouver vos jeux (SuperXCI, NSP, NSZ).<br>Astuce : Utilisez un VPN pour contourner l'attente sur 1fichier.</p>
+                        <div class="dl-actions">
+                            <a href="https://eggnsemulator.com/nintendo-switch-roms/" target="_blank" class="dl-btn">Eggns Emulator</a>
+                            <a href="https://switchrom.net/" target="_blank" class="dl-btn">SwitchRom</a>
+                            <a href="https://www.emulegends.net/console/switch/" target="_blank" class="dl-btn">EmuLegends</a>
+                            <a href="https://github.com/XorTroll/Goldleaf/releases" target="_blank" class="dl-btn secondary">Goldleaf / Quark</a>
+                        </div>
+                        <p style="margin-top:20px; font-size:0.9rem; color:#86868b;">Merci à <strong>joueur68</strong> pour son aide précieuse.</p>
+                    </div>
+                </div>
+
+                <div class="card download-card full-width">
+                    <div>
+                        <div class="video-eyebrow-date">Informations</div>
+                        <div class="dl-title">FAQ Switch (par Allan)</div>
+                        
+                        <div class="faq-item">
+                            <h4>Qu’est-ce que ce tuto ?</h4>
+                            <p>Ce Tuto a pour finalité de prendre une Switch non modifiée à l'état "Usine" au CFW Atmosphère. Fusée-gelée est actuellement la meilleure méthode qui nous donne presque un contrôle total du système via le mode RCM.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Qu’est-ce que homebrew ?</h4>
+                            <p>Homebrew est un terme pour les logiciels non-officiels (éditeurs de sauvegardes, émulateurs, etc.). Ils peuvent être exécutés gratuitement via un CFW sur une Switch de "première génération" (non patchée).</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Qu’est-ce qu'un Custom Firmware (CFW) ?</h4>
+                            <p>C'est un logiciel qui modifie le système (comme Atmosphère). Il tourne en arrière-plan et permet d'étendre les fonctionnalités, de modder des jeux via LayeredFS, et d'exécuter du code non signé.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Que puis-je faire avec un CFW ?</h4>
+                            <p>- Customiser le Menu Home (Thèmes).<br>- Utiliser des “ROM hacks”.<br>- Gérer ses sauvegardes (Checkpoint/JKSV).<br>- Jouer à des jeux rétros (RetroArch).<br>- Mettre à jour en sécurité.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Pourquoi une EmuNAND ?</h4>
+                            <p>L'emuNAND permet d'utiliser des homebrews et codes de triche sans affecter votre sysNAND (système original). Ainsi, votre sysNAND peut rester propre pour jouer en ligne sans risque de bannissement.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Qu’est-ce que le RCM ?</h4>
+                            <p>Le mode de récupération (Recovery Mode). Sur les Switchs non patchées, on peut envoyer un payload en RCM pour lancer Atmosphère.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Pourquoi ma Switch ne boot pas sur Hekate ?</h4>
+                            <p>Soit elle est Patchée (modèle trop récent), soit le Jig RCM est mal inséré.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Qu'est ce que l'emuNAND, l'emuMMC, sysNAND ?</h4>
+                            <p><strong>sysNAND :</strong> Mémoire interne réelle de la console.<br><strong>emuNAND :</strong> Copie complète de la NAND qui tourne sur la carte SD (séparée du système réel).<br><strong>emuMMC :</strong> Nom technique de l'emuNAND utilisée par la Switch.</p>
+                        </div>
+
+                        <div class="faq-item">
+                            <h4>Message d'erreur Windows pour la carte SD ?</h4>
+                            <p>Si Windows demande de formater la carte SD, <strong>NE LE FAITES PAS !</strong> C’est votre partition emuMMC que Windows ne reconnaît pas. Ignorez simplement le message.</p>
+                        </div>
+
+                        <div class="update-date">Mise à jour le 19/04/2022</div>
                     </div>
                 </div>
 
