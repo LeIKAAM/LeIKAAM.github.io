@@ -124,7 +124,7 @@
             margin-bottom: 40px; text-align: center; color: #1d1d1f;
         }
 
-        /* --- BENTO GRID --- */
+        /* --- BENTO GRID (2 COLONNES) --- */
         .bento-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -137,7 +137,9 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* Éléments qui prennent toute la largeur */
         .span-full { grid-column: span 2; }
+        
         .video-card.featured { grid-column: span 2; min-height: 520px; }
 
         .download-card {
@@ -702,6 +704,15 @@
                 
                 <div class="card download-card span-full">
                     <div>
+                        <div class="video-eyebrow-date">Nintendo Switch</div>
+                        <div class="dl-title">Citron</div>
+                        <p class="dl-desc">Le nouvel émulateur Switch performant (successeur de Yuzu/Ryujinx).</p>
+                    </div>
+                    <a href="https://citron-emu.org/" target="_blank" class="dl-btn" style="background-color: #F4D03F; color: black;">Télécharger Citron</a>
+                </div>
+
+                <div class="card download-card span-full">
+                    <div>
                         <div class="video-eyebrow-date">PlayStation 3</div>
                         <div class="dl-title">RPCS3</div>
                         <p class="dl-desc">L'émulateur PS3 le plus performant.</p>
@@ -718,15 +729,6 @@
 
                 <div class="card download-card">
                     <div>
-                        <div class="video-eyebrow-date">Nintendo Switch</div>
-                        <div class="dl-title">Ryujinx</div>
-                        <p class="dl-desc">Émulateur Switch très stable.</p>
-                    </div>
-                    <a href="https://ryujinx.org/download" target="_blank" class="dl-btn switch-btn">Site Officiel</a>
-                </div>
-
-                <div class="card download-card">
-                    <div>
                         <div class="video-eyebrow-date">Xbox 360</div>
                         <div class="dl-title">Xenia (Canary)</div>
                         <p class="dl-desc">L'émulateur Xbox 360 pour PC.</p>
@@ -734,7 +736,7 @@
                     <a href="https://github.com/xenia-canary/xenia-canary/releases" target="_blank" class="dl-btn" style="background-color:#107C10;">Télécharger Xenia</a>
                 </div>
 
-                <div class="card download-card span-full">
+                <div class="card download-card">
                     <div>
                         <div class="video-eyebrow-date">PlayStation 2</div>
                         <div class="dl-title">PCSX2 (Nightly)</div>
