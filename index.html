@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IKAAM</title>
+    <title>Site Officiel de IKAAM</title>
     
     <link rel="icon" href="logo-removebg-preview.png" type="image/png">
     <link rel="shortcut icon" href="logo-removebg-preview.png" type="image/png">
@@ -923,20 +923,50 @@
             isPlaying = !isPlaying;
         }
 
-        // --- FILTRE RECHERCHE ---
+        // --- FILTRE RECHERCHE (MODE GLOBAL) ---
         function filterCards() {
             let input = document.getElementById('searchInput');
             let filter = input.value.toUpperCase();
             let cards = document.querySelectorAll('.card'); 
-            
-            cards.forEach(card => {
-                let text = card.textContent || card.innerText;
-                if (text.toUpperCase().indexOf(filter) > -1) {
-                    card.style.display = "";
-                } else {
-                    card.style.display = "none";
+            let tabs = ['videos', 'cod', 'switch', 'emulators']; // Liste des IDs de tes onglets
+            let headers = document.querySelectorAll('h1');
+
+            if (filter.length > 0) {
+                // 1. Afficher TOUS les onglets pour chercher partout
+                tabs.forEach(t => {
+                    let tabDiv = document.getElementById('tab-' + t);
+                    if(tabDiv) tabDiv.classList.remove('hidden');
+                });
+
+                // 2. Cacher les titres H1
+                headers.forEach(h => h.style.display = 'none');
+
+                // 3. Filtrer les cartes
+                cards.forEach(card => {
+                    let text = card.textContent || card.innerText;
+                    if (text.toUpperCase().indexOf(filter) > -1) {
+                        card.style.display = "";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+
+            } else {
+                // SI RECHERCHE VIDE : RETOUR A LA NORMALE
+                
+                // 1. Réafficher les titres
+                headers.forEach(h => h.style.display = '');
+
+                // 2. Réafficher toutes les cartes (le masquage se fera par l'onglet)
+                cards.forEach(card => card.style.display = "");
+
+                // 3. Revenir à l'onglet actif actuel pour cacher les autres
+                const activeBtn = document.querySelector('.segment-btn.active');
+                if(activeBtn) {
+                    let tabName = activeBtn.id.replace('nav-', '');
+                    switchTab(tabName); 
                 }
-            });
+            }
         }
 
         // --- MODALE ---
