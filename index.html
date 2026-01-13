@@ -127,7 +127,7 @@
         /* --- BENTO GRID --- */
         .bento-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+            grid-template-columns: 1fr 1fr; 
             gap: 30px; 
             width: 100%;
         }
@@ -137,13 +137,13 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        .span-full { grid-column: span 2; }
         .video-card.featured { grid-column: span 2; min-height: 520px; }
 
         .download-card {
             min-height: auto !important; padding: 30px !important;
             display: flex; flex-direction: column; justify-content: space-between;
         }
-        .download-card.full-width { grid-column: 1 / -1; } /* Force toute la largeur */
 
         /* --- STYLE DES CARTES --- */
         .card {
@@ -286,17 +286,11 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 850px) { 
-            .video-card.featured { grid-column: span 1; min-height: 380px; }
-            .download-card.full-width { grid-column: span 1; }
-            h1 { font-size: 2.5rem; } 
-            header { padding: 15px 20px; }
-            .bento-grid { grid-template-columns: 1fr; }
+            .bento-grid { grid-template-columns: 1fr; } 
+            .span-full { grid-column: span 1; }
             .modal-content { width: 95%; }
-            /* Ajustement Menu Mobile */
             .segmented-control { 
-                justify-content: flex-start; 
-                width: 90%; 
-                margin-bottom: 30px;
+                justify-content: flex-start; width: 90%; margin-bottom: 30px;
             }
         }
 
@@ -335,7 +329,7 @@
             <h1>Call of Duty</h1>
             <div class="bento-grid">
                 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Classique</div>
                         <div class="dl-title">Call of Duty 1X</div>
@@ -344,7 +338,7 @@
                     <a href="https://www.mediafire.com/file/34lt06fw6ad1t64/COD1X.rar" target="_blank" class="dl-btn">Télécharger (Mediafire)</a>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Légendaire</div>
                         <div class="dl-title">Call of Duty 2</div>
@@ -367,13 +361,13 @@
                     <div>
                         <div class="video-eyebrow-date">Moderne</div>
                         <div class="dl-title">Call of Duty 4X</div>
-                        <p class="dl-desc">Suis les instructions pour installer le Promod :</p>
+                        <p class="dl-desc">Installation Promod :</p>
                         <ol class="instruction-list">
                             <li>Télécharge le jeu complet.</li>
                             <li>Télécharge le patch <strong>cod4x_client</strong>.</li>
                         </ol>
                         <div class="dl-actions">
-                            <a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Télécharger Jeu</a>
+                            <a href="https://www.mediafire.com/file/498gner89hj16mc/COD4.zip" target="_blank" class="dl-btn">1. Jeu</a>
                             <a href="https://cod4promod.eu/files/cod4/cod4x_client_21_1.zip" target="_blank" class="dl-btn secondary">2. Patch</a>
                         </div>
                         <a href="https://youtu.be/CQRDyJh-P4I" target="_blank" class="dl-btn youtube" style="margin-top:10px;">▶ Tuto Clés</a>
@@ -386,8 +380,7 @@
                         <div class="dl-title">CoD : World at War</div>
                         <ol class="instruction-list">
                             <li>Télécharge le torrent.</li>
-                            <li>Crée un compte Plutonium.</li>
-                            <li>Installe qBittorent.</li>
+                            <li>Compte Plutonium requis.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223201349379031154/1223201879417421824/Call_of_Duty_-_Wolrd_At_War.torrent?ex=6966b8c6&is=69656746&hm=82086b2c74ce66654c778f5b6eacdd1134060c7978872415ae3aa61ea927de04&" target="_blank" class="dl-btn">1. Torrent WaW</a>
@@ -401,9 +394,9 @@
                         <div class="video-eyebrow-date">IW4X / Alterware</div>
                         <div class="dl-title">CoD : MW2 (IW4X)</div>
                         <ol class="instruction-list">
-                            <li>Télécharge MW2 (Torrent).</li>
-                            <li>Télécharge <strong>release.zip</strong>.</li>
-                            <li>Télécharge <strong>launcher.exe</strong>.</li>
+                            <li>Télécharge le Torrent.</li>
+                            <li>Extraire <strong>release.zip</strong>.</li>
+                            <li>Lancer <strong>launcher.exe</strong>.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223219330452553738/1223220365527093259/Call_of_Duty_-_Modern_Warfare_2.torrent?ex=6966213d&is=6964cfbd&hm=d8c330b69a24c0b2bda1e8b66d9bd7af34e4b670af4faea6b25d7fa161d29a25&" target="_blank" class="dl-btn">1. Torrent MW2</a>
@@ -418,8 +411,7 @@
                         <div class="dl-title">CoD : Black Ops 1</div>
                         <ol class="instruction-list">
                             <li>Télécharge le torrent.</li>
-                            <li>Crée un compte Plutonium.</li>
-                            <li>Sélectionne Black Ops sur Plutonium.</li>
+                            <li>Utilise Plutonium pour lancer.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223198204749942805/1223199306765570098/Call_of_Duty_-_Black_Ops.torrent?ex=6966b660&is=696564e0&hm=f22d8c991451f0d6a59c68d667174858d326e74b0278368c5ad536023d77b1b0&" target="_blank" class="dl-btn">1. Torrent BO1</a>
@@ -433,13 +425,12 @@
                         <div class="video-eyebrow-date">Plutonium / Steam</div>
                         <div class="dl-title">CoD : MW3</div>
                         <ol class="instruction-list">
-                            <li>Installe MW3 Dedicated Server (Steam).</li>
-                            <li>Télécharge les DLCs (Mega).</li>
-                            <li>Glisse les DLCs dans les fichiers.</li>
+                            <li>MW3 Dedicated Server (Steam).</li>
+                            <li>Ajoute les DLCs (Mega).</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://mega.nz/folder/CYUkGSrJ#HVa6Cik59Bgi9pp5NBW4fg" target="_blank" class="dl-btn mega">Télécharger DLCs</a>
-                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Compte Plutonium</a>
+                            <a href="https://forum.plutonium.pw/register" target="_blank" class="dl-btn secondary">Plutonium</a>
                         </div>
                     </div>
                 </div>
@@ -450,8 +441,7 @@
                         <div class="dl-title">CoD : Black Ops II</div>
                         <ol class="instruction-list">
                             <li>Télécharge le torrent BO2.</li>
-                            <li>Crée un compte Plutonium.</li>
-                            <li>Lance Plutonium > Setup > Dossier BO2.</li>
+                            <li>Utilise Plutonium pour jouer.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223200028794028032/1223200890115325952/Call_of_Duty_-_Black_Ops_2.torrent?ex=6966b7da&is=6965665a&hm=1a7db5ce4079d75d2a225aac47bbfe1222230742d8cdca5c74295f7dbb53c370&" target="_blank" class="dl-btn">1. Torrent BO2</a>
@@ -466,8 +456,7 @@
                         <div class="dl-title">CoD : Advanced Warfare</div>
                         <ol class="instruction-list">
                             <li>Télécharge AW (Torrent).</li>
-                            <li>Télécharge <strong>launcher.exe</strong>.</li>
-                            <li>Lance le launcher dans le dossier.</li>
+                            <li>Lance avec <strong>launcher.exe</strong>.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223254054629675158/1223254962176397353/Call_of_Duty_-_Advanced_Warfare.torrent?ex=69664175&is=6964eff5&hm=48ed9b9488ee8655c75c66c83326759fe613a98ee1cff9bc1b555ddb86e68bd0&" target="_blank" class="dl-btn">1. Torrent AW</a>
@@ -482,8 +471,7 @@
                         <div class="dl-title">CoD : MW Remastered</div>
                         <ol class="instruction-list">
                             <li>Télécharge MWR (Torrent).</li>
-                            <li>Télécharge <strong>H1-Mod</strong> (Github).</li>
-                            <li>Glisse le H1-Mod dans le jeu.</li>
+                            <li>Installe le <strong>H1-Mod</strong>.</li>
                         </ol>
                         <div class="dl-actions">
                             <a href="https://cdn.discordapp.com/attachments/1223256304814915664/1223256674949660723/Call_of_Duty_-_Modern_Warfare_Remastered.torrent?ex=6966430e&is=6964f18e&hm=b626d6d3f664d600736d7cb1a8640d6cf28cf473e51072f5619ffa4508875249&" target="_blank" class="dl-btn">1. Torrent MWR</a>
@@ -492,7 +480,7 @@
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">T7 Patch / Workshop</div>
                         <div class="dl-title">CoD : Black Ops III</div>
@@ -509,7 +497,7 @@
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Projet BO4</div>
                         <div class="dl-title">CoD : Black Ops 4</div>
@@ -555,7 +543,7 @@
             <h1>Nintendo Switch</h1>
             <div class="bento-grid">
                 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Pack AIO</div>
                         <div class="dl-title">Pack pour Hack la Switch</div>
@@ -569,7 +557,7 @@
                     <a href="https://cdn.discordapp.com/attachments/960788243308232704/1441453401954058302/Pack_Switch.zip?ex=69671057&is=6965bed7&hm=db0b81f4ff94d5482bfec302f238870a0b89c36612c64460ac95a7258b999c10&" target="_blank" class="dl-btn switch-btn">Télécharger le Pack Switch</a>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Tutoriel Complet</div>
                         <div class="dl-title">Tuto pour hack la Switch</div>
@@ -582,14 +570,12 @@
                             - Câble USB-C pour relier au PC : <a href="https://cutt.ly/hF3jvGc" target="_blank">Lien</a><br>
                             - RCM Jig (indispensable) : <a href="https://cutt.ly/BxpPvO3" target="_blank">Lien</a></p>
                         </div>
-
                         <div class="tuto-section">
                             <h3>2. Vérifier si votre Switch est compatible</h3>
                             <p>Seules les Switch de "première génération" (V1 non patchées) sont hackables facilement. Vérifiez votre numéro de série (sous la console).</p>
                             <a href="https://damota.me/ssnc/checker" target="_blank" class="dl-btn secondary" style="margin-bottom:15px;">Checker mon Numéro de Série</a>
                             <img src="https://cdn.discordapp.com/attachments/415232404303642655/965955899627831346/Capture_decran_2022-04-19_144324.png?ex=6966e6c9&is=69659549&hm=3b08f348d54f2f6e148c26311c505245001cc581ca89fa4882e870f99a5d4da2&" alt="Serial Check" class="tuto-img">
                         </div>
-
                         <div class="tuto-section">
                             <h3>3. Entrer en mode RCM</h3>
                             <p>1. Éteignez complètement la Switch.<br>
@@ -598,7 +584,6 @@
                             4. L'écran doit rester noir. S'il s'allume, recommencez.</p>
                             <img src="https://jeffvi.github.io/Switch-guide-FR/user_guide/img/entering_rcm_jig.jpg" alt="RCM Jig" class="tuto-img">
                         </div>
-
                         <div class="tuto-section">
                             <h3>4. Préparer la Carte SD</h3>
                             <p class="warning-text">ATTENTION : Sauvegardez votre dossier "Nintendo" sur PC avant de commencer !</p>
@@ -606,7 +591,6 @@
                             2. Copiez tout le contenu à la racine de la carte SD.<br>
                             3. Insérez la carte SD dans la Switch.</p>
                         </div>
-
                         <div class="tuto-section">
                             <h3>5. Injection & Partition (TegraRcmGUI)</h3>
                             <p>1. Sur PC, lancez <strong>TegraRcmGUI</strong> et installez les drivers (onglet Settings).<br>
@@ -615,20 +599,18 @@
                             4. Sur la Switch : Allez dans "Partition the SD" -> "Fat32 + EmuMMC". Validez.<br>
                             5. Une fois fini, redémarrez en RCM.</p>
                         </div>
-
                         <div class="tuto-section">
                             <h3>6. Créer l'EmuMMC & Lancer</h3>
                             <p>1. Injectez le payload <strong>Hekate</strong>.<br>
                             2. Menu Hekate -> <strong>emuMMC</strong> -> <strong>Create emuMMC</strong> -> <strong>SD Partition</strong> -> <strong>Part 1</strong>.<br>
                             3. Une fois fini : Close -> Change emuMMC -> SD RAW 1.<br>
                             4. Retour au menu -> <strong>Launch</strong> -> <strong>Atmosphere FSS0 EmuMMC</strong>.</p>
-
                             <p class="warning-text">IMPORTANT : Ne connectez jamais l'emuMMC à Internet (Nintendo) pour éviter le bannissement !</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Logiciels</div>
                         <div class="dl-title">Utilitaires pour le hack</div>
@@ -642,7 +624,7 @@
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Roms & Outils</div>
                         <div class="dl-title">Sites de Jeux & Quark</div>
@@ -657,56 +639,14 @@
                     </div>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Informations</div>
                         <div class="dl-title">FAQ Switch (par Allan)</div>
-                        
                         <div class="faq-item">
                             <h4>Qu’est-ce que ce tuto ?</h4>
                             <p>Ce Tuto a pour finalité de prendre une Switch non modifiée à l'état "Usine" au CFW Atmosphère. Fusée-gelée est actuellement la meilleure méthode qui nous donne presque un contrôle total du système via le mode RCM.</p>
                         </div>
-
-                        <div class="faq-item">
-                            <h4>Qu’est-ce que homebrew ?</h4>
-                            <p>Homebrew est un terme pour les logiciels non-officiels (éditeurs de sauvegardes, émulateurs, etc.). Ils peuvent être exécutés gratuitement via un CFW sur une Switch de "première génération" (non patchée).</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Qu’est-ce qu'un Custom Firmware (CFW) ?</h4>
-                            <p>C'est un logiciel qui modifie le système (comme Atmosphère). Il tourne en arrière-plan et permet d'étendre les fonctionnalités, de modder des jeux via LayeredFS, et d'exécuter du code non signé.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Que puis-je faire avec un CFW ?</h4>
-                            <p>- Customiser le Menu Home (Thèmes).<br>- Utiliser des “ROM hacks”.<br>- Gérer ses sauvegardes (Checkpoint/JKSV).<br>- Jouer à des jeux rétros (RetroArch).<br>- Mettre à jour en sécurité.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Pourquoi une EmuNAND ?</h4>
-                            <p>L'emuNAND permet d'utiliser des homebrews et codes de triche sans affecter votre sysNAND (système original). Ainsi, votre sysNAND peut rester propre pour jouer en ligne sans risque de bannissement.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Qu’est-ce que le RCM ?</h4>
-                            <p>Le mode de récupération (Recovery Mode). Sur les Switchs non patchées, on peut envoyer un payload en RCM pour lancer Atmosphère.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Pourquoi ma Switch ne boot pas sur Hekate ?</h4>
-                            <p>Soit elle est Patchée (modèle trop récent), soit le Jig RCM est mal inséré.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Qu'est ce que l'emuNAND, l'emuMMC, sysNAND ?</h4>
-                            <p><strong>sysNAND :</strong> Mémoire interne réelle de la console.<br><strong>emuNAND :</strong> Copie complète de la NAND qui tourne sur la carte SD (séparée du système réel).<br><strong>emuMMC :</strong> Nom technique de l'emuNAND utilisée par la Switch.</p>
-                        </div>
-
-                        <div class="faq-item">
-                            <h4>Message d'erreur Windows pour la carte SD ?</h4>
-                            <p>Si Windows demande de formater la carte SD, <strong>NE LE FAITES PAS !</strong> C’est votre partition emuMMC que Windows ne reconnaît pas. Ignorez simplement le message.</p>
-                        </div>
-
                         <div class="update-date">Mise à jour le 19/04/2022</div>
                     </div>
                 </div>
@@ -718,7 +658,7 @@
             <h1>Émulateurs</h1>
             <div class="bento-grid">
                 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">PlayStation 3</div>
                         <div class="dl-title">RPCS3</div>
@@ -752,7 +692,7 @@
                     <a href="https://github.com/xenia-canary/xenia-canary/releases" target="_blank" class="dl-btn" style="background-color:#107C10;">Télécharger Xenia</a>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">PlayStation 2</div>
                         <div class="dl-title">PCSX2 (Nightly)</div>
@@ -761,7 +701,7 @@
                     <a href="https://pcsx2.net/downloads" target="_blank" class="dl-btn secondary">Télécharger PCSX2</a>
                 </div>
 
-                <div class="card download-card full-width">
+                <div class="card download-card span-full">
                     <div>
                         <div class="video-eyebrow-date">Tout-en-un</div>
                         <div class="dl-title">RetroArch</div>
@@ -785,11 +725,9 @@
     </div>
 
     <script>
-        const API_KEY = 'AIzaSyBUUGtjhf9BBh0atNbk4rT97q7kz2Mm62k'; 
         const CHANNEL_ID = 'UCBUHEV2NI3H4weKFG4Fz7AQ'; 
         const grid = document.getElementById('video-grid');
         
-        // --- LOGIQUE MODALE ---
         const modal = document.getElementById("videoModal");
         const videoFrame = document.getElementById("videoFrame");
         const closeBtn = document.getElementsByClassName("close-btn")[0];
@@ -809,7 +747,6 @@
             if (event.target == modal) closeModal();
         }
 
-        // --- AFFICHAGE VIDÉOS ---
         function displayVideos(videos) {
             grid.innerHTML = ''; 
             videos.forEach((video, index) => {
@@ -817,6 +754,7 @@
                 card.href = "#"; 
                 card.onclick = function(e) { e.preventDefault(); openModal(video.id); };
                 card.style.animationDelay = `${index * 0.05}s`;
+                // La première vidéo est "featured" (prend 2 colonnes)
                 card.className = index === 0 ? 'card video-card featured' : 'card video-card';
                 card.innerHTML = `
                     <div class="thumbnail-container">
@@ -834,21 +772,27 @@
 
         async function fetchYouTubeVideos() {
             try {
-                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=25`);
-                if (!res.ok) throw new Error("Erreur API");
+                // Utilisation du flux RSS via rss2json pour éviter les erreurs de clé API
+                const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`);
+                if (!res.ok) throw new Error("Erreur");
                 const data = await res.json();
+                
                 if (!data.items) { grid.innerHTML = '<p>Aucune vidéo trouvée.</p>'; return; }
-                const realVideos = data.items.map(item => ({
-                    id: item.id.videoId, 
-                    title: item.snippet.title,
-                    thumbnail: (item.snippet.thumbnails.maxres ? item.snippet.thumbnails.maxres.url : item.snippet.thumbnails.high.url),
-                    date: new Date(item.snippet.publishedAt).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
-                }));
+                
+                const realVideos = data.items.map(item => {
+                    const videoId = item.link.split('v=')[1];
+                    return {
+                        id: videoId,
+                        title: item.title,
+                        // Construction manuelle de la miniature HQ
+                        thumbnail: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+                        date: new Date(item.pubDate).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
+                    };
+                });
                 displayVideos(realVideos);
             } catch (error) { grid.innerHTML = `<p style="text-align:center">Erreur de chargement des vidéos.</p>`; }
         }
         
-        // --- LOGIQUE ONGLETS ---
         function switchTab(tabName, event) {
             document.getElementById('tab-videos').classList.add('hidden');
             document.getElementById('tab-cod').classList.add('hidden');
