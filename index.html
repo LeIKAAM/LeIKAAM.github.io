@@ -181,6 +181,35 @@
         .segment-btn.active { font-weight: 600; color: var(--text-primary); }
 
         /* --- GRID --- */
+
+        /* --- CORRECTIF FORUM --- */
+#tab-forum {
+    max-width: 900px; /* On limite la largeur pour que ça fasse "pro" */
+    margin: 0 auto;   /* On centre tout le bloc forum */
+}
+
+/* Le formulaire de création */
+#forum-list-view .card:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre le titre et les champs */
+    text-align: center;
+}
+
+#newTopicTitle {
+    width: 100% !important; /* Force la barre à prendre toute la place */
+    max-width: 600px;       /* Mais pas trop large sur PC */
+    margin-bottom: 10px;
+}
+
+/* Les cartes des sujets */
+.topic-card-content {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    width: 100%;
+}
+        
         h1 { font-family: "SF Pro Display", sans-serif; font-size: 3rem; font-weight: 600; letter-spacing: -0.04em; margin-bottom: 40px; text-align: center; color: var(--text-primary); }
         .bento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
         .span-full { grid-column: span 2; }
