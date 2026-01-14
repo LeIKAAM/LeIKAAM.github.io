@@ -222,6 +222,146 @@
         }
 
         .hidden { display: none !important; }
+
+        /* =========================================
+       VERSION MOBILE (SMARTPHONE UNIQUEMENT)
+       Ce code ne s'active que si l'écran fait moins de 850px
+       ========================================= */
+    @media screen and (max-width: 850px) {
+
+        /* 1. HEADER & NAVIGATION */
+        header {
+            flex-direction: column; /* Empile le logo et les boutons */
+            padding: 15px 10px;
+            gap: 15px;
+            position: relative; /* Moins agressif que sticky sur mobile */
+        }
+
+        .logo img {
+            height: 40px; /* Logo un peu plus discret */
+            margin: 0 auto; /* Centré */
+        }
+
+        .header-actions {
+            display: grid; /* Transforme les boutons en grille facile à toucher */
+            grid-template-columns: 1fr 1fr; /* 2 boutons par ligne */
+            gap: 10px;
+            width: 100%;
+        }
+
+        /* Le bouton S'abonner prend toute la largeur pour être bien visible */
+        .subscribe-btn { grid-column: span 2; text-align: center; }
+        
+        /* Boutons plus gros (zone tactile confortable pour le pouce) */
+        .btn { padding: 12px; font-size: 0.9rem; justify-content: center; display: flex; }
+
+        /* 2. MENU DES ONGLETS (SCROLLABLE) */
+        .segmented-control {
+            width: 100%;
+            left: 0;
+            transform: none; /* Annule le centrage PC */
+            margin: 0 0 30px 0;
+            display: flex;
+            overflow-x: auto; /* Permet de faire glisser le menu de gauche à droite */
+            justify-content: flex-start;
+            padding: 5px 15px;
+            -webkit-overflow-scrolling: touch; /* Scroll fluide sur iPhone */
+            background: transparent; /* Plus propre sur mobile */
+        }
+        
+        /* Cache la barre de défilement moche sous le menu */
+        .segmented-control::-webkit-scrollbar { display: none; }
+        
+        .segment-btn {
+            flex: 0 0 auto; /* Empêche les boutons de s'écraser */
+            margin-right: 10px;
+            background: var(--glass-bg); /* Fond visible */
+            border: 1px solid var(--glass-border);
+        }
+
+        /* 3. CORPS DE PAGE */
+        .container {
+            padding: 10px 15px 100px 15px; /* Marges réduites */
+            overflow-x: hidden; /* Empêche le site de bouger de gauche à droite */
+        }
+
+        h1 {
+            font-size: 1.8rem; /* Titres moins énormes */
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        /* Grille passe en 1 seule colonne */
+        .bento-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Cartes prennent toute la largeur */
+        .card, .video-card.featured, .span-full {
+            grid-column: auto;
+            width: 100%;
+            min-height: auto;
+        }
+
+        /* Enlever l'effet de survol (hover) qui bug sur tactile */
+        .card:hover { transform: none; }
+
+        /* 4. TÉLÉCHARGEMENTS ET CLÉS */
+        .download-card { padding: 20px !important; }
+        
+        .dl-actions {
+            flex-direction: column; /* Boutons de téléchargement les uns sous les autres */
+            width: 100%;
+        }
+        
+        .dl-btn {
+            width: 100%; /* Bouton prend toute la largeur */
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        /* Clés CD : Scroll horizontal si la clé est trop longue */
+        .code-block {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        /* 5. LE CHAT (Le plus gros problème actuel) */
+        .chat-container { position: static; } /* On sort le chat du flux normal */
+        
+        .chat-popup {
+            position: fixed; /* Fixé par dessus tout */
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%); /* Centré parfaitement */
+            width: 90vw; /* 90% de la largeur écran */
+            height: 60vh; /* 60% de la hauteur */
+            right: auto;
+            border-radius: 20px;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+        }
+
+        /* 6. MODALE VIDÉO */
+        .modal-content {
+            width: 100%; /* Pleine largeur */
+            border-radius: 0; /* Pas de bords arrondis en mode cinéma */
+        }
+        .close-btn {
+            top: -35px;
+            right: 10px;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            width: 30px; height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+        }
+        
+        /* 7. BARRE DE NEWS */
+        .news-ticker { display: none; } /* On cache la barre de news sur mobile (prend trop de place pour rien) */
+    }
     </style>
 </head>
 <body>
