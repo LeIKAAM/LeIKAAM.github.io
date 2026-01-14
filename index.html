@@ -150,15 +150,15 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px 24px; }
 
         /* --- RECHERCHE --- */
-        .search-container { max-width: 400px; margin: 0 auto 30px auto; position: relative; z-index: 10; }
+        .search-container { max-width: 500px; margin: 0 auto 30px auto; position: relative; z-index: 10; display: flex; justify-content: center; }
         #searchInput {
-            width: 100%; padding: 12px 20px; border-radius: 50px;
+            width: 100%; padding: 12px 25px; border-radius: 50px;
             border: 1px solid var(--glass-border); background: var(--glass-bg);
             backdrop-filter: blur(10px); font-size: 1rem; color: var(--text-primary);
             outline: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            box-sizing: border-box;
+            box-sizing: border-box; text-align: center;
         }
-        #searchInput:focus { transform: scale(1.02); border-color: var(--accent-blue); }
+        #searchInput:focus { transform: scale(1.02); border-color: var(--accent-blue); text-align: left; }
 
         /* --- NAVIGATION --- */
         .segmented-control {
@@ -263,10 +263,6 @@
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- LECTEUR MUSIQUE --- */
-        .music-player { position: fixed; bottom: 20px; left: 20px; z-index: 100; }
-        #playBtn { background: var(--glass-bg); color: var(--text-primary); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-
         /* --- TOAST NOTIFICATION --- */
         #toast {
             visibility: hidden; min-width: 250px; margin-left: -125px;
@@ -291,6 +287,13 @@
             color: var(--text-primary); min-width: 250px;
         }
         .topic-card-content { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+
+        /* BADGE ADMIN */
+        .admin-badge {
+            background: #e60012; color: white; padding: 2px 6px;
+            border-radius: 4px; font-size: 0.7rem; margin-left: 5px; vertical-align: middle;
+            font-weight: bold;
+        }
 
         .hidden { display: none !important; }
 
@@ -558,13 +561,6 @@
         </div>
     </div>
 
-    <div class="music-player">
-        <button id="playBtn" onclick="toggleMusic()">🎵 Play Music</button>
-        <audio id="bgMusic" loop crossorigin="anonymous">
-            <source src="https://stream.zeno.fm/0r0xa854rp8uv" type="audio/mpeg">
-        </audio>
-    </div>
-
     <script>
         // --- SCRIPT STANDARD ---
         const CHANNEL_ID = 'UCBUHEV2NI3H4weKFG4Fz7AQ'; 
@@ -595,15 +591,6 @@
             toast.innerText = message;
             toast.className = "show";
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-
-        var music = document.getElementById("bgMusic");
-        var btn = document.getElementById("playBtn");
-        var isPlaying = false;
-        function toggleMusic() {
-            if (isPlaying) { music.pause(); btn.innerText = "🎵 Play Music"; } 
-            else { music.play().catch(e => console.log(e)); btn.innerText = "⏸ Pause Music"; }
-            isPlaying = !isPlaying;
         }
 
         function filterCards() {
@@ -734,8 +721,6 @@
                     if(!pseudo) { msg.innerText = "Veuillez choisir un pseudo."; return; }
                     
                     // 1. Vérifier si le pseudo est déjà pris
-                    const usersRef = collection(db, "usernames");
-                    // On utilise le pseudo comme ID de document pour garantir l'unicité
                     const docSnap = await getDoc(doc(db, "usernames", pseudo));
                     
                     if (docSnap.exists()) {
@@ -771,8 +756,10 @@
             currentUser = user;
             const btn = document.getElementById('authBtn');
             if(user) {
-                // Affiche le PSEUDO s'il existe, sinon le début de l'email
-                const displayName = user.displayName || user.email.split('@')[0];
+                // FORCE LE NOM "IKAAM" POUR L'ADMIN
+                let displayName = user.displayName || user.email.split('@')[0];
+                if(user.email === ADMIN_EMAIL) displayName = "IKAAM";
+
                 btn.innerHTML = `👤 ${displayName}`; 
                 btn.style.background = "#e60012"; 
             } else {
@@ -789,8 +776,9 @@
             const titleInput = document.getElementById('newTopicTitle');
             if(!titleInput.value.trim()) return;
 
-            // Utilise le pseudo (displayName) ou l'email par défaut
-            const authorName = currentUser.displayName || currentUser.email.split('@')[0];
+            // Utilise le pseudo (displayName) ou l'email par défaut. FORCE IKAAM SI ADMIN.
+            let authorName = currentUser.displayName || currentUser.email.split('@')[0];
+            if(currentUser.email === ADMIN_EMAIL) authorName = "IKAAM";
 
             try {
                 await addDoc(collection(db, "topics"), {
@@ -823,6 +811,10 @@
                     deleteBtn = `<button onclick="event.stopPropagation(); deleteTopic('${topicId}')" style="background:#ff3b30; color:white; border:none; border-radius:8px; padding:5px 10px; margin-left:10px; cursor:pointer;">🗑️</button>`;
                 }
 
+                // Badge IKAAM
+                let authorDisplay = data.author;
+                if(data.author === "IKAAM") authorDisplay += ' <span class="admin-badge">OFFICIEL</span>';
+
                 const card = document.createElement('div');
                 card.className = "card download-card span-full";
                 card.style.cursor = "pointer";
@@ -831,7 +823,7 @@
                 card.innerHTML = `
                     <div class="topic-card-content">
                         <div style="flex:1;">
-                            <div class="video-eyebrow-date" style="color:#0071e3;">${data.author} • ${dateStr}</div>
+                            <div class="video-eyebrow-date" style="color:#0071e3;">${authorDisplay} • ${dateStr}</div>
                             <div class="dl-title" style="font-size:1.2rem; margin-bottom:0;">${data.title}</div>
                         </div>
                         <div style="display:flex; align-items:center;">
@@ -848,7 +840,11 @@
             currentTopicId = id;
             document.getElementById('forum-list-view').classList.add('hidden');
             document.getElementById('forum-topic-view').classList.remove('hidden');
-            document.getElementById('current-topic-header').innerHTML = `<div class="video-eyebrow-date">Sujet de ${data.author}</div><h2 class="dl-title" style="margin-bottom:0;">${data.title}</h2>`;
+            
+            let authorDisplay = data.author;
+            if(data.author === "IKAAM") authorDisplay += ' <span class="admin-badge">OFFICIEL</span>';
+
+            document.getElementById('current-topic-header').innerHTML = `<div class="video-eyebrow-date">Sujet de ${authorDisplay}</div><h2 class="dl-title" style="margin-bottom:0;">${data.title}</h2>`;
             
             if(unsubscribeMessages) unsubscribeMessages();
             const qMessages = query(collection(db, `topics/${id}/messages`), orderBy("date", "asc"));
@@ -864,7 +860,11 @@
                     msgDiv.style.border = isMe ? "1px solid #0071e3" : "1px solid var(--glass-border)";
                     msgDiv.style.maxWidth = "80%"; msgDiv.style.padding = "15px"; msgDiv.style.borderRadius = "16px";
                     
-                    msgDiv.innerHTML = `<div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">${msg.author}</div><div style="color:var(--text-primary); line-height:1.4;">${msg.content}</div>`;
+                    // Badge IKAAM dans les réponses
+                    let msgAuthor = msg.author;
+                    if(msg.author === "IKAAM") msgAuthor += ' <span class="admin-badge">OFFICIEL</span>';
+
+                    msgDiv.innerHTML = `<div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:4px;">${msgAuthor}</div><div style="color:var(--text-primary); line-height:1.4;">${msg.content}</div>`;
                     container.appendChild(msgDiv);
                 });
             });
@@ -876,7 +876,8 @@
             const input = document.getElementById('replyInput');
             if(!input.value.trim()) return;
             
-            const authorName = currentUser.displayName || currentUser.email.split('@')[0];
+            let authorName = currentUser.displayName || currentUser.email.split('@')[0];
+            if(currentUser.email === ADMIN_EMAIL) authorName = "IKAAM";
 
             await addDoc(collection(db, `topics/${currentTopicId}/messages`), {
                 content: input.value.trim(),
